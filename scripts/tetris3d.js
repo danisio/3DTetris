@@ -1,12 +1,19 @@
 var Tetris = Tetris || {};
 
 var initScene, render, _boxes = [], spawnBox,
-    renderer, render_stats, physics_stats, scene, ground_material, ground, light, camera, blockSize, boundingBoxConfig;
+    renderer, render_stats, physics_stats, scene, ground_material, ground, light, camera, contorls, blockSize, boundingBoxConfig;
 var WIDTH = window.innerWidth,
     HEIGHT = window.innerHeight,
-    NEAR = 1,
-    FAR = 1000,
+    NEAR = 0.1,
+    FAR = 20000,
     GRAVITY_VECTOR = -100,
+    VIEW_ANGLE = 30,
+    ASPECT = WIDTH / HEIGHT,
+    CAMERA_POSITION = {
+        X: 0,
+        Y: 150,
+        Z: 1500
+    },
 
     GAMEFIELD_WIDTH = 420,
     GAMEFIELD_HEIGHT = 420,
@@ -14,16 +21,11 @@ var WIDTH = window.innerWidth,
     GROUND_HEIGHT = 1,
 
     BLOCK_MASS = 10;
-var CAMERA_POSITION = {
-    X:250,
-    Y:250,
-    Z:250
-};
 
 initScene = function () {
     // Basic setup for the rendere, camera and scene. We have to do it just once.
     renderer = new THREE.WebGLRenderer({antialias: true});
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(WIDTH, HEIGHT);
     renderer.shadowMapEnabled = true;
     renderer.shadowMapSoft = true;
     document.getElementById('viewport').appendChild(renderer.domElement);
@@ -42,27 +44,18 @@ initScene = function () {
 
     scene = new Physijs.Scene;
     scene.setGravity(new THREE.Vector3(0, GRAVITY_VECTOR, 0));
-    scene.addEventListener(
-        'update',
-        function () {
+    scene.addEventListener('update', function () {
             scene.simulate(undefined, 1);
             physics_stats.update();
         }
-    );
-
-    camera = new THREE.OrthographicCamera(
-        WIDTH / -2,
-        WIDTH / 2,
-        HEIGHT / 2,
-        HEIGHT / -2,
-        NEAR,
-        FAR);
-    camera.updateProjectionMatrix();
+    )
+    camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
+    //camera.updateProjectionMatrix();
     camera.position.set(CAMERA_POSITION.X, CAMERA_POSITION.Y, CAMERA_POSITION.Z);
-    //camera.position.z = 600;
     camera.lookAt(scene.position);
     scene.add(camera);
 
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
     // End of basic setup
 
     // Ground
@@ -199,12 +192,12 @@ Tetris.Block.generate = function () {
     }
 
     // the glue :D
-       function buildBlockMesh() {
+    function buildBlockMesh() {
         randColor = Tetris.Colors[Math.floor(Math.random() * Tetris.Colors.length)];
 
         geometry = new Physijs.BoxMesh(
             new THREE.BoxGeometry(blockSize, blockSize, blockSize),
-            new THREE.MeshBasicMaterial({color: randColor}, .9,.0)
+            new THREE.MeshBasicMaterial({color: randColor}, .9, .0)
         );
         for (var i = 1; i < Tetris.Block.shape.length; i++) {
             tmpGeometry = new Physijs.BoxMesh(new THREE.BoxGeometry(blockSize, blockSize, blockSize),
@@ -243,8 +236,7 @@ Tetris.Block.generate = function () {
     scene.add(Tetris.Block.mesh);
 };
 
-
-window.onload = function(){
+window.onload = function () {
     initScene();
 
     // removing the infobar comming with Physijs
@@ -260,12 +252,7 @@ render = function () {
     requestAnimationFrame(render);
     renderer.render(scene, camera);
     render_stats.update();
-    camera.lookAt(scene.position);
-
-    // Moving the camera just for  demo
-    var timer = new Date().getTime() * 0.0005;
-    camera.position.x = Math.floor(Math.cos(timer) * 200);
-    camera.position.z = Math.floor(Math.sin(timer) * 200);
+    controls.update();
 };
 
 // TODO: call this function only when the last block had collision with the ground
