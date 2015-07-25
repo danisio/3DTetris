@@ -5,19 +5,37 @@
     <title>3D Tetris</title>
     <!--<script src="scripts/PhysiJS/physijs_worker.js"></script>
     <script src="scripts/PhysiJS/js/ammo.js"></script>-->
-</head>
-<body>
-    <div id="viewport"></div>
-
-    <script src="scripts/PhysiJS/js/three.min.js"></script>
-    <script src="scripts/PhysiJS/js/stats.js"></script>
-    <script src="scripts/PhysiJS/physi.js"></script>
-    <script src="scripts/OrbitControls.js"></script>
     <script>
-        Physijs.scripts.worker = 'scripts/PhysiJS/physijs_worker.js';
-        Physijs.scripts.ammo = 'js/ammo.js';
+        try {
+            var test = new Physijs.Scene;
+        }
+        catch(e) {
+            this.Physijs = '';
+        }
     </script>
-    <script src="scripts/tetris3d.js"></script>
-<!--<scripts src="scripts/block.js"></scripts>-->
+</head>
+<body onload="Start();">
+<div id="viewport"></div>
+
+<script src="scripts/libs/three.min.js"></script>
+<script src="scripts/libs/stats.js"></script>
+<script src="scripts/libs/physi.js"></script>
+<script>
+     Physijs.scripts.worker = 'scripts/libs/physijs_worker.js';
+     Physijs.scripts.ammo = 'ammo.js';
+</script>
+
+<script type="text/javascript" src="scripts/tetris3d.js"></script>
+<scripts type="text/javascript" src="scripts/block.js"></scripts>
+<scripts type="text/javascript" src="scripts/utilities.js"></scripts>
+<script type="text/javascript" src="scripts/engine.js"></script>
+<script src="scripts/OrbitControls.js"></script>
+
+<script>
+     function Start() {
+        Engine.getEngine(Block, Tetris, Utilities);
+        Engine.run();
+    }
+</script>
 </body>
 </html>

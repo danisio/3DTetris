@@ -24,37 +24,19 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.807693">
-              <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+            <state vertical-scroll-proportion="-14.538462">
+              <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OrbitControls.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/OrbitControls.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6615385">
-              <caret line="124" column="38" selection-start-line="124" selection-start-column="38" selection-end-line="124" selection-end-column="38" />
-              <folding>
-                <element signature="e#1001#1031#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tetris3d.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="tetris3d.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scripts/tetris3d.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.37931">
-              <caret line="45" column="40" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
-              <folding>
-                <element signature="e#4334#5109#0" expanded="false" />
-                <element signature="e#5337#5931#0" expanded="false" />
-                <element signature="e#5999#8280#0" expanded="false" />
-                <element signature="e#8311#8582#0" expanded="false" />
-                <element signature="e#8606#8730#0" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="0.3963816">
+              <caret line="150" column="115" selection-start-line="150" selection-start-column="115" selection-end-line="150" selection-end-column="115" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -79,9 +61,9 @@
         <option value="$PROJECT_DIR$/scripts/tetris.js" />
         <option value="$PROJECT_DIR$/scripts/block.js" />
         <option value="$PROJECT_DIR$/scripts/orbitControls.js" />
+        <option value="$PROJECT_DIR$/scripts/OrbitControls.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/scripts/tetris3d.js" />
-        <option value="$PROJECT_DIR$/scripts/OrbitControls.js" />
       </list>
     </option>
   </component>
@@ -121,7 +103,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -157,6 +138,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -232,26 +214,26 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24925596" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2489019" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39967373" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39967373" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -298,7 +280,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/scripts/tetris3d.js</url>
-          <line>250</line>
+          <line>232</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
@@ -310,14 +292,16 @@
     <entry file="file://$PROJECT_DIR$/scripts/tetris3d.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/tetris3d.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="260" column="35" selection-start-line="260" selection-start-column="35" selection-end-line="260" selection-end-column="35" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -333,13 +317,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="260" column="35" selection-start-line="260" selection-start-column="35" selection-end-line="260" selection-end-column="35" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -355,13 +333,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="260" column="35" selection-start-line="260" selection-start-column="35" selection-end-line="260" selection-end-column="35" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -373,48 +345,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/bower.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/tetris3d.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="263" column="0" selection-start-line="263" selection-start-column="0" selection-end-line="263" selection-end-column="0" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/physi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1129" column="4" selection-start-line="1129" selection-start-column="4" selection-end-line="1129" selection-end-column="4" />
-          <folding>
-            <element signature="e#690#781#0" expanded="false" />
-            <element signature="e#1059#1224#0" expanded="false" />
-            <element signature="e#1302#1567#0" expanded="false" />
-            <element signature="e#1629#1910#0" expanded="false" />
-            <element signature="e#1946#2169#0" expanded="false" />
-            <element signature="e#2199#2262#0" expanded="false" />
-            <element signature="e#2321#2547#0" expanded="false" />
-            <element signature="e#2596#2963#0" expanded="false" />
-            <element signature="e#3027#3560#0" expanded="false" />
-            <element signature="e#3621#3672#0" expanded="false" />
-            <element signature="e#3773#4100#0" expanded="false" />
-            <element signature="e#4186#4611#0" expanded="false" />
-            <element signature="e#4675#4842#0" expanded="false" />
-            <element signature="e#6614#7107#0" expanded="false" />
-            <element signature="e#7172#7359#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -426,48 +361,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/bower.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/tetris3d.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="263" column="0" selection-start-line="263" selection-start-column="0" selection-end-line="263" selection-end-column="0" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/physi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1129" column="4" selection-start-line="1129" selection-start-column="4" selection-end-line="1129" selection-end-column="4" />
-          <folding>
-            <element signature="e#690#781#0" expanded="false" />
-            <element signature="e#1059#1224#0" expanded="false" />
-            <element signature="e#1302#1567#0" expanded="false" />
-            <element signature="e#1629#1910#0" expanded="false" />
-            <element signature="e#1946#2169#0" expanded="false" />
-            <element signature="e#2199#2262#0" expanded="false" />
-            <element signature="e#2321#2547#0" expanded="false" />
-            <element signature="e#2596#2963#0" expanded="false" />
-            <element signature="e#3027#3560#0" expanded="false" />
-            <element signature="e#3621#3672#0" expanded="false" />
-            <element signature="e#3773#4100#0" expanded="false" />
-            <element signature="e#4186#4611#0" expanded="false" />
-            <element signature="e#4675#4842#0" expanded="false" />
-            <element signature="e#6614#7107#0" expanded="false" />
-            <element signature="e#7172#7359#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -483,37 +381,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="263" column="0" selection-start-line="263" selection-start-column="0" selection-end-line="263" selection-end-column="0" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/physi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1129" column="4" selection-start-line="1129" selection-start-column="4" selection-end-line="1129" selection-end-column="4" />
-          <folding>
-            <element signature="e#690#781#0" expanded="false" />
-            <element signature="e#1059#1224#0" expanded="false" />
-            <element signature="e#1302#1567#0" expanded="false" />
-            <element signature="e#1629#1910#0" expanded="false" />
-            <element signature="e#1946#2169#0" expanded="false" />
-            <element signature="e#2199#2262#0" expanded="false" />
-            <element signature="e#2321#2547#0" expanded="false" />
-            <element signature="e#2596#2963#0" expanded="false" />
-            <element signature="e#3027#3560#0" expanded="false" />
-            <element signature="e#3621#3672#0" expanded="false" />
-            <element signature="e#3773#4100#0" expanded="false" />
-            <element signature="e#4186#4611#0" expanded="false" />
-            <element signature="e#4675#4842#0" expanded="false" />
-            <element signature="e#6614#7107#0" expanded="false" />
-            <element signature="e#7172#7359#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -529,37 +397,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="263" column="0" selection-start-line="263" selection-start-column="0" selection-end-line="263" selection-end-column="0" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/physi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1129" column="4" selection-start-line="1129" selection-start-column="4" selection-end-line="1129" selection-end-column="4" />
-          <folding>
-            <element signature="e#690#781#0" expanded="false" />
-            <element signature="e#1059#1224#0" expanded="false" />
-            <element signature="e#1302#1567#0" expanded="false" />
-            <element signature="e#1629#1910#0" expanded="false" />
-            <element signature="e#1946#2169#0" expanded="false" />
-            <element signature="e#2199#2262#0" expanded="false" />
-            <element signature="e#2321#2547#0" expanded="false" />
-            <element signature="e#2596#2963#0" expanded="false" />
-            <element signature="e#3027#3560#0" expanded="false" />
-            <element signature="e#3621#3672#0" expanded="false" />
-            <element signature="e#3773#4100#0" expanded="false" />
-            <element signature="e#4186#4611#0" expanded="false" />
-            <element signature="e#4675#4842#0" expanded="false" />
-            <element signature="e#6614#7107#0" expanded="false" />
-            <element signature="e#7172#7359#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -567,37 +405,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/physi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1129" column="4" selection-start-line="1129" selection-start-column="4" selection-end-line="1129" selection-end-column="4" />
-          <folding>
-            <element signature="e#690#781#0" expanded="false" />
-            <element signature="e#1059#1224#0" expanded="false" />
-            <element signature="e#1302#1567#0" expanded="false" />
-            <element signature="e#1629#1910#0" expanded="false" />
-            <element signature="e#1946#2169#0" expanded="false" />
-            <element signature="e#2199#2262#0" expanded="false" />
-            <element signature="e#2321#2547#0" expanded="false" />
-            <element signature="e#2596#2963#0" expanded="false" />
-            <element signature="e#3027#3560#0" expanded="false" />
-            <element signature="e#3621#3672#0" expanded="false" />
-            <element signature="e#3773#4100#0" expanded="false" />
-            <element signature="e#4186#4611#0" expanded="false" />
-            <element signature="e#4675#4842#0" expanded="false" />
-            <element signature="e#6614#7107#0" expanded="false" />
-            <element signature="e#7172#7359#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -613,37 +421,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/physi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1129" column="4" selection-start-line="1129" selection-start-column="4" selection-end-line="1129" selection-end-column="4" />
-          <folding>
-            <element signature="e#690#781#0" expanded="false" />
-            <element signature="e#1059#1224#0" expanded="false" />
-            <element signature="e#1302#1567#0" expanded="false" />
-            <element signature="e#1629#1910#0" expanded="false" />
-            <element signature="e#1946#2169#0" expanded="false" />
-            <element signature="e#2199#2262#0" expanded="false" />
-            <element signature="e#2321#2547#0" expanded="false" />
-            <element signature="e#2596#2963#0" expanded="false" />
-            <element signature="e#3027#3560#0" expanded="false" />
-            <element signature="e#3621#3672#0" expanded="false" />
-            <element signature="e#3773#4100#0" expanded="false" />
-            <element signature="e#4186#4611#0" expanded="false" />
-            <element signature="e#4675#4842#0" expanded="false" />
-            <element signature="e#6614#7107#0" expanded="false" />
-            <element signature="e#7172#7359#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -659,37 +437,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="285" column="59" selection-start-line="285" selection-start-column="59" selection-end-line="285" selection-end-column="59" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/physi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1129" column="4" selection-start-line="1129" selection-start-column="4" selection-end-line="1129" selection-end-column="4" />
-          <folding>
-            <element signature="e#690#781#0" expanded="false" />
-            <element signature="e#1059#1224#0" expanded="false" />
-            <element signature="e#1302#1567#0" expanded="false" />
-            <element signature="e#1629#1910#0" expanded="false" />
-            <element signature="e#1946#2169#0" expanded="false" />
-            <element signature="e#2199#2262#0" expanded="false" />
-            <element signature="e#2321#2547#0" expanded="false" />
-            <element signature="e#2596#2963#0" expanded="false" />
-            <element signature="e#3027#3560#0" expanded="false" />
-            <element signature="e#3621#3672#0" expanded="false" />
-            <element signature="e#3773#4100#0" expanded="false" />
-            <element signature="e#4186#4611#0" expanded="false" />
-            <element signature="e#4675#4842#0" expanded="false" />
-            <element signature="e#6614#7107#0" expanded="false" />
-            <element signature="e#7172#7359#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -705,37 +453,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="282" column="70" selection-start-line="282" selection-start-column="70" selection-end-line="282" selection-end-column="70" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/physi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1129" column="4" selection-start-line="1129" selection-start-column="4" selection-end-line="1129" selection-end-column="4" />
-          <folding>
-            <element signature="e#690#781#0" expanded="false" />
-            <element signature="e#1059#1224#0" expanded="false" />
-            <element signature="e#1302#1567#0" expanded="false" />
-            <element signature="e#1629#1910#0" expanded="false" />
-            <element signature="e#1946#2169#0" expanded="false" />
-            <element signature="e#2199#2262#0" expanded="false" />
-            <element signature="e#2321#2547#0" expanded="false" />
-            <element signature="e#2596#2963#0" expanded="false" />
-            <element signature="e#3027#3560#0" expanded="false" />
-            <element signature="e#3621#3672#0" expanded="false" />
-            <element signature="e#3773#4100#0" expanded="false" />
-            <element signature="e#4186#4611#0" expanded="false" />
-            <element signature="e#4675#4842#0" expanded="false" />
-            <element signature="e#6614#7107#0" expanded="false" />
-            <element signature="e#7172#7359#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -751,37 +469,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/physi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="950" column="0" selection-start-line="950" selection-start-column="0" selection-end-line="950" selection-end-column="0" />
-          <folding>
-            <element signature="e#690#781#0" expanded="false" />
-            <element signature="e#1059#1224#0" expanded="false" />
-            <element signature="e#1302#1567#0" expanded="false" />
-            <element signature="e#1629#1910#0" expanded="false" />
-            <element signature="e#1946#2169#0" expanded="false" />
-            <element signature="e#2199#2262#0" expanded="false" />
-            <element signature="e#2321#2547#0" expanded="false" />
-            <element signature="e#2596#2963#0" expanded="false" />
-            <element signature="e#3027#3560#0" expanded="false" />
-            <element signature="e#3621#3672#0" expanded="false" />
-            <element signature="e#3773#4100#0" expanded="false" />
-            <element signature="e#4186#4611#0" expanded="false" />
-            <element signature="e#4675#4842#0" expanded="false" />
-            <element signature="e#6614#7107#0" expanded="false" />
-            <element signature="e#7172#7359#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -797,13 +485,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -819,13 +501,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -861,44 +537,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/physijs_worker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-38.39638">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/physi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1129" column="4" selection-start-line="1129" selection-start-column="4" selection-end-line="1129" selection-end-column="4" />
-          <folding>
-            <element signature="e#690#781#0" expanded="false" />
-            <element signature="e#1059#1224#0" expanded="false" />
-            <element signature="e#1302#1567#0" expanded="false" />
-            <element signature="e#1629#1910#0" expanded="false" />
-            <element signature="e#1946#2169#0" expanded="false" />
-            <element signature="e#2199#2262#0" expanded="false" />
-            <element signature="e#2321#2547#0" expanded="false" />
-            <element signature="e#2596#2963#0" expanded="false" />
-            <element signature="e#3027#3560#0" expanded="false" />
-            <element signature="e#3621#3672#0" expanded="false" />
-            <element signature="e#3773#4100#0" expanded="false" />
-            <element signature="e#4186#4611#0" expanded="false" />
-            <element signature="e#4675#4842#0" expanded="false" />
-            <element signature="e#6614#7107#0" expanded="false" />
-            <element signature="e#7172#7359#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/js/ammo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts/block.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.4743152">
@@ -906,7 +544,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/PhysiJS/bower.json">
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.63931626">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -915,52 +560,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.807693">
-          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LICENSE">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63931626">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-14.538462">
+          <caret line="34" column="12" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/tetris3d.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.37931">
-          <caret line="45" column="40" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
-          <folding>
-            <element signature="e#4334#5109#0" expanded="false" />
-            <element signature="e#5337#5931#0" expanded="false" />
-            <element signature="e#5999#8280#0" expanded="false" />
-            <element signature="e#8311#8582#0" expanded="false" />
-            <element signature="e#8606#8730#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/OrbitControls.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6615385">
-          <caret line="124" column="38" selection-start-line="124" selection-start-column="38" selection-end-line="124" selection-end-column="38" />
-          <folding>
-            <element signature="e#1001#1031#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.3963816">
+          <caret line="150" column="115" selection-start-line="150" selection-start-column="115" selection-end-line="150" selection-end-column="115" />
+          <folding />
         </state>
       </provider>
     </entry>
