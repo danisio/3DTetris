@@ -12,6 +12,8 @@ THREE.OrbitControls = function (object, domElement) {
     this.maxPolarAngle = Math.PI / 2; // radians
     this.minDistance = 0;
     this.maxDistance = Infinity;
+    this.minAzimuthAngle = -Math.PI / 3;
+    this.maxAzimuthAngle = Math.PI / 3;
 
     // internals
     var self = this,
@@ -54,44 +56,31 @@ THREE.OrbitControls = function (object, domElement) {
         phiDelta -= angle;
     };
 
-    //this.rotateRight = function (angle) {
-    //    if (angle === undefined) {
-    //       angle = getAutoRotationAngle();
-    //    }
-    //
-    //    thetaDelta += angle;
-    //};
-
-    //this.rotateDown = function (angle) {
-    //    if (angle === undefined) {
-    //        angle = getAutoRotationAngle();
-    //    }
-    //
-    //    phiDelta += angle;
-    //};
-
     this.update = function () {
         var position = this.object.position;
         var offset = position.clone().sub(this.center);
-       
+
         // angle from z-axis around y-axis
         var theta = Math.atan2(offset.x, offset.z);
 
         // angle from y-axis
         var phi = Math.atan2(Math.sqrt(offset.x * offset.x + offset.z * offset.z), offset.y);
 
-        //if (this.autoRotate) {
-        //    this.rotateLeft(getAutoRotationAngle());
-        //}
+        if (this.autoRotate) {
+            this.rotateLeft(getAutoRotationAngle());
+        }
 
         theta += thetaDelta;
         phi += phiDelta;
+
+        // restrict theta to be between desired limits
+        theta = Math.max(this.minAzimuthAngle, Math.min(this.maxAzimuthAngle, theta));
 
         // restrict phi to be between desired limits
         phi = Math.max(this.minPolarAngle, Math.min(this.maxPolarAngle, phi));
 
         // restrict phi to be between EPS and PI-EPS
-        //phi = Math.max(EPS, Math.min(Math.PI - EPS, phi));
+        phi = Math.max(EPS, Math.min(Math.PI - EPS, phi));
 
         var radius = offset.length() * scale;
 

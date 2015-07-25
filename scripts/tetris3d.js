@@ -1,6 +1,6 @@
 var Tetris = function () {
     var initScene, render, renderer, render_stats, physics_stats, scene, camera,
-        ground_material, ground, contorls;
+        ground_material, ground, controls;
 
     var WIDTH = window.innerWidth,
         HEIGHT = window.innerHeight,
@@ -46,20 +46,10 @@ var Tetris = function () {
     }
 
     render_stats = new Stats();
-    /*camera = new THREE.OrthographicCamera(
-     WIDTH / -2,
-     WIDTH / 2,
-     HEIGHT / 2,
-     HEIGHT / -2,
-     NEAR,
-     FAR
-     );*/
-
     camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
 
     function initScene() {
-        // Basic setup for the rendere, camera and scene. We have to do it just once.
-
+        // Basic setup for the render, camera and scene. We have to do it just once.
         renderer.setSize(WIDTH, HEIGHT);
         renderer.shadowMapEnabled = true;
         renderer.shadowMapSoft = true;
