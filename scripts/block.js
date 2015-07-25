@@ -20,13 +20,13 @@ var Block = (function () {
     rotate = function (axis) {
         var shape = this.shape;
 
-        // frotating only 90 degrees. Add multiplier ?
+        // rotating 360 degrees but just once. Add multiplier ?
         if (axis == 'z') {
 
             for (var ind = 0; ind < shape.children.length; ind += 1) {
 
-                var temp =  shape.children[ind].position.y;
-                shape.children[ind].position.y = shape.children[ind].position.z ;
+                var temp = -Math.abs(shape.children[ind].position.y);
+                shape.children[ind].position.y = -Math.abs(shape.children[ind].position.z);
                 shape.children[ind].position.z = temp;
 
             }

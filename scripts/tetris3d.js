@@ -141,7 +141,7 @@ var Tetris = function () {
         renderer: renderer,
         camera: camera,
         stats: render_stats,
-      //  controls: getPerspectiveCameraControls(),
+        //  controls: getPerspectiveCameraControls(),
         blockSize: BLOCK_SIZE
 
     }
@@ -170,10 +170,10 @@ var Block = (function () {
     };
 
     Object.defineProperty(block, 'shape', {
-        get: function(){
+        get: function () {
             return this._shape;
         },
-        set: function(value){
+        set: function (value) {
             this._shape = "bumbabumaye"
         }
     });
@@ -181,13 +181,13 @@ var Block = (function () {
     rotate = function (axis) {
         var shape = this.shape;
 
-        // frotating only 90 degrees. Add multiplier ?
+        // rotating 360 degrees but just once. Add multiplier ?
         if (axis == 'z') {
 
             for (var ind = 0; ind < shape.children.length; ind += 1) {
 
-                var temp =  shape.children[ind].position.y;
-                shape.children[ind].position.y = shape.children[ind].position.z ;
+                var temp = -Math.abs(shape.children[ind].position.y);
+                shape.children[ind].position.y = -Math.abs(shape.children[ind].position.z);
                 shape.children[ind].position.z = temp;
 
             }
