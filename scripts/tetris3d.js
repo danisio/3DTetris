@@ -148,38 +148,63 @@ var Tetris = function () {
 
 }();
 
-//--------------  Block.js and Utilities.js copied | workaround for the problem with merging files --------------//
+//--------------
 
 //TODO: Singleton
 var Block = (function () {
     var move, rotate
 
+    var block = {};
+
+    block.init = function () {
+        this.position = {
+            x: 0,
+            y: 0,
+            z: 0
+        };
+        this.shape = [];
+        return this;
+    }
     move = function () {
 
     };
 
-    rotate = function (axis) {
+    Object.defineProperty(block, 'shape', {
+        get: function(){
+            return this._shape;
+        },
+        set: function(value){
+            this._shape = "bumbabumaye"
+        }
+    });
 
+    rotate = function (axis) {
+        var shape = this.shape;
+
+        // frotating only 90 degrees. Add multiplier ?
+        if (axis == 'z') {
+
+            for (var ind = 0; ind < shape.children.length; ind += 1) {
+
+                var temp =  shape.children[ind].position.y;
+                shape.children[ind].position.y = shape.children[ind].position.z ;
+                shape.children[ind].position.z = temp;
+
+            }
+        }
+
+        return this;
     };
 
+
     return {
-        initializeBlock: function () {
-            this.position = {
-                x: 0,
-                y: 0,
-                z: 0
-            };
-            this.shape = [];
-            return this;
-        }
+        initializeBlock: block.init,
         // move: move
-        // rotate: rotate
+        rotate: rotate
     }
 }());
 
-/**
- * Created by Solara on 24/07/2015.
- */
+//-----------------------------
 var Utilities = function () {
     var COLORS = [
         0x6666ff, 0x66ffff, 0xcc68EE, 0x666633, 0x66ff66, 0x9966ff,

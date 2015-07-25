@@ -2,13 +2,19 @@ var Engine = function () {
     var typeIndex, baseGeometry, additionalGeometry,
         generateBlock, getNewShapeSkeleton, drawBlock,
         setBlockPosition, joinSubElements, getAvailableMesh,
-        setUp, render, controls;
+        setUp, render, controls, x, y,z;
 
     var PHYSI_MESH_CONSTS = {
         MASS: 10,
         FRICTION: .9,
         RESTITUTION: .0 // bouncing
-    }
+    };
+
+    var AXIS = {
+        X: 'x',
+        Y: 'y',
+        Z: 'z'
+    };
 
     generateBlock = function () {
         Block.shape = []; // nullify
@@ -24,8 +30,9 @@ var Engine = function () {
     getNewShapeSkeleton = function () {
         typeIndex = Math.floor(Math.random() * Utilities.Tetrominoes.length);
         for (var ind = 0; ind < Utilities.Tetrominoes[typeIndex].length; ind += 1) {
-            console.log(Block.shape);
+
             Block.shape[ind] = Utilities.cloneVector(Utilities.Tetrominoes[typeIndex][ind]);
+            //console.log(Block.shape[ind].x);
         }
         return this;
     };
@@ -89,14 +96,26 @@ var Engine = function () {
         }
     }
 
+
+
     setUp = function () {
         Tetris.initScene();
         controls = new THREE.OrbitControls(Tetris.camera, Tetris.renderer.domElement);
         Block.initializeBlock();
         Utilities.cleanScreen();
         generateBlock();
+       // document.addEventListener('onkeypress', onKeyPress, false);
     };
 
+    window.onkeyup = function(e){
+        var key = e.keyCode ? e.keyCode : e.which;
+
+        if(key == 90){
+            console.log('KEY');
+        Block.rotate(AXIS.Z);
+            //Tetris.camera.add(Block.shape);
+        }
+    }
     render = function () {
         requestAnimationFrame(render);
         Tetris.renderer.render(Tetris.scene, Tetris.camera);
@@ -107,9 +126,7 @@ var Engine = function () {
         // generateBlock();
 
 
-        Block.shape.position.x = Block.shape.position.x;
-        Block.shape.position.y = Block.shape.position.y;
-    }
+    };
 
     // TODO: delete when collision events are implemented
     setInterval(generateBlock, 3000);
