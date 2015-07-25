@@ -45,7 +45,7 @@ var Block = (function () {
     });
     
     return {
-        initializeBlock: init,
+        initializeBlock: block.init,
         // move: move
         rotate: rotate
     }
