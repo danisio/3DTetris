@@ -2,7 +2,7 @@ var Engine = function () {
     var typeIndex, baseGeometry, additionalGeometry,
         generateBlock, getNewShapeSkeleton, drawBlock,
         setBlockPosition, joinSubElements, getAvailableMesh,
-        setUp, render, controls, x, y,z;
+        setUp, render, controls, x, y, z;
 
     var PHYSI_MESH_CONSTS = {
         MASS: 10,
@@ -21,7 +21,6 @@ var Engine = function () {
         getNewShapeSkeleton();
         drawBlock();
         setBlockPosition();
-
         Tetris.scene.add(Block.shape);
 
         return this;
@@ -32,7 +31,6 @@ var Engine = function () {
         for (var ind = 0; ind < Utilities.Tetrominoes[typeIndex].length; ind += 1) {
 
             Block.shape[ind] = Utilities.cloneVector(Utilities.Tetrominoes[typeIndex][ind]);
-            //console.log(Block.shape[ind].x);
         }
         return this;
     };
@@ -55,14 +53,15 @@ var Engine = function () {
     };
 
     setBlockPosition = function () {//boundingBoxConfig.segmentHeigh
-        Block.position.x = Math.floor(Math.random() * 6 - Tetris.blockSize / 2); // -1?
-        Block.position.z = Math.floor(Math.random() * 6 - Tetris.blockSize / 2);
-        Block.position.y = 155 // TODO: tuning
+        Block.shape.position.x = Math.floor(Math.random() * 6 - Tetris.blockSize / 2); // -1?
+        Block.shape.position.z = Math.floor(Math.random() * 6 - Tetris.blockSize / 2);
+        Block.shape.position.y = 155; // TODO: tuning
 
-        Block.shape.position = new THREE.Vector3(
-            Block.position.x,
-            Block.position.y,
-            Block.position.z);
+        /* Block.shape.position = new THREE.Vector3(
+         Block.position.x,
+         Block.position.y,
+         Block.position.z);
+         */
         Block.shape.rotation = {x: 0, y: 0, z: 0};
         Block.shape.overdraw = true;
 
@@ -74,7 +73,8 @@ var Engine = function () {
             baseGeometry.add(additionalGeometry);
         }
         else {
-            THREE.GeometryUtils.merge(base.geometry, additional);
+            baseGeometry.add(additionalGeometry);
+            // THREE.GeometryUtils.merge(base.geometry, additional);
         }
     };
 
@@ -97,23 +97,29 @@ var Engine = function () {
     }
 
 
-
     setUp = function () {
         Tetris.initScene();
         controls = new THREE.OrbitControls(Tetris.camera, Tetris.renderer.domElement);
         Block.initializeBlock(Tetris.blockSize);
         Utilities.cleanScreen();
         generateBlock();
-       // document.addEventListener('onkeypress', onKeyPress, false);
+        // document.addEventListener('onkeypress', onKeyPress, false);
     };
 
-    window.onkeyup = function(e){
+    window.onkeyup = function (e) {
         var key = e.keyCode ? e.keyCode : e.which;
 
-        if(key == 90){
-            console.log('KEY');
-        Block.rotate(AXIS.Z);
-            //Tetris.camera.add(Block.shape);
+        if (key == 88) {
+            Block.rotate(AXIS.X);
+        }
+
+        if (key == 89) {
+            Block.rotate(AXIS.Y);
+        }
+
+        if (key == 90) {
+            Block.rotate(AXIS.Z);
+
         }
     }
 
@@ -144,7 +150,7 @@ var Engine = function () {
     };
 
     // TODO: delete when collision events are implemented
-    setInterval(generateBlock, 3000);
+    setInterval(generateBlock, 8000);
 
     return {
 

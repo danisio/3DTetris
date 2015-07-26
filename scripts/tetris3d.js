@@ -109,12 +109,14 @@ var Tetris = function () {
 
         // Gamefield - the big cube
 
+
         var boundingBox = new THREE.Mesh(
             new THREE.BoxGeometry(GAMEFIELD_CONFIG.width, GAMEFIELD_CONFIG.height, GAMEFIELD_CONFIG.depth,
                 GAMEFIELD_CONFIG.segmentWidth, GAMEFIELD_CONFIG.segmentHeight, GAMEFIELD_CONFIG.segmentDepth),
             new THREE.MeshBasicMaterial({color: 0xffaa00, wireframe: true}),
             0
         );
+
 
         scene.add(boundingBox);
         if (Physijs) {
@@ -125,7 +127,6 @@ var Tetris = function () {
     };
 
     return {
-
         initScene: initScene,
         scene: scene,
         renderer: renderer,

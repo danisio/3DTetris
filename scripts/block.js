@@ -1,6 +1,9 @@
 //TODO: Singleton
 var Block = (function (blockSize) {
-    var move, rotate
+    var move, rotate, multiplier,
+        pressedX = 0,
+        pressedY = 0,
+        pressedZ = 0;
 
     var block = {};
 
@@ -14,18 +17,54 @@ var Block = (function (blockSize) {
         return this;
     }
 
-    rotate = function (axis) {
+    var  rotate= function(axis) {
         var shape = this.shape;
+        multiplier;
 
-        // rotating 360 degrees but just once. Add multiplier ?
-        if (axis == 'z') {
 
+
+        if (axis == 'x') {
+            pressedX += 1;
+            if (pressedX % 2 == 0) {
+                multiplier = 1
+            } else {
+                multiplier = -1
+            }
             for (var ind = 0; ind < shape.children.length; ind += 1) {
 
-                var temp = -Math.abs(shape.children[ind].position.y);
-                shape.children[ind].position.y = -Math.abs(shape.children[ind].position.z);
-                shape.children[ind].position.z = temp;
+                var temp = multiplier * shape.children[ind].position.z;
+                shape.children[ind].position.z = multiplier * shape.children[ind].position.x;
+                shape.children[ind].position.x = temp;
+            }
+        }
 
+        if (axis == 'y') {
+            pressedY += 1;
+            if (pressedY % 2 == 0) {
+                multiplier = 1
+            } else {
+                multiplier = -1
+            }
+            for (var ind = 0; ind < shape.children.length; ind += 1) {
+
+                var temp = multiplier * shape.children[ind].position.y;
+                shape.children[ind].position.y = multiplier * shape.children[ind].position.x;
+                shape.children[ind].position.x = temp;
+            }
+        }
+
+      
+        if (axis == 'z') {
+            pressedZ += 1;
+            if (pressedZ % 2 == 0) {
+                multiplier = -1
+            } else {
+                multiplier = 1
+            }
+            for (var ind = 0; ind < shape.children.length; ind += 1) {
+                var temp = multiplier * shape.children[ind].position.y;
+                shape.children[ind].position.y = multiplier * shape.children[ind].position.z;
+                shape.children[ind].position.z = temp;
             }
         }
 
@@ -47,7 +86,7 @@ var Block = (function (blockSize) {
             return this._shape;
         },
         set: function(value){
-            this._shape = "bumbabumaye"
+            this._shape = "alabalaportokalq" // or why it doesnt effect the shape
         }
     });
     
