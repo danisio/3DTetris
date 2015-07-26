@@ -1,5 +1,5 @@
 //TODO: Singleton
-var Block = (function () {
+var Block = (function (blockSize) {
     var move, rotate
 
     var block = {};
@@ -13,9 +13,6 @@ var Block = (function () {
         this.shape = [];
         return this;
     }
-    move = function () {
-
-    };
 
     rotate = function (axis) {
         var shape = this.shape;
@@ -35,6 +32,16 @@ var Block = (function () {
         return this;
     };
 
+    move = function(x, y, z) {
+
+        Block.shape.position.x += x * blockSize;
+   //     Block.position.x += x;
+        Block.shape.position.y += y * blockSize;
+    //    Block.position.y += y;
+        Block.shape.position.z += z * blockSize;
+     //   Block.position.z += z;
+    }
+
     Object.defineProperty(block, 'shape', {
         get: function(){
             return this._shape;
@@ -47,6 +54,7 @@ var Block = (function () {
     return {
         initializeBlock: block.init,
         // move: move
-        rotate: rotate
+        rotate: rotate,
+        move: move
     }
-}());
+}(Tetris.blockSize));

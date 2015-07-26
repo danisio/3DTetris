@@ -101,7 +101,7 @@ var Engine = function () {
     setUp = function () {
         Tetris.initScene();
         controls = new THREE.OrbitControls(Tetris.camera, Tetris.renderer.domElement);
-        Block.initializeBlock();
+        Block.initializeBlock(Tetris.blockSize);
         Utilities.cleanScreen();
         generateBlock();
        // document.addEventListener('onkeypress', onKeyPress, false);
@@ -116,16 +116,31 @@ var Engine = function () {
             //Tetris.camera.add(Block.shape);
         }
     }
+
+    var lastFrameTime = Date.now();
+    var gameStepTime = 1000;
+    var frameTimeDifference = 0;
+
     render = function () {
-        requestAnimationFrame(render);
+
+        var time = Date.now();
+        frameTimeDifference += time - lastFrameTime;
+        lastFrameTime = time;
+
+        while (frameTimeDifference > gameStepTime) {
+
+            frameTimeDifference -= gameStepTime;
+            Block.move(0, -1, 0);
+            render();
+        }
+
         Tetris.renderer.render(Tetris.scene, Tetris.camera);
         Tetris.stats.update();
         controls.update();
 
+        requestAnimationFrame(render);
         // TODO: if collision with ground is detected:
         // generateBlock();
-
-
     };
 
     // TODO: delete when collision events are implemented
