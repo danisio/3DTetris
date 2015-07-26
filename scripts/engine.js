@@ -21,6 +21,7 @@ var Engine = function () {
         getNewShapeSkeleton();
         drawBlock();
         setBlockPosition();
+
         Tetris.scene.add(Block.shape);
 
         return this;
@@ -55,13 +56,13 @@ var Engine = function () {
     setBlockPosition = function () {//boundingBoxConfig.segmentHeigh
         Block.shape.position.x = Math.floor(Math.random() * 6 - Tetris.blockSize / 2); // -1?
         Block.shape.position.z = Math.floor(Math.random() * 6 - Tetris.blockSize / 2);
-        Block.shape.position.y = 155; // TODO: tuning
 
-        /* Block.shape.position = new THREE.Vector3(
-         Block.position.x,
-         Block.position.y,
-         Block.position.z);
-         */
+        Block.shape.position.y = Tetris.gameFieldConfig.height / 2 + Tetris.blockSize / 2; // TODO: tuning
+/*        Block.shape.position = new THREE.Vector3(
+            Block.position.x,
+            Block.position.y,
+            Block.position.z);*/
+
         Block.shape.rotation = {x: 0, y: 0, z: 0};
         Block.shape.overdraw = true;
 
@@ -106,7 +107,22 @@ var Engine = function () {
         // document.addEventListener('onkeypress', onKeyPress, false);
     };
 
-    window.onkeyup = function (e) {
+    checkCollision = function() {
+
+        //Check for floor collision
+        if(Block.shape.position.y <= -(Tetris.gameFieldConfig.height / 2)) {
+            console.log("Y ground collision.");
+            return Tetris.collisionObject.GROUND;
+        }
+        /*else if(Math.abs(Block.shape.position.x) <= Tetris.blockSize / 2 || (Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
+            alert("X wall collision.");
+        } else if(Math.abs(Block.shape.position.z) <= Tetris.blockSize / 2 ||(Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
+            alert("Z wall collision");
+        } */
+    }
+
+    window.onkeyup = function(e){
+
         var key = e.keyCode ? e.keyCode : e.which;
 
         if (key == 88) {
@@ -137,7 +153,14 @@ var Engine = function () {
 
             frameTimeDifference -= gameStepTime;
             Block.move(0, -1, 0);
+
+            var collisionType = checkCollision();
+            if(collisionType == Tetris.collisionObject.GROUND) {
+                Tetris.scene.remove(Block.shape);
+                generateBlock();
+            }
             render();
+            console.log("Falling block x: " + Block.shape.position.x + ", y: " + Block.shape.position.y + ", z: " + Block.shape.position.z);
         }
 
         Tetris.renderer.render(Tetris.scene, Tetris.camera);
@@ -150,7 +173,6 @@ var Engine = function () {
     };
 
     // TODO: delete when collision events are implemented
-    setInterval(generateBlock, 8000);
 
     return {
 

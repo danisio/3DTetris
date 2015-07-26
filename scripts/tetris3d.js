@@ -24,6 +24,11 @@ var Tetris = function () {
             segmentHeight: 6,
             segmentDepth: 6
         },
+        COLLISION_OBJECT = {
+            GROUND: 1,
+            WALL: 2,
+            STATIC_BLOCK: 3
+        },
         BLOCK_SIZE = GAMEFIELD_CONFIG.width / GAMEFIELD_CONFIG.segmentWidth;
 
     // Params for Perspective camera
@@ -133,8 +138,11 @@ var Tetris = function () {
         camera: camera,
         stats: render_stats,
         //  controls: getPerspectiveCameraControls(),
-        blockSize: BLOCK_SIZE
+        blockSize: BLOCK_SIZE,
 
+        //FIXME:
+        gameFieldConfig: GAMEFIELD_CONFIG,
+        collisionObject: COLLISION_OBJECT
     }
 
 }();
