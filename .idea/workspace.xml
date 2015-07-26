@@ -25,16 +25,27 @@
         <entry file="file://$PROJECT_DIR$/scripts/startGame.js">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <state vertical-scroll-proportion="-5.3846154">
               <caret line="22" column="4" selection-start-line="22" selection-start-column="0" selection-end-line="27" selection-end-column="12" />
               <folding />
 =======
+=======
+>>>>>>> Collision
             <state vertical-scroll-proportion="0.0">
               <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
+<<<<<<< HEAD
 >>>>>>> Collision added
+=======
+=======
+            <state vertical-scroll-proportion="-5.3846154">
+              <caret line="22" column="4" selection-start-line="22" selection-start-column="0" selection-end-line="27" selection-end-column="12" />
+              <folding />
+>>>>>>> origin/master
+>>>>>>> Collision
             </state>
           </provider>
         </entry>
@@ -44,10 +55,17 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
 =======
               <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
 >>>>>>> Collision added
+=======
+              <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+=======
+              <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+>>>>>>> origin/master
+>>>>>>> Collision
               <folding />
             </state>
           </provider>
@@ -67,12 +85,21 @@
         <entry file="file://$PROJECT_DIR$/scripts/engine.js">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.058721934">
               <caret line="55" column="6" selection-start-line="55" selection-start-column="6" selection-end-line="55" selection-end-column="6" />
 =======
             <state vertical-scroll-proportion="0.41591927">
               <caret line="112" column="33" selection-start-line="112" selection-start-column="33" selection-end-line="112" selection-end-column="33" />
 >>>>>>> Collision added
+=======
+            <state vertical-scroll-proportion="0.41591927">
+              <caret line="112" column="33" selection-start-line="112" selection-start-column="33" selection-end-line="112" selection-end-column="33" />
+=======
+            <state vertical-scroll-proportion="0.058721934">
+              <caret line="55" column="6" selection-start-line="55" selection-start-column="6" selection-end-line="55" selection-end-column="6" />
+>>>>>>> origin/master
+>>>>>>> Collision
               <folding />
             </state>
           </provider>
@@ -106,10 +133,17 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <caret line="66" column="38" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="38" />
 =======
               <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
 >>>>>>> Collision added
+=======
+              <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+=======
+              <caret line="66" column="38" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="38" />
+>>>>>>> origin/master
+>>>>>>> Collision
               <folding />
             </state>
           </provider>
@@ -154,6 +188,7 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/scripts/startGame.js" />
 <<<<<<< HEAD
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/scripts/tetris3d.js" />
         <option value="$PROJECT_DIR$/../../Visual Studio 2013/Projects/Telerik Academy/JS UI&amp;DOM/3DTetris-Git/scripts/engine.js" />
         <option value="$PROJECT_DIR$/index.html" />
@@ -161,6 +196,15 @@
 =======
         <option value="$PROJECT_DIR$/index.html" />
 >>>>>>> Collision added
+=======
+        <option value="$PROJECT_DIR$/index.html" />
+=======
+        <option value="$PROJECT_DIR$/scripts/tetris3d.js" />
+        <option value="$PROJECT_DIR$/../../Visual Studio 2013/Projects/Telerik Academy/JS UI&amp;DOM/3DTetris-Git/scripts/engine.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/scripts/engine.js" />
+>>>>>>> origin/master
+>>>>>>> Collision
         <option value="$PROJECT_DIR$/scripts/block.js" />
         <option value="$PROJECT_DIR$/scripts/tetris3d.js" />
         <option value="$PROJECT_DIR$/scripts/engine.js" />
@@ -746,16 +790,28 @@
       </provider>
     </entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/scripts/tetris3d.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
 =======
+=======
+>>>>>>> Collision
     <entry file="file://$PROJECT_DIR$/scripts/block.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+<<<<<<< HEAD
 >>>>>>> Collision added
+=======
+=======
+    <entry file="file://$PROJECT_DIR$/scripts/tetris3d.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+>>>>>>> origin/master
+>>>>>>> Collision
           <folding />
         </state>
       </provider>
@@ -764,14 +820,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
 <<<<<<< HEAD
+<<<<<<< HEAD
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
 =======
           <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
 >>>>>>> Collision added
+=======
+          <caret line="140" column="0" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+=======
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> origin/master
+>>>>>>> Collision
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/../../Visual Studio 2013/Projects/Telerik Academy/JS UI&amp;DOM/3DTetris-Git/scripts/engine.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -792,15 +856,41 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="66" column="38" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="38" />
 =======
+=======
+>>>>>>> Collision
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.9615384">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+<<<<<<< HEAD
 >>>>>>> Collision added
+=======
+=======
+    <entry file="file://$PROJECT_DIR$/../../Visual Studio 2013/Projects/Telerik Academy/JS UI&amp;DOM/3DTetris-Git/scripts/engine.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.86206895">
+          <caret line="64" column="29" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
+          <folding>
+            <element signature="e#768#1110#0" expanded="false" />
+            <element signature="e#1141#1686#0" expanded="false" />
+            <element signature="e#2284#2465#0" expanded="false" />
+            <element signature="e#2503#3126#0" expanded="false" />
+            <marker date="1437909938752" expanded="true" signature="4100:4195" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Visual Studio 2013/Projects/Telerik Academy/JS UI&amp;DOM/3DTetris-Git/scripts/block.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="38" selection-start-line="66" selection-start-column="27" selection-end-line="66" selection-end-column="38" />
+>>>>>>> origin/master
+>>>>>>> Collision
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -826,11 +916,41 @@
         <state vertical-scroll-proportion="0.058721934">
           <caret line="55" column="6" selection-start-line="55" selection-start-column="6" selection-end-line="55" selection-end-column="6" />
 =======
+=======
+>>>>>>> Collision
     <entry file="file://$PROJECT_DIR$/scripts/engine.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41591927">
           <caret line="112" column="33" selection-start-line="112" selection-start-column="33" selection-end-line="112" selection-end-column="33" />
+<<<<<<< HEAD
 >>>>>>> Collision added
+=======
+=======
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.3846154">
+          <caret line="22" column="4" selection-start-line="22" selection-start-column="0" selection-end-line="27" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/engine.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.0689654">
+          <caret line="32" column="92" selection-start-line="32" selection-start-column="92" selection-end-line="32" selection-end-column="92" />
+          <folding>
+            <element signature="e#457#642#0" expanded="false" />
+            <element signature="e#2449#3072#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts/block.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.058721934">
+          <caret line="55" column="6" selection-start-line="55" selection-start-column="6" selection-end-line="55" selection-end-column="6" />
+>>>>>>> origin/master
+>>>>>>> Collision
           <folding />
         </state>
       </provider>

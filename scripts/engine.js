@@ -21,7 +21,6 @@ var Engine = function () {
         getNewShapeSkeleton();
         drawBlock();
         setBlockPosition();
-
         Tetris.scene.add(Block.shape);
 
         return this;
@@ -63,6 +62,13 @@ var Engine = function () {
             Block.position.y,
             Block.position.z);*/
 
+        Block.shape.position.y = 155; // TODO: tuning
+
+        /* Block.shape.position = new THREE.Vector3(
+         Block.position.x,
+         Block.position.y,
+         Block.position.z);
+         */
         Block.shape.rotation = {x: 0, y: 0, z: 0};
         Block.shape.overdraw = true;
 
@@ -121,7 +127,8 @@ var Engine = function () {
         } */
     }
 
-    window.onkeyup = function(e){
+
+    window.onkeyup = function (e) {
 
         var key = e.keyCode ? e.keyCode : e.which;
 
@@ -173,6 +180,7 @@ var Engine = function () {
     };
 
     // TODO: delete when collision events are implemented
+    //setInterval(generateBlock, 8000);
 
     return {
 
