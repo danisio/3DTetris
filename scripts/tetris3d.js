@@ -115,21 +115,37 @@ var Tetris = function () {
         // Gamefield - the big cube
 
 
+        var boundingBoxGeometry = new THREE.BoxGeometry(GAMEFIELD_CONFIG.width, GAMEFIELD_CONFIG.height, GAMEFIELD_CONFIG.depth,
+            GAMEFIELD_CONFIG.segmentWidth, GAMEFIELD_CONFIG.segmentHeight, GAMEFIELD_CONFIG.segmentDepth);
         var boundingBox = new THREE.Mesh(
-            new THREE.BoxGeometry(GAMEFIELD_CONFIG.width, GAMEFIELD_CONFIG.height, GAMEFIELD_CONFIG.depth,
-                GAMEFIELD_CONFIG.segmentWidth, GAMEFIELD_CONFIG.segmentHeight, GAMEFIELD_CONFIG.segmentDepth),
-            new THREE.MeshBasicMaterial({color: 0xffaa00, wireframe: true}),
+            boundingBoxGeometry,
+            new THREE.MeshBasicMaterial({
+                color: 0x000000,
+                transparent: true,
+                opacity: 0.05
+            }),
             0
         );
 
-
         scene.add(boundingBox);
+
         if (Physijs) {
             scene.simulate();
             boundingBox.position.y = ground.position.y + GAMEFIELD_CONFIG.width / 2 + 1;
         }
 
-    };
+        var outlineMaterial = new THREE.MeshBasicMaterial({
+            color: 0xA3DA2E,
+            transparent: true,
+            opacity: 1,
+            side: THREE.BackSide
+        });
+
+        var outlineMesh = new THREE.Mesh(boundingBoxGeometry, outlineMaterial);
+        outlineMesh.position = boundingBox.position;
+        outlineMesh.scale.multiplyScalar(1.01);
+        scene.add(outlineMesh);
+    }
 
     return {
         initScene: initScene,
