@@ -11,9 +11,9 @@ var Tetris = function () {
         BLOCK_MASS = 10,
 
         GAMEFIELD_CONFIG = {
-            width: 500,
-            height: 500,
-            depth: 500,
+            width: 600,
+            height: 600,
+            depth: 600,
 
             segmentWidth: 6,
             segmentHeight: 6,
@@ -81,7 +81,7 @@ var Tetris = function () {
         // End of basic setup
 
         // Ground
-        var size = 250, step = BLOCK_SIZE;
+        var size = 300, step = BLOCK_SIZE;
         var geometry = new THREE.Geometry();
 
         for (var i = -size; i <= size; i += step) {
