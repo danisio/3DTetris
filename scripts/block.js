@@ -17,11 +17,11 @@ var Block = (function (blockSize) {
         return this;
     }
 
-    var  rotate= function(axis) {
+    var rotate = function (axis) {
         var shape = this.shape;
         multiplier;
 
-
+        console.log(shape.children[0].position.y);
 
         if (axis == 'x') {
             pressedX += 1;
@@ -53,7 +53,7 @@ var Block = (function (blockSize) {
             }
         }
 
-      
+
         if (axis == 'z') {
             pressedZ += 1;
             if (pressedZ % 2 == 0) {
@@ -71,34 +71,36 @@ var Block = (function (blockSize) {
         return this;
     };
 
-    move = function(x, y, z) {
+    move = function (x, y, z) {
 
         Block.shape.position.x += x * blockSize;
-   //     Block.position.x += x;
+        //     Block.position.x += x;
         Block.shape.position.y += y * blockSize;
-    //    Block.position.y += y;
+        //    Block.position.y += y;
         Block.shape.position.z += z * blockSize;
-     //   Block.position.z += z;
+        //   Block.position.z += z;
     }
 
-    moveByUser = function (axis,key) {
+    moveByUser = function (axis, key) {
 
-        if(axis == 'x' && key == 37){
+        if (axis == 'x' && key == 37) {
+            console.log(this.shape.position.x);
             this.shape.position.x -= Tetris.blockSize;
             console.log('left arrow');
+            console.log(this.shape.position.x);
         }
 
-        if(axis == 'x' && key == 39){
+        if (axis == 'x' && key == 39) {
             this.shape.position.x += Tetris.blockSize;
             console.log('right arrow');
         }
 
-        if(axis == 'z' && key == 38){
+        if (axis == 'z' && key == 38) {
             this.shape.position.z -= Tetris.blockSize;
             console.log('up arrow');
         }
 
-        if(axis == 'z' && key == 40){
+        if (axis == 'z' && key == 40) {
             this.shape.position.z += Tetris.blockSize;
             console.log('down arrow');
         }
@@ -106,14 +108,14 @@ var Block = (function (blockSize) {
     };
 
     Object.defineProperty(block, 'shape', {
-        get: function(){
+        get: function () {
             return this._shape;
         },
-        set: function(value){
+        set: function (value) {
             this._shape = "alabalaportokalq" // or why it doesnt effect the shape
         }
     });
-    
+
     return {
         initializeBlock: block.init,
         moveByUser: moveByUser,

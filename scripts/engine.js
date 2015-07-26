@@ -18,9 +18,11 @@ var Engine = function () {
 
     generateBlock = function () {
         Block.shape = []; // nullify
+        Block.mesh = [];
         getNewShapeSkeleton();
         drawBlock();
         setBlockPosition();
+        Block.shape.name = "test";
         Tetris.scene.add(Block.shape);
 
         return this;
@@ -30,7 +32,7 @@ var Engine = function () {
         typeIndex = Math.floor(Math.random() * Utilities.Tetrominoes.length);
         for (var ind = 0; ind < Utilities.Tetrominoes[typeIndex].length; ind += 1) {
 
-            Block.shape[ind] = Utilities.cloneVector(Utilities.Tetrominoes[typeIndex][ind]);
+            Block.mesh[ind] = Utilities.cloneVector(Utilities.Tetrominoes[typeIndex][ind]);
         }
         return this;
     };
@@ -40,10 +42,10 @@ var Engine = function () {
 
         baseGeometry = getAvailableMesh();
 
-        for (var i = 0; i < Block.shape.length; i++) {
+        for (var i = 0; i < Block.mesh.length; i++) {
             additionalGeometry = getAvailableMesh();
-            additionalGeometry.position.x = Tetris.blockSize * Block.shape[i].x;
-            additionalGeometry.position.y = Tetris.blockSize * Block.shape[i].y;
+            additionalGeometry.position.x = Tetris.blockSize * Block.mesh[i].x;
+            additionalGeometry.position.y = Tetris.blockSize * Block.mesh[i].y;
 
             joinSubElements(baseGeometry, additionalGeometry);
         }
@@ -53,22 +55,16 @@ var Engine = function () {
     };
 
     setBlockPosition = function () {//boundingBoxConfig.segmentHeigh
-        Block.shape.position.x = Math.floor(Math.random() * 6 - Tetris.blockSize / 2); // -1?
-        Block.shape.position.z = Math.floor(Math.random() * 6 - Tetris.blockSize / 2);
+        Block.position.x = Math.floor(Math.random() * 6 - Tetris.blockSize / 2); // -1?
+        Block.position.z = Math.floor(Math.random() * 6 - Tetris.blockSize / 2);
 
-        Block.shape.position.y = Tetris.gameFieldConfig.height / 2 + Tetris.blockSize / 2; // TODO: tuning
-/*        Block.shape.position = new THREE.Vector3(
+        Block.position.y = Tetris.gameFieldConfig.height / 2 + Tetris.blockSize / 2; // TODO: tuning
+        Block.shape.position = new THREE.Vector3(
             Block.position.x,
             Block.position.y,
-            Block.position.z);*/
+            Block.position.z);
 
-        Block.shape.position.y = 155; // TODO: tuning
 
-        /* Block.shape.position = new THREE.Vector3(
-         Block.position.x,
-         Block.position.y,
-         Block.position.z);
-         */
         Block.shape.rotation = {x: 0, y: 0, z: 0};
         Block.shape.overdraw = true;
 
@@ -113,18 +109,18 @@ var Engine = function () {
         // document.addEventListener('onkeypress', onKeyPress, false);
     };
 
-    checkCollision = function() {
+    checkCollision = function () {
 
         //Check for floor collision
-        if(Block.shape.position.y <= -(Tetris.gameFieldConfig.height / 2)) {
+        if (Block.shape.position.y <= -(Tetris.gameFieldConfig.height / 2)) {
             console.log("Y ground collision.");
             return Tetris.collisionObject.GROUND;
         }
         /*else if(Math.abs(Block.shape.position.x) <= Tetris.blockSize / 2 || (Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
-            alert("X wall collision.");
-        } else if(Math.abs(Block.shape.position.z) <= Tetris.blockSize / 2 ||(Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
-            alert("Z wall collision");
-        } */
+         alert("X wall collision.");
+         } else if(Math.abs(Block.shape.position.z) <= Tetris.blockSize / 2 ||(Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
+         alert("Z wall collision");
+         } */
     }
 
 
@@ -145,9 +141,42 @@ var Engine = function () {
 
         }
 
-        Block.moveByUser(AXIS.X,key);
-        Block.moveByUser(AXIS.Z,key);
+        Block.moveByUser(AXIS.X, key);
+        Block.moveByUser(AXIS.Z, key);
     }
+
+    // Static blocks
+
+    var staticBlocks = [];
+
+    changeStateToStatic = function (block) {
+
+        for (var subBlock = 0; subBlock < block.children.length; subBlock += 1) {
+
+            block.children[subBlock].position.y += block.position.y;
+            block.children[subBlock].position.x += block.position.x;
+            block.children[subBlock].position.z += block.position.z;
+
+            staticBlocks.push(block.children[subBlock]);
+            Tetris.scene.add(block.children[subBlock]);
+        }
+
+        /*
+         Fot Block.mesh
+
+         for (var subBlock = 0; subBlock < block.length; subBlock += 1) {
+
+         staticBlocks.push(block[subBlock]);
+         var staticSubBlock = getAvailableMesh();
+         staticSubBlock.position.x = Tetris.blockSize * block[subBlock].x;
+         staticSubBlock.position.y = Tetris.blockSize * block[subBlock].y;
+
+         Tetris.scene.add(staticSubBlock);
+         }*/
+    };
+
+
+    // end static block
 
     var lastFrameTime = Date.now();
     var gameStepTime = 1000;
@@ -164,15 +193,17 @@ var Engine = function () {
             frameTimeDifference -= gameStepTime;
             Block.move(0, -1, 0);
 
-            var collisionType = checkCollision();
-            if(collisionType == Tetris.collisionObject.GROUND) {
-                Tetris.scene.remove(Block.shape);
-                generateBlock();
-            }
-            render();
-            console.log("Falling block x: " + Block.shape.position.x + ", y: " + Block.shape.position.y + ", z: " + Block.shape.position.z);
-        }
 
+            // render(); it cuts the drawing of static blocks
+            //  console.log("Falling block x: " + Block.shape.position.x + ", y: " + Block.shape.position.y + ", z: " + Block.shape.position.z);
+        }
+        var collisionType = checkCollision();
+        if (collisionType == Tetris.collisionObject.GROUND) {
+
+            changeStateToStatic(Block.shape);
+            Tetris.scene.remove(Block.shape);
+            // generateBlock();
+        }
         Tetris.renderer.render(Tetris.scene, Tetris.camera);
         Tetris.stats.update();
         controls.update();
