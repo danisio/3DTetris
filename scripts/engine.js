@@ -111,11 +111,24 @@ var Engine = function () {
 
     checkCollision = function () {
 
+        //
+        // console.log(Block.shape.children.length);
+
         //Check for floor collision
-        if (Block.shape.position.y <= -(Tetris.gameFieldConfig.height / 2)) {
-            console.log("Y ground collision.");
-            return Tetris.collisionObject.GROUND;
+
+        for (var index = 0; index < Block.shape.children.length; index += 1) {
+            var child = Block.shape.children[index];
+            if (child.position.y + Block.shape.position.y + (Tetris.blockSize / 2)  <= -(Tetris.gameFieldConfig.height / 2 )) {
+                return Tetris.collisionObject.GROUND;
+            }
         }
+
+        /*if (Block.shape.position.y <= -(Tetris.gameFieldConfig.height / 2)) {
+         // console.log("Y ground collision.");
+         return Tetris.collisionObject.GROUND;
+         }*/
+
+
         /*else if(Math.abs(Block.shape.position.x) <= Tetris.blockSize / 2 || (Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
          alert("X wall collision.");
          } else if(Math.abs(Block.shape.position.z) <= Tetris.blockSize / 2 ||(Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
@@ -192,18 +205,19 @@ var Engine = function () {
 
             frameTimeDifference -= gameStepTime;
             Block.move(0, -1, 0);
-
-
-            // render(); it cuts the drawing of static blocks
+            render();// it cuts the drawing of static blocks
             //  console.log("Falling block x: " + Block.shape.position.x + ", y: " + Block.shape.position.y + ", z: " + Block.shape.position.z);
         }
+
         var collisionType = checkCollision();
         if (collisionType == Tetris.collisionObject.GROUND) {
 
             changeStateToStatic(Block.shape);
             Tetris.scene.remove(Block.shape);
-            // generateBlock();
+
+            //  generateBlock();
         }
+
         Tetris.renderer.render(Tetris.scene, Tetris.camera);
         Tetris.stats.update();
         controls.update();
@@ -225,7 +239,7 @@ var Engine = function () {
             setUp();
             return this;
         },
-
+        testGenerateBlock: generateBlock,
         run: render
     }
 
