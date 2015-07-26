@@ -81,6 +81,30 @@ var Block = (function (blockSize) {
      //   Block.position.z += z;
     }
 
+    moveByUser = function (axis,key) {
+
+        if(axis == 'x' && key == 37){
+            this.shape.position.x -= Tetris.blockSize;
+            console.log('left arrow');
+        }
+
+        if(axis == 'x' && key == 39){
+            this.shape.position.x += Tetris.blockSize;
+            console.log('right arrow');
+        }
+
+        if(axis == 'z' && key == 38){
+            this.shape.position.z -= Tetris.blockSize;
+            console.log('up arrow');
+        }
+
+        if(axis == 'z' && key == 40){
+            this.shape.position.z += Tetris.blockSize;
+            console.log('down arrow');
+        }
+        return this;
+    };
+
     Object.defineProperty(block, 'shape', {
         get: function(){
             return this._shape;
@@ -92,7 +116,7 @@ var Block = (function (blockSize) {
     
     return {
         initializeBlock: block.init,
-        // move: move
+        moveByUser: moveByUser,
         rotate: rotate,
         move: move
     }

@@ -144,6 +144,9 @@ var Engine = function () {
             Block.rotate(AXIS.Z);
 
         }
+
+        Block.moveByUser(AXIS.X,key);
+        Block.moveByUser(AXIS.Z,key);
     }
 
     var lastFrameTime = Date.now();
