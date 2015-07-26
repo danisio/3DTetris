@@ -15,9 +15,9 @@ var Tetris = function () {
             height: 600,
             depth: 600,
 
-            segmentWidth: 6,
-            segmentHeight: 6,
-            segmentDepth: 6
+            segmentWidth: 10,
+            segmentHeight: 10,
+            segmentDepth: 10
         },
         COLLISION_OBJECT = {
             GROUND: 1,

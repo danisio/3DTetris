@@ -17,11 +17,10 @@ var Block = (function (blockSize) {
         return this;
     }
 
-    var rotate = function (axis) {
+    // TODO: Check if the block have the time to be rotated! If you rotate it when it is near the bottom, it breaks the collision
+     rotate = function (axis) {
         var shape = this.shape;
         multiplier;
-
-        console.log(shape.children[0].position.y);
 
         if (axis == 'x') {
             pressedX += 1;
@@ -75,8 +74,8 @@ var Block = (function (blockSize) {
 
         Block.shape.position.x += x * blockSize;
         //     Block.position.x += x;
-        Block.shape.position.y += y * blockSize;
-        //    Block.position.y += y;
+       // Block.shape.position.y += y * blockSize;
+        Block.shape.position.y += y;
         Block.shape.position.z += z * blockSize;
         //   Block.position.z += z;
     }
@@ -84,10 +83,8 @@ var Block = (function (blockSize) {
     moveByUser = function (axis, key) {
 
         if (axis == 'x' && key == 37) {
-            console.log(this.shape.position.x);
             this.shape.position.x -= Tetris.blockSize;
             console.log('left arrow');
-            console.log(this.shape.position.x);
         }
 
         if (axis == 'x' && key == 39) {

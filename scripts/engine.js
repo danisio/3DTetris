@@ -54,9 +54,9 @@ var Engine = function () {
         return this;
     };
 
-    setBlockPosition = function () {//boundingBoxConfig.segmentHeigh
-        Block.position.x = Math.floor(Math.random() * 6 - Tetris.blockSize / 2); // -1?
-        Block.position.z = Math.floor(Math.random() * 6 - Tetris.blockSize / 2);
+    setBlockPosition = function () {// TODO: make [boundingBoxConfig.segmentHeigh] public
+        Block.position.x = Math.floor(Math.random() * 10 - Tetris.blockSize / 2);
+        Block.position.z = Math.floor(Math.random() * 10 - Tetris.blockSize / 2);
 
         Block.position.y = Tetris.gameFieldConfig.height / 2 + Tetris.blockSize / 2; // TODO: tuning
         Block.shape.position = new THREE.Vector3(
@@ -72,13 +72,7 @@ var Engine = function () {
     };
 
     joinSubElements = function (base, additional) {
-        if (Physijs) {
             baseGeometry.add(additionalGeometry);
-        }
-        else {
-            baseGeometry.add(additionalGeometry);
-            // THREE.GeometryUtils.merge(base.geometry, additional);
-        }
     };
 
     getAvailableMesh = function () {
@@ -99,7 +93,6 @@ var Engine = function () {
         }
     }
 
-
     setUp = function () {
         Tetris.initScene();
         controls = new THREE.OrbitControls(Tetris.camera, Tetris.renderer.domElement);
@@ -111,31 +104,18 @@ var Engine = function () {
 
     checkCollision = function () {
 
-        //
-        // console.log(Block.shape.children.length);
-
-        //Check for floor collision
-
         for (var index = 0; index < Block.shape.children.length; index += 1) {
             var child = Block.shape.children[index];
-            if (child.position.y + Block.shape.position.y + (Tetris.blockSize / 2)  <= -(Tetris.gameFieldConfig.height / 2 )) {
+            if ((child.position.y  + (Block.shape.position.y - (Tetris.blockSize / 2)) ) == -(Tetris.gameFieldConfig.height / 2 )) {
                 return Tetris.collisionObject.GROUND;
             }
         }
-
-        /*if (Block.shape.position.y <= -(Tetris.gameFieldConfig.height / 2)) {
-         // console.log("Y ground collision.");
-         return Tetris.collisionObject.GROUND;
-         }*/
-
-
         /*else if(Math.abs(Block.shape.position.x) <= Tetris.blockSize / 2 || (Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
          alert("X wall collision.");
          } else if(Math.abs(Block.shape.position.z) <= Tetris.blockSize / 2 ||(Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
          alert("Z wall collision");
          } */
-    }
-
+    };
 
     window.onkeyup = function (e) {
 
@@ -160,75 +140,54 @@ var Engine = function () {
 
     // Static blocks
 
+    // TODO: Make staticBlocks 3-dimentional matrix. If it just add all subBlocks one by one we cant find a special flast to be removed
     var staticBlocks = [];
 
     changeStateToStatic = function (block) {
 
         for (var subBlock = 0; subBlock < block.children.length; subBlock += 1) {
-
+            console.log('LENGTH' + block.children.length);
             block.children[subBlock].position.y += block.position.y;
             block.children[subBlock].position.x += block.position.x;
             block.children[subBlock].position.z += block.position.z;
-
+            console.log(block.children[subBlock]);
             staticBlocks.push(block.children[subBlock]);
-            Tetris.scene.add(block.children[subBlock]);
         }
 
-        /*
-         Fot Block.mesh
+        // [!] really important this loop to be outside the upper one.
+        // When you add the child to the scene, it is deleted from the block.children list!
+        for (var ind = 0; ind < staticBlocks.length; ind += 1) {
+            var test = staticBlocks[ind];
+            Tetris.scene.add(test);
+        }
+    };    // end static block
 
-         for (var subBlock = 0; subBlock < block.length; subBlock += 1) {
-
-         staticBlocks.push(block[subBlock]);
-         var staticSubBlock = getAvailableMesh();
-         staticSubBlock.position.x = Tetris.blockSize * block[subBlock].x;
-         staticSubBlock.position.y = Tetris.blockSize * block[subBlock].y;
-
-         Tetris.scene.add(staticSubBlock);
-         }*/
-    };
-
-
-    // end static block
-
-    var lastFrameTime = Date.now();
+    /*var lastFrameTime = Date.now();
     var gameStepTime = 1000;
-    var frameTimeDifference = 0;
+    var frameTimeDifference = 0;*/
 
     render = function () {
 
-        var time = Date.now();
+        /*var time = Date.now();
         frameTimeDifference += time - lastFrameTime;
         lastFrameTime = time;
+         while (frameTimeDifference > gameStepTime) {
+        frameTimeDifference -= gameStepTime;*/
 
-        while (frameTimeDifference > gameStepTime) {
-
-            frameTimeDifference -= gameStepTime;
-            Block.move(0, -1, 0);
-            render();// it cuts the drawing of static blocks
-            //  console.log("Falling block x: " + Block.shape.position.x + ", y: " + Block.shape.position.y + ", z: " + Block.shape.position.z);
-        }
+        Block.move(0, -1, 0);
 
         var collisionType = checkCollision();
         if (collisionType == Tetris.collisionObject.GROUND) {
-
             changeStateToStatic(Block.shape);
             Tetris.scene.remove(Block.shape);
-
-            //  generateBlock();
+            //Tetris.renderer.render(Tetris.scene, Tetris.camera);
+            generateBlock();
         }
-
         Tetris.renderer.render(Tetris.scene, Tetris.camera);
         Tetris.stats.update();
         controls.update();
-
         requestAnimationFrame(render);
-        // TODO: if collision with ground is detected:
-        // generateBlock();
     };
-
-    // TODO: delete when collision events are implemented
-    //setInterval(generateBlock, 8000);
 
     return {
 
@@ -239,7 +198,6 @@ var Engine = function () {
             setUp();
             return this;
         },
-        testGenerateBlock: generateBlock,
         run: render
     }
 
