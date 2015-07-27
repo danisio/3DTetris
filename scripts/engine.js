@@ -55,14 +55,14 @@ var Engine = function () {
     };
 
     setBlockPosition = function () {// TODO: make [boundingBoxConfig.segmentHeigh] public
-        Block.position.x = Math.floor(Math.random() * 10 - Tetris.blockSize / 2);
-        Block.position.z = Math.floor(Math.random() * 10 - Tetris.blockSize / 2);
+        Block.shape.position.x = 180;//Math.floor(Math.random() * 10 - Tetris.blockSize / 2);
+        Block.shape.position.z = 180;//Math.floor(Math.random() * 10 - Tetris.blockSize / 2);
 
-        Block.position.y = Tetris.gameFieldConfig.height / 2 + Tetris.blockSize / 2; // TODO: tuning
-        Block.shape.position = new THREE.Vector3(
+        Block.shape.position.y = Tetris.gameFieldConfig.height / 2; // TODO: tuning
+        /*Block.shape.position = new THREE.Vector3(
             Block.position.x,
             Block.position.y,
-            Block.position.z);
+            Block.position.z); */
 
 
         Block.shape.rotation = {x: 0, y: 0, z: 0};
