@@ -21,8 +21,9 @@ var Tetris = function () {
         },
         COLLISION_OBJECT = {
             GROUND: 1,
-            WALL: 2,
-            STATIC_BLOCK: 3
+            WALLX: 2,
+            WALLZ: 3,
+            STATIC_BLOCK: 4
         },
         BLOCK_SIZE = GAMEFIELD_CONFIG.width / GAMEFIELD_CONFIG.segmentWidth;
 

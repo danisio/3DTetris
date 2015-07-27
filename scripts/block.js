@@ -87,7 +87,6 @@ var Block = (function (blockSize) {
 
     moveByUser = function (axis, key) {
 
-        var oldShapePosition = {x: Block.shape.position.x, z: Block.shape.position.z};
         /*
          if (axis == 'x' && key == 37) {
 
@@ -115,6 +114,14 @@ var Block = (function (blockSize) {
 
         for(var i = 0; i < Tetris.blockSize / 2; i++) {
 
+            var collisionType = checkCollision();
+            if (collisionType.WALLX == true && axis == 'x') {
+                break;
+            }
+            else if (collisionType.WALLZ == true && axis == 'z') {
+                break;
+            }
+
             if (axis == 'x' && key == 37) {
 
                 Block.shape.position.x -= 1;
@@ -135,15 +142,6 @@ var Block = (function (blockSize) {
             if (axis == 'z' && key == 40) {
                 Block.shape.position.z += 1;
                 //  console.log('down arrow');
-            }
-
-            var collisionType = checkCollision();
-            if (collisionType == Tetris.collisionObject.WALL) {
-                //changeStateToStatic(Block.shape);
-                //Tetris.scene.remove(Block.shape);
-                //Tetris.renderer.render(Tetris.scene, Tetris.camera);
-                //generateBlock();
-                break;
             }
         }
 
