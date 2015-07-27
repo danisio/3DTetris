@@ -128,18 +128,26 @@ var Engine = function () {
                 //break;
             }
 
-            if(vector.x - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2) || vector.x + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.width) / 2) {
+            if(vector.x - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2)) {
                 console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
            //     collisionType = Tetris.collisionObject.WALLX;
-                collisionType.WALLX = true;
+                collisionType.WALLXNegative = true;
                 //alert("Wall collision");
             }
 
-            if(vector.z - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2) || vector.z + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.depth) / 2) {
+            if(vector.x + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.width) / 2) {
+                collisionType.WALLXPositive = true;
+            }
+
+            if(vector.z - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2)) {
                 console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
             //    collisionType = Tetris.collisionObject.WALLZ;
-                collisionType.WALLZ = true;
+                collisionType.WALLZNegative = true;
                 //alert("Wall collision");
+            }
+
+            if(vector.z + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.depth) / 2) {
+                collisionType.WALLZPositive = true;
             }
         }
 

@@ -115,18 +115,19 @@ var Block = (function (blockSize) {
         for(var i = 0; i < Tetris.blockSize / 2; i++) {
 
             var collisionType = checkCollision();
-            if (collisionType.WALLX == true && axis == 'x') {
+            if (collisionType.WALLXNegative == true && key == 37 && axis == 'x') {
                 break;
-            }
-            else if (collisionType.WALLZ == true && axis == 'z') {
+            } else if (collisionType.WALLXPositive == true && key == 39 && axis == 'x') {
+                break;
+            } else if (collisionType.WALLZNegative == true && key == 38 && axis == 'z') {
+                break;
+            } else if (collisionType.WALLZPositive == true && key == 40 && axis == 'z') {
                 break;
             }
 
             if (axis == 'x' && key == 37) {
 
                 Block.shape.position.x -= 1;
-
-                //  console.log('left arrow');
             }
 
             if (axis == 'x' && key == 39) {
