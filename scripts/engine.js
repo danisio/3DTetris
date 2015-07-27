@@ -126,7 +126,9 @@ var Engine = function () {
         }
 
         if (key == 89) {
+
             Block.rotate(AXIS.Y);
+
         }
 
         if (key == 90) {
