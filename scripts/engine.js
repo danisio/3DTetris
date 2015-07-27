@@ -104,12 +104,40 @@ var Engine = function () {
 
     checkCollision = function () {
 
+        //FIXME: Must be moved out of here
+        Tetris.scene.updateMatrixWorld();
+        Block.shape.updateMatrixWorld();
+
+        /*        console.log("x: " + Block.shape.position.x + ", y: " + Block.shape.position.y + ", z:" + Block.shape.position.z);
+         for (var index = 0; index < Block.shape.children.length; index += 1) {
+         var vector = new THREE.Vector3();
+         vector.setFromMatrixPosition( Block.shape.children[index].matrixWorld );
+         console.log("x: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
+         */
         for (var index = 0; index < Block.shape.children.length; index += 1) {
+
             var child = Block.shape.children[index];
-            if ((child.position.y  + (Block.shape.position.y - (Tetris.blockSize / 2)) ) == -(Tetris.gameFieldConfig.height / 2 )) {
+            var vector = new THREE.Vector3();
+            vector.setFromMatrixPosition( child.matrixWorld );
+
+            if ((vector.y - (Tetris.blockSize / 2)) <= -(Tetris.gameFieldConfig.height / 2 )) { //Bottom collision
+                console.log("Bottom collision: x: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
                 return Tetris.collisionObject.GROUND;
             }
+
+            if(vector.x - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2) || vector.x + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.width) / 2) {
+                console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
+                return Tetris.collisionObject.WALL;
+                //alert("Wall collision");
+            }
+
+            if(vector.z - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2) || vector.z + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.width) / 2) {
+                console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
+                return Tetris.collisionObject.WALL;
+                //alert("Wall collision");
+            }
         }
+
         /*else if(Math.abs(Block.shape.position.x) <= Tetris.blockSize / 2 || (Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
          alert("X wall collision.");
          } else if(Math.abs(Block.shape.position.z) <= Tetris.blockSize / 2 ||(Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
@@ -126,9 +154,7 @@ var Engine = function () {
         }
 
         if (key == 89) {
-
             Block.rotate(AXIS.Y);
-
         }
 
         if (key == 90) {
@@ -136,9 +162,11 @@ var Engine = function () {
 
         }
 
+        //FIXME: Why called twice, better no
         Block.moveByUser(AXIS.X, key);
         Block.moveByUser(AXIS.Z, key);
     }
+
 
     // Static blocks
 
@@ -164,26 +192,30 @@ var Engine = function () {
         }
     };    // end static block
 
-    /*var lastFrameTime = Date.now();
+    var lastFrameTime = Date.now();
     var gameStepTime = 1000;
-    var frameTimeDifference = 0;*/
+    var frameTimeDifference = 0;
 
     render = function () {
 
-        /*var time = Date.now();
+        var time = Date.now();
         frameTimeDifference += time - lastFrameTime;
         lastFrameTime = time;
-         while (frameTimeDifference > gameStepTime) {
-        frameTimeDifference -= gameStepTime;*/
+        if (frameTimeDifference > gameStepTime) {
+            frameTimeDifference = 0;
 
-        Block.move(0, -1, 0);
-
-        var collisionType = checkCollision();
-        if (collisionType == Tetris.collisionObject.GROUND) {
-            changeStateToStatic(Block.shape);
-            Tetris.scene.remove(Block.shape);
-            //Tetris.renderer.render(Tetris.scene, Tetris.camera);
-            generateBlock();
+            for(var i = 0; i < Tetris.blockSize; i++) {
+                var collisionType = checkCollision(true);
+                if (collisionType == Tetris.collisionObject.GROUND) {
+                    changeStateToStatic(Block.shape);
+                    Tetris.scene.remove(Block.shape);
+                    //Tetris.renderer.render(Tetris.scene, Tetris.camera);
+                    generateBlock();
+                    break;
+                }
+                Block.move(0, -1, 0);
+            }
+            Tetris.renderer.render(Tetris.scene, Tetris.camera);
         }
         Tetris.renderer.render(Tetris.scene, Tetris.camera);
         Tetris.stats.update();

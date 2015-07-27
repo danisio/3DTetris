@@ -76,32 +76,80 @@ var Block = (function (blockSize) {
     };
 
     move = function (x, y, z) {
-        Block.shape.position.x += x * blockSize;
-        Block.shape.position.y += y;
-        Block.shape.position.z += z * blockSize;
+
+        Block.shape.position.x += x; //* blockSize;
+        //     Block.position.x += x;
+        Block.shape.position.y += y; // * blockSize;
+        //Block.shape.position.y += y;
+        Block.shape.position.z += z; // * blockSize;
+        //   Block.position.z += z;
     }
 
     moveByUser = function (axis, key) {
 
-        if (axis == 'x' && key == 37) {
-            this.shape.position.x -= Tetris.blockSize;
-            console.log('left arrow');
+        var oldShapePosition = {x: Block.shape.position.x, z: Block.shape.position.z};
+        /*
+         if (axis == 'x' && key == 37) {
+
+         Block.shape.position.x -= Tetris.blockSize;
+
+         console.log('left arrow');
+         }
+
+         if (axis == 'x' && key == 39) {
+         Block.shape.position.x += Tetris.blockSize;
+         console.log('right arrow');
+         }
+
+         if (axis == 'z' && key == 38) {
+         Block.shape.position.z -= Tetris.blockSize;
+         console.log('up arrow');
+         }
+
+         if (axis == 'z' && key == 40) {
+         Block.shape.position.z += Tetris.blockSize;
+         console.log('down arrow');
+         } */
+
+        //    if(oldShapePosition.x != Block.shape.position.x || oldShapePosition.z != Block.shape.position.z) {
+
+        for(var i = 0; i < Tetris.blockSize / 2; i++) {
+
+            if (axis == 'x' && key == 37) {
+
+                Block.shape.position.x -= 1;
+
+                //  console.log('left arrow');
+            }
+
+            if (axis == 'x' && key == 39) {
+                Block.shape.position.x += 1;
+                //   console.log('right arrow');
+            }
+
+            if (axis == 'z' && key == 38) {
+                Block.shape.position.z -= 1;
+                //   console.log('up arrow');
+            }
+
+            if (axis == 'z' && key == 40) {
+                Block.shape.position.z += 1;
+                //  console.log('down arrow');
+            }
+
+            var collisionType = checkCollision();
+            if (collisionType == Tetris.collisionObject.WALL) {
+                //changeStateToStatic(Block.shape);
+                //Tetris.scene.remove(Block.shape);
+                //Tetris.renderer.render(Tetris.scene, Tetris.camera);
+                //generateBlock();
+                break;
+            }
         }
 
-        if (axis == 'x' && key == 39) {
-            this.shape.position.x += Tetris.blockSize;
-            console.log('right arrow');
-        }
+        Tetris.renderer.render(Tetris.scene, Tetris.camera);
+        // }
 
-        if (axis == 'z' && key == 38) {
-            this.shape.position.z -= Tetris.blockSize;
-            console.log('up arrow');
-        }
-
-        if (axis == 'z' && key == 40) {
-            this.shape.position.z += Tetris.blockSize;
-            console.log('down arrow');
-        }
         return this;
     };
 
