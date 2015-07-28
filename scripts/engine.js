@@ -102,28 +102,15 @@ var Engine = function () {
     };
 
     getAvailableMesh = function () {
-        if (Physijs) {
-            return new Physijs.BoxMesh(
-                new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize),
-                new THREE.MeshBasicMaterial({color: randColor},
-                    PHYSI_MESH_CONSTS.FRICTION,
-                    PHYSI_MESH_CONSTS.RESTITUTION),
-                PHYSI_MESH_CONSTS.MASS
-            );
-        }
+        /* return new THREE.SceneUtils.createMultiMaterialObject(new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize), [
+         new THREE.MeshBasicMaterial({color: 0x000000, shading: THREE.FlatShading, wireframe: true, transparent: true}),
+         new THREE.MeshBasicMaterial({color: randColor})
+         ]);*/
 
-        else {
-
-            /* return new THREE.SceneUtils.createMultiMaterialObject(new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize), [
-             new THREE.MeshBasicMaterial({color: 0x000000, shading: THREE.FlatShading, wireframe: true, transparent: true}),
-             new THREE.MeshBasicMaterial({color: randColor})
-             ]);*/
-
-            return new THREE.Mesh(
-                new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize),
-                new THREE.MeshBasicMaterial({color: randColor, transperant: true})
-            );
-        }
+        return new THREE.Mesh(
+            new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize),
+            new THREE.MeshBasicMaterial({color: randColor, transperant: true})
+        );
     };
 
     checkCollision = function () {
@@ -182,9 +169,9 @@ var Engine = function () {
             y = getIndexByCoordinates(vector.y);
             z = getIndexByCoordinates(vector.z);
 
-         ///   console.log(staticBlocks);
-         //   console.log(x);
-    //        console.log("x:" + x + " y:" + y + " z:" + z);
+            ///   console.log(staticBlocks);
+            //   console.log(x);
+            //        console.log("x:" + x + " y:" + y + " z:" + z);
             if (!!staticBlocks && !!staticBlocks[x] && !!staticBlocks[x][y] && !!staticBlocks[x][y][z]) {
                 console.log("collision with block");
                 collisionType.StaticBlock = true;
@@ -361,20 +348,20 @@ var Engine = function () {
 
             Block.move(0, -Tetris.blockSize, 0);
 
-                var collisionType = checkCollision();
+            var collisionType = checkCollision();
 
-                if (collisionType.GROUND == true || collisionType.StaticBlock == true) {
+            if (collisionType.GROUND == true || collisionType.StaticBlock == true) {
 
-                    //if(collisionType.StaticBlock == true) {
-                    Block.move(0, Tetris.blockSize, 0);
+                //if(collisionType.StaticBlock == true) {
+                Block.move(0, Tetris.blockSize, 0);
 
-                    changeStateToStatic(Block.shape);
-                    Tetris.scene.remove(Block.shape);
-                    //Tetris.renderer.render(Tetris.scene, Tetris.camera);
-                    //console.dir(staticBlocks);
-                    generateBlock();
+                changeStateToStatic(Block.shape);
+                Tetris.scene.remove(Block.shape);
+                //Tetris.renderer.render(Tetris.scene, Tetris.camera);
+                //console.dir(staticBlocks);
+                generateBlock();
 
-                }
+            }
             Tetris.renderer.render(Tetris.scene, Tetris.camera);
         }
         Tetris.renderer.render(Tetris.scene, Tetris.camera);
@@ -464,7 +451,7 @@ var Engine = function () {
             this.Utilities = utilities;
             setUp();
             staticBlocks = [];
-         //   testCleanUpRow();
+            //   testCleanUpRow();
             // testCleanUpRowWithMoreElements();
             return this;
         },

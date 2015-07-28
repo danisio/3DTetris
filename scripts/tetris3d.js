@@ -1,4 +1,4 @@
-var Tetris = function () {
+var Tetris = (function () {
     var renderer, render_stats, physics_stats, scene, camera;
 
     var WIDTH = window.innerWidth,
@@ -38,13 +38,7 @@ var Tetris = function () {
     };
 
     renderer = new THREE.WebGLRenderer({antialias: true});
-
-    if (Physijs.Scene) {
-        scene = new Physijs.Scene
-    } else {
-        scene = new THREE.Scene();
-    }
-
+    scene = new THREE.Scene();
     render_stats = new Stats();
     camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
 
@@ -60,22 +54,6 @@ var Tetris = function () {
         render_stats.domElement.style.zIndex = 100;
         document.getElementById('viewport').appendChild(render_stats.domElement);
 
-        if (Physijs) {
-            physics_stats = new Stats();
-            physics_stats.domElement.style.position = 'absolute';
-            physics_stats.domElement.style.top = '50px';
-            physics_stats.domElement.style.zIndex = 100;
-            document.getElementById('viewport').appendChild(physics_stats.domElement);
-
-            scene.setGravity(new THREE.Vector3(0, GRAVITY_VECTOR, 0));
-            scene.addEventListener('update', function () {
-                    scene.simulate(undefined, 1);
-                    physics_stats.update();
-                }
-            );
-        }
-
-        // camera.updateProjectionMatrix(); needed only for Orthographic camera
         camera.position.set(CAMERA_POSITION.X, CAMERA_POSITION.Y, CAMERA_POSITION.Z);
         camera.lookAt(scene.position);
         scene.add(camera);
@@ -140,4 +118,4 @@ var Tetris = function () {
         gameFieldConfig: GAMEFIELD_CONFIG,
         collisionObject: COLLISION_OBJECT
     }
-}();
+}());
