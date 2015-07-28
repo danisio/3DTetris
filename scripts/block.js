@@ -15,7 +15,7 @@ var Block = (function (blockSize) {
         };
         this.shape = [];
         return this;
-    }
+    };
 
     // TODO: Check if the block have the time to be rotated! If you rotate it when it is near the bottom, it breaks the collision
     rotate = function (axis) {
@@ -113,7 +113,7 @@ var Block = (function (blockSize) {
 
         //    if(oldShapePosition.x != Block.shape.position.x || oldShapePosition.z != Block.shape.position.z) {
 
-        for(var i = 0; i < Tetris.blockSize / 2; i++) {
+        for(var i = 0; i < Tetris.blockSize ; i++) {
 
             if (axis == 'x' && key == 37) {
 
@@ -143,7 +143,7 @@ var Block = (function (blockSize) {
                 //Tetris.scene.remove(Block.shape);
                 //Tetris.renderer.render(Tetris.scene, Tetris.camera);
                 //generateBlock();
-                break;
+              // break;
             }
         }
 

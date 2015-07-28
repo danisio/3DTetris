@@ -1,8 +1,17 @@
 var Engine = function () {
     var typeIndex, baseGeometry, additionalGeometry,
+        controls, x, y, z, staticBlocks,
+        lastFrameTime, gameStepTime, frameTimeDifference, time,
+
+    // Test Functions
+        testAddingSubBlocks,
+    // Help Functions
+        joinSubElements, getAvailableMesh, getCoordinates,
+    // Main Functions
         generateBlock, getNewShapeSkeleton, drawBlock,
-        setBlockPosition, joinSubElements, getAvailableMesh,
-        setUp, render, controls, x, y, z;
+        setBlockPosition, changeStateToStatic,
+        checkFullFlat, removeFlat,
+        setUp, render;
 
     var PHYSI_MESH_CONSTS = {
         MASS: 10,
@@ -14,6 +23,10 @@ var Engine = function () {
         X: 'x',
         Y: 'y',
         Z: 'z'
+    };
+
+    getCoordinates = function (m) {
+        return (m * Tetris.blockSize - (Tetris.gameFieldConfig.width / 2)) + (Tetris.blockSize / 2);
     };
 
     generateBlock = function () {
@@ -55,14 +68,14 @@ var Engine = function () {
     };
 
     setBlockPosition = function () {// TODO: make [boundingBoxConfig.segmentHeigh] public
-        Block.shape.position.x = 180;//Math.floor(Math.random() * 10 - Tetris.blockSize / 2);
-        Block.shape.position.z = 180;//Math.floor(Math.random() * 10 - Tetris.blockSize / 2);
+        Block.shape.position.x = 30;//Math.floor(Math.random() * 10 - Tetris.blockSize / 2);
+        Block.shape.position.z = 30;//Math.floor(Math.random() * 10 - Tetris.blockSize / 2);
 
         Block.shape.position.y = Tetris.gameFieldConfig.height / 2; // TODO: tuning
         /*Block.shape.position = new THREE.Vector3(
-            Block.position.x,
-            Block.position.y,
-            Block.position.z); */
+         Block.position.x,
+         Block.position.y,
+         Block.position.z); */
 
 
         Block.shape.rotation = {x: 0, y: 0, z: 0};
@@ -72,7 +85,7 @@ var Engine = function () {
     };
 
     joinSubElements = function (base, additional) {
-            baseGeometry.add(additionalGeometry);
+        baseGeometry.add(additionalGeometry);
     };
 
     getAvailableMesh = function () {
@@ -91,15 +104,6 @@ var Engine = function () {
                 new THREE.MeshBasicMaterial({color: randColor})
             );
         }
-    }
-
-    setUp = function () {
-        Tetris.initScene();
-        controls = new THREE.OrbitControls(Tetris.camera, Tetris.renderer.domElement);
-        Block.initializeBlock(Tetris.blockSize);
-        Utilities.cleanScreen();
-        generateBlock();
-        // document.addEventListener('onkeypress', onKeyPress, false);
     };
 
     checkCollision = function () {
@@ -118,21 +122,21 @@ var Engine = function () {
 
             var child = Block.shape.children[index];
             var vector = new THREE.Vector3();
-            vector.setFromMatrixPosition( child.matrixWorld );
+            vector.setFromMatrixPosition(child.matrixWorld);
 
-            if ((vector.y - (Tetris.blockSize / 2)) <= -(Tetris.gameFieldConfig.height / 2 )) { //Bottom collision
-                console.log("Bottom collision: x: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
+            if ((vector.y - (Tetris.blockSize / 2)) == -(Tetris.gameFieldConfig.height / 2 )) { //Bottom collision
+                //  console.log("Bottom collision: x: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
                 return Tetris.collisionObject.GROUND;
             }
 
-            if(vector.x - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2) || vector.x + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.width) / 2) {
-                console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
+            if (vector.x - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2) || vector.x + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.width) / 2) {
+                //console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
                 return Tetris.collisionObject.WALL;
                 //alert("Wall collision");
             }
 
-            if(vector.z - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2) || vector.z + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.width) / 2) {
-                console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
+            if (vector.z - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2) || vector.z + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.width) / 2) {
+                // console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
                 return Tetris.collisionObject.WALL;
                 //alert("Wall collision");
             }
@@ -143,6 +147,118 @@ var Engine = function () {
          } else if(Math.abs(Block.shape.position.z) <= Tetris.blockSize / 2 ||(Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
          alert("Z wall collision");
          } */
+    };
+
+    function moveToStaticBlocks(staticBlocks, element) {
+        var x = element.position.x,
+            y = element.position.y,
+            z = element.position.z;
+        // TODO: check range for all
+        /* if(z==360){
+         return;
+         }*/
+        if (!staticBlocks[x]) {
+            staticBlocks[x] = [];
+        }
+        if (!staticBlocks[x][y]) {
+            staticBlocks[x][y] = [];
+        }
+        staticBlocks[x][y][z] = element;
+        var isFlatFull = checkFullFlat(staticBlocks, element, x, y, z);
+
+        if (!isFlatFull) {
+            //console.log("Not FULL");
+            Tetris.scene.add(staticBlocks[x][y][z]);
+        }
+        else {
+            removeFlat(staticBlocks, x, y, z)
+        }
+    }
+
+    changeStateToStatic = function (block) {
+
+        for (var subBlock = 0; subBlock < block.children.length; subBlock += 1) {
+            block.children[subBlock].position.y += block.position.y;
+            block.children[subBlock].position.x += block.position.x;
+            block.children[subBlock].position.z += block.position.z;
+            var newStatic = block.children[subBlock].clone();
+            moveToStaticBlocks(staticBlocks, newStatic);
+        }
+
+        // [!] really important this loop to be outside the upper one.
+        // When you add the child to the scene, it is deleted from the block.children list!
+        /*for (var ind = 0; ind < staticBlocks.length; ind += 1) {
+         var test = staticBlocks[ind];
+         Tetris.scene.add(test);
+         }*/
+    };
+
+    checkFullFlat = function (staticBlocks, element, x, y, z) {
+        staticBlocks[x][y][z] = element;
+        console.log('check');
+        // check
+        var maxCubesCount = Tetris.gameFieldConfig.segmentWidth;
+
+        for (var j = 0; j < maxCubesCount; j += 1) {
+            var axis_Y = getCoordinates(j);
+            var count = 0; // because we search a flat
+
+            for (var i = 0; i < maxCubesCount; i += 1) {
+                var axis_X = getCoordinates(i);
+
+                for (var k = 0; k < maxCubesCount; k += 1) {
+                    var axis_Z = getCoordinates(k);
+                   // DEBUG: console.log("X " + x + " Y " + y + " Z" + z);
+                     if (staticBlocks[axis_X] && staticBlocks[axis_X][axis_Y] && staticBlocks[axis_X][axis_Y][axis_Z]) {
+                         console.log(staticBlocks[axis_X][axis_Y][axis_Z]);
+                         console.log('~~~~~~~~~~~~~~');
+                    count += 1;
+                     }
+
+                }
+            }
+            console.log('COUNT: ' + count);
+            if (count == 100) {
+                return true;
+                count = 0;
+            }
+
+        }
+
+
+        return false;
+    };
+
+    removeFlat = function (staticBlocks, x, y, z) {
+        console.log('REMOVE');
+        for (var k = 0; k < Tetris.gameFieldConfig.segmentWidth; k += 1) {
+            var index_Y = getCoordinates(k);
+
+            for (var i = 0; i < Tetris.gameFieldConfig.segmentWidth; i += 1) {
+                var index_X = getCoordinates(i);
+
+                for (var j = 0; j < Tetris.gameFieldConfig.segmentWidth; j += 1) {
+
+                    var index_Z = getCoordinates(j);
+                    if (staticBlocks[index_X] && staticBlocks[index_X][index_Y] && staticBlocks[index_X][index_Y][index_Z]) {
+
+                        Tetris.scene.remove(staticBlocks[index_X][index_Y][index_Z]);
+                        //staticBlocks[index_X][index_Y][index_Z] = 'EMPTY';
+                    }
+
+                }
+
+            }
+        }
+    };
+
+    setUp = function () {
+        Tetris.initScene();
+        controls = new THREE.OrbitControls(Tetris.camera, Tetris.renderer.domElement);
+        Block.initializeBlock(Tetris.blockSize);
+        Utilities.cleanScreen();
+        generateBlock();
+        // document.addEventListener('onkeypress', onKeyPress, false);
     };
 
     window.onkeyup = function (e) {
@@ -165,52 +281,29 @@ var Engine = function () {
         //FIXME: Why called twice, better no
         Block.moveByUser(AXIS.X, key);
         Block.moveByUser(AXIS.Z, key);
-    }
-
-
-    // Static blocks
-
-    // TODO: Make staticBlocks 3-dimentional matrix. If it just add all subBlocks one by one we cant find a special flast to be removed
-    var staticBlocks = [];
-
-    changeStateToStatic = function (block) {
-
-        for (var subBlock = 0; subBlock < block.children.length; subBlock += 1) {
-            console.log('LENGTH' + block.children.length);
-            block.children[subBlock].position.y += block.position.y;
-            block.children[subBlock].position.x += block.position.x;
-            block.children[subBlock].position.z += block.position.z;
-            console.log(block.children[subBlock]);
-            staticBlocks.push(block.children[subBlock]);
-        }
-
-        // [!] really important this loop to be outside the upper one.
-        // When you add the child to the scene, it is deleted from the block.children list!
-        for (var ind = 0; ind < staticBlocks.length; ind += 1) {
-            var test = staticBlocks[ind];
-            Tetris.scene.add(test);
-        }
-    };    // end static block
-
-    var lastFrameTime = Date.now();
-    var gameStepTime = 1000;
-    var frameTimeDifference = 0;
+    };
+    lastFrameTime = Date.now();
+    gameStepTime = 1000;
+    frameTimeDifference = 0;
 
     render = function () {
 
-        var time = Date.now();
+        time = Date.now();
         frameTimeDifference += time - lastFrameTime;
         lastFrameTime = time;
+
         if (frameTimeDifference > gameStepTime) {
             frameTimeDifference = 0;
 
-            for(var i = 0; i < Tetris.blockSize; i++) {
+            for (var i = 0; i < Tetris.blockSize; i++) {
+
                 var collisionType = checkCollision(true);
+
                 if (collisionType == Tetris.collisionObject.GROUND) {
                     changeStateToStatic(Block.shape);
                     Tetris.scene.remove(Block.shape);
                     //Tetris.renderer.render(Tetris.scene, Tetris.camera);
-                    generateBlock();
+                    console.dir(staticBlocks);
                     break;
                 }
                 Block.move(0, -1, 0);
@@ -223,6 +316,34 @@ var Engine = function () {
         requestAnimationFrame(render);
     };
 
+    testAddingSubBlocks = function () {
+        var y = -270;
+
+        for (var j = 0; j < 10; j += 1) {
+            var x = getCoordinates(j);
+
+            for (var i = 0; i < 10; i += 1) {
+                var z = getCoordinates(i);
+
+                if (staticBlocks[x] === undefined) staticBlocks[x] = [];
+                if (staticBlocks[x][y] === undefined) staticBlocks[x][y] = [];
+
+                var mesh = new THREE.Mesh(
+                    new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize),
+                    new THREE.MeshBasicMaterial({color: Utilities.Colors[Math.floor(Math.random() * 6)]})
+                );
+
+                mesh.overdraw = true;
+                // console.log("X: " + x, " Y " + y + " Z " + z);
+
+                mesh.position.x = x;
+                mesh.position.y = y;
+                mesh.position.z = z;
+                Tetris.scene.add(mesh);
+                staticBlocks[x][y][z] = mesh;
+            }
+        }
+    };
     return {
 
         getEngine: function (block, tetris, utilities) {
@@ -230,9 +351,11 @@ var Engine = function () {
             this.Block = block;
             this.Utilities = utilities;
             setUp();
+            staticBlocks = [];
+            // testAddingSubBlocks();
             return this;
         },
         run: render
     }
-
 }();
+
