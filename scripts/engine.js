@@ -4,7 +4,7 @@ var Engine = function () {
         lastFrameTime, gameStepTime, frameTimeDifference, time,
 
     // Test Functions
-        testAddingSubBlocks,
+        testCleanUpRow,
     // Help Functions
         joinSubElements, getAvailableMesh, getCoordinates,
     // Main Functions
@@ -35,7 +35,6 @@ var Engine = function () {
         getNewShapeSkeleton();
         drawBlock();
         setBlockPosition();
-        Block.shape.name = "test";
         Tetris.scene.add(Block.shape);
 
         return this;
@@ -118,27 +117,42 @@ var Engine = function () {
          vector.setFromMatrixPosition( Block.shape.children[index].matrixWorld );
          console.log("x: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
          */
+        var collisionType = {};
+
         for (var index = 0; index < Block.shape.children.length; index += 1) {
 
             var child = Block.shape.children[index];
             var vector = new THREE.Vector3();
             vector.setFromMatrixPosition(child.matrixWorld);
 
-            if ((vector.y - (Tetris.blockSize / 2)) == -(Tetris.gameFieldConfig.height / 2 )) { //Bottom collision
-                //  console.log("Bottom collision: x: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
-                return Tetris.collisionObject.GROUND;
+
+            if ((vector.y - (Tetris.blockSize / 2)) <= -(Tetris.gameFieldConfig.height / 2 )) { //Bottom collision
+                // console.log("Bottom collision: x: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
+                collisionType.GROUND = true;
+                //break;
             }
 
-            if (vector.x - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2) || vector.x + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.width) / 2) {
+            if (vector.x - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2)) {
                 //console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
-                return Tetris.collisionObject.WALL;
+                //     collisionType = Tetris.collisionObject.WALLX;
+                collisionType.WALLXNegative = true;
                 //alert("Wall collision");
             }
 
-            if (vector.z - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2) || vector.z + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.width) / 2) {
-                // console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
-                return Tetris.collisionObject.WALL;
+            if (vector.x + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.width) / 2) {
+                collisionType.WALLXPositive = true;
+            }
+
+            if (vector.z - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2)) {
+                //console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
+                //    collisionType = Tetris.collisionObject.WALLZ;
+                collisionType.WALLZNegative = true;
+
                 //alert("Wall collision");
+            }
+
+            if (vector.z + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.depth) / 2) {
+                collisionType.WALLZPositive = true;
             }
         }
 
@@ -147,16 +161,15 @@ var Engine = function () {
          } else if(Math.abs(Block.shape.position.z) <= Tetris.blockSize / 2 ||(Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
          alert("Z wall collision");
          } */
+
+        return collisionType;
     };
 
     function moveToStaticBlocks(staticBlocks, element) {
         var x = element.position.x,
             y = element.position.y,
             z = element.position.z;
-        // TODO: check range for all
-        /* if(z==360){
-         return;
-         }*/
+
         if (!staticBlocks[x]) {
             staticBlocks[x] = [];
         }
@@ -185,18 +198,10 @@ var Engine = function () {
             moveToStaticBlocks(staticBlocks, newStatic);
         }
 
-        // [!] really important this loop to be outside the upper one.
-        // When you add the child to the scene, it is deleted from the block.children list!
-        /*for (var ind = 0; ind < staticBlocks.length; ind += 1) {
-         var test = staticBlocks[ind];
-         Tetris.scene.add(test);
-         }*/
     };
 
     checkFullFlat = function (staticBlocks, element, x, y, z) {
         staticBlocks[x][y][z] = element;
-        console.log('check');
-        // check
         var maxCubesCount = Tetris.gameFieldConfig.segmentWidth;
 
         for (var j = 0; j < maxCubesCount; j += 1) {
@@ -208,21 +213,19 @@ var Engine = function () {
 
                 for (var k = 0; k < maxCubesCount; k += 1) {
                     var axis_Z = getCoordinates(k);
-                   // DEBUG: console.log("X " + x + " Y " + y + " Z" + z);
-                     if (staticBlocks[axis_X] && staticBlocks[axis_X][axis_Y] && staticBlocks[axis_X][axis_Y][axis_Z]) {
-                         console.log(staticBlocks[axis_X][axis_Y][axis_Z]);
-                         console.log('~~~~~~~~~~~~~~');
-                    count += 1;
-                     }
-
+                    // DEBUG: console.log("X " + x + " Y " + y + " Z" + z);
+                    if (staticBlocks[axis_X] && staticBlocks[axis_X][axis_Y] && staticBlocks[axis_X][axis_Y][axis_Z]) {
+                        // console.log(staticBlocks[axis_X][axis_Y][axis_Z]);
+                        // console.log('~~~~~~~~~~~~~~');
+                        count += 1;
+                    }
                 }
             }
-            console.log('COUNT: ' + count);
+            // console.log('COUNT: ' + count);
             if (count == 100) {
                 return true;
                 count = 0;
             }
-
         }
 
 
@@ -278,13 +281,15 @@ var Engine = function () {
 
         }
 
-        //FIXME: Why called twice, better no
-        Block.moveByUser(AXIS.X, key);
-        Block.moveByUser(AXIS.Z, key);
+        else {
+            Block.moveByUser(AXIS.X, key);
+            Block.moveByUser(AXIS.Z, key);
+        }
     };
-    lastFrameTime = Date.now();
-    gameStepTime = 1000;
-    frameTimeDifference = 0;
+
+    var lastFrameTime = Date.now();
+    var gameStepTime = 1000;
+    var frameTimeDifference = 0;
 
     render = function () {
 
@@ -299,11 +304,11 @@ var Engine = function () {
 
                 var collisionType = checkCollision(true);
 
-                if (collisionType == Tetris.collisionObject.GROUND) {
+                if (collisionType.GROUND == true) {
                     changeStateToStatic(Block.shape);
                     Tetris.scene.remove(Block.shape);
                     //Tetris.renderer.render(Tetris.scene, Tetris.camera);
-                    console.dir(staticBlocks);
+                    //console.dir(staticBlocks);
                     break;
                 }
                 Block.move(0, -1, 0);
@@ -316,13 +321,17 @@ var Engine = function () {
         requestAnimationFrame(render);
     };
 
-    testAddingSubBlocks = function () {
-        var y = -270;
+    testCleanUpRow = function () {
+        console.log('~~~~~~~~~~~~~~~~~~~');
+        console.log('TEST CLEANING ROW: function testCleanUpRow() called in getEngine. Removable: true :D');
+        console.log('~~~~~~~~~~~~~~~~~~~~');
 
-        for (var j = 0; j < 10; j += 1) {
+        var y = -270; // the most bottom y
+
+        for (var j = 0; j < Tetris.gameFieldConfig.segmentWidth; j += 1) {
             var x = getCoordinates(j);
 
-            for (var i = 0; i < 10; i += 1) {
+            for (var i = 0; i < Tetris.gameFieldConfig.segmentWidth; i += 1) {
                 var z = getCoordinates(i);
 
                 if (staticBlocks[x] === undefined) staticBlocks[x] = [];
@@ -344,6 +353,7 @@ var Engine = function () {
             }
         }
     };
+
     return {
 
         getEngine: function (block, tetris, utilities) {
@@ -352,7 +362,7 @@ var Engine = function () {
             this.Utilities = utilities;
             setUp();
             staticBlocks = [];
-            // testAddingSubBlocks();
+            testCleanUpRow();
             return this;
         },
         run: render
