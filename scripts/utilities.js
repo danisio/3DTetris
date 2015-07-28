@@ -9,7 +9,7 @@ var Utilities = function () {
     ];
 
     var TETROMINOES = [
-        /*[
+        [
             {x: 1, y: 2, z: 0},
             {x: 1, y: 1, z: 0},
             {x: 1, y: 0, z: 0},
@@ -19,13 +19,13 @@ var Utilities = function () {
             {x: 0, y: 0, z: 0},
             {x: 0, y: 1, z: 0},
             {x: 0, y: 2, z: 0}
-        ],*/
+        ],
         [
             {x: 0, y: 0, z: 0},
             {x: 0, y: 1, z: 0},  //1
             {x: 1, y: 0, z: 0},
             {x: 1, y: 1, z: 0}   // 2
-        ]/*,
+        ],
         [
             {x: 0, y: 0, z: 0},
             {x: 0, y: 1, z: 0},
@@ -37,7 +37,7 @@ var Utilities = function () {
             {x: 0, y: 1, z: 0},
             {x: 1, y: 1, z: 0},
             {x: 1, y: 2, z: 0}
-        ]*/
+        ]
     ];
 
     var cleanInfoBar = function () {

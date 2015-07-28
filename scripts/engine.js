@@ -59,8 +59,13 @@ var Engine = function () {
             additionalGeometry.position.x = Tetris.blockSize * Block.mesh[i].x;
             additionalGeometry.position.y = Tetris.blockSize * Block.mesh[i].y;
 
+            var cubeOutline = new THREE.EdgesHelper( additionalGeometry, 0x1f1f1f );
+            cubeOutline.material.linewidth = 2;
+            Tetris.scene.add( cubeOutline );
+
             joinSubElements(baseGeometry, additionalGeometry);
         }
+
 
         Block.shape = baseGeometry;
         return this;
@@ -97,10 +102,17 @@ var Engine = function () {
                 PHYSI_MESH_CONSTS.MASS
             );
         }
+
         else {
+
+           /* return new THREE.SceneUtils.createMultiMaterialObject(new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize), [
+             new THREE.MeshBasicMaterial({color: 0x000000, shading: THREE.FlatShading, wireframe: true, transparent: true}),
+             new THREE.MeshBasicMaterial({color: randColor})
+             ]);*/
+
             return new THREE.Mesh(
                 new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize),
-                new THREE.MeshBasicMaterial({color: randColor})
+                new THREE.MeshBasicMaterial({color: randColor, transperant: true})
             );
         }
     };
@@ -184,7 +196,8 @@ var Engine = function () {
             Tetris.scene.add(staticBlocks[x][y][z]);
         }
         else {
-            removeFlat(staticBlocks, x, y, z)
+            removeFlat(staticBlocks, x, y, z);
+            // TODO: moveFlatDown();
         }
     }
 
@@ -309,6 +322,7 @@ var Engine = function () {
                     Tetris.scene.remove(Block.shape);
                     //Tetris.renderer.render(Tetris.scene, Tetris.camera);
                     //console.dir(staticBlocks);
+                    generateBlock();
                     break;
                 }
                 Block.move(0, -1, 0);
@@ -362,7 +376,7 @@ var Engine = function () {
             this.Utilities = utilities;
             setUp();
             staticBlocks = [];
-            testCleanUpRow();
+            //testCleanUpRow();
             return this;
         },
         run: render

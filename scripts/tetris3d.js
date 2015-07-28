@@ -106,7 +106,7 @@ var Tetris = function () {
 
         scene.add(boundingBox);
 
-        var outlineMaterial = new THREE.MeshBasicMaterial({
+        /*var outlineMaterial = new THREE.MeshBasicMaterial({
             color: 0xA3DA2E,
             transparent: true,
             opacity: 1,
@@ -117,7 +117,14 @@ var Tetris = function () {
         outlineMesh.position = boundingBox.position;
         outlineMesh.scale.multiplyScalar(1.01);
         scene.add(outlineMesh);
-        // end of game field
+        // end of game field*/
+
+        // test borders
+
+        var cubeOutline = new THREE.EdgesHelper( boundingBox, 0xA3DA2E );
+        cubeOutline.material.linewidth = 5;
+        scene.add( cubeOutline );
+        //end test borders
     }
 
     return {
