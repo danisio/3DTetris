@@ -1,6 +1,3 @@
-/**
- * Created by Solara on 24/07/2015.
- */
 var Utilities = function () {
     var COLORS = [
         0x6666ff, 0x66ffff, 0xcc68EE, 0x666633, 0x66ff66, 0x9966ff,
@@ -41,7 +38,7 @@ var Utilities = function () {
     ];
 
     var cleanInfoBar = function () {
-        var viewport, divCollection, ind;
+        var viewport, divsCollection, ind;
 
         viewport = document.getElementById('viewport');
         divsCollection = viewport.getElementsByTagName('div');
