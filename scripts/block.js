@@ -17,6 +17,13 @@ var Block = (function (blockSize) {
         return this;
     };
 
+    function compareCollisionStates(firstCollision, secondCollision) {
+        if (firstCollision.WALLXNegative == secondCollision.WALLXNegative && firstCollision.WALLXPositive == secondCollision.WALLXPositive && firstCollision.WALLZNegative == secondCollision.WALLZPositive && firstCollision.GROUND == secondCollision.GROUND) {
+            return true;
+        }
+        return false;
+    }
+
     // TODO: Check if the block have the time to be rotated! If you rotate it when it is near the bottom, it breaks the collision
     rotate = function (axis) {
         var shape = this.shape;
@@ -29,11 +36,30 @@ var Block = (function (blockSize) {
             } else {
                 multiplier = -1
             }
+
+            //var collisionBeforeRotation = checkCollision();
+
             for (var ind = 0; ind < shape.children.length; ind += 1) {
 
                 var temp = multiplier * shape.children[ind].position.z;
                 shape.children[ind].position.z = multiplier * shape.children[ind].position.x;
                 shape.children[ind].position.x = temp;
+            }
+
+            //var collisionAfterRotation = checkCollision();
+            var collisionTypes = checkCollision();
+            var isRotationPossible = true;
+            if (collisionTypes.WALLXNegative == true || collisionTypes.WALLXPositive == true || collisionTypes.WALLZNegative == true || collisionTypes.WALLZPositive == true || collisionTypes.GROUND == true) {
+                isRotationPossible = false;
+            }
+
+            if(isRotationPossible == false) {
+                for (var ind = 0; ind < shape.children.length; ind += 1) {
+                    var temp = shape.children[ind].position.z / multiplier;
+                    shape.children[ind].position.z = shape.children[ind].position.x / multiplier;
+                    shape.children[ind].position.x = temp;
+                }
+
             }
         }
 
@@ -45,15 +71,27 @@ var Block = (function (blockSize) {
             } else {
                 multiplier = -1
             }
-            var isRotationPosible = checkRotationPossibility(shape, multiplier);
 
-            if (isRotationPosible) {
+            for (var ind = 0; ind < shape.children.length; ind += 1) {
+
+                var temp = multiplier * shape.children[ind].position.y;
+                shape.children[ind].position.y = multiplier * shape.children[ind].position.x;
+                shape.children[ind].position.x = temp;
+             }
+
+            var collisionTypes = checkCollision();
+            var isRotationPossible = true;
+            if (collisionTypes.WALLXNegative == true || collisionTypes.WALLXPositive == true || collisionTypes.WALLZNegative == true || collisionTypes.WALLZPositive == true || collisionTypes.GROUND == true) {
+                isRotationPossible = false;
+            }
+
+            if(isRotationPossible == false) {
                 for (var ind = 0; ind < shape.children.length; ind += 1) {
-
-                    var temp = multiplier * shape.children[ind].position.y;
-                    shape.children[ind].position.y = multiplier * shape.children[ind].position.x;
+                    var temp = shape.children[ind].position.y / multiplier;
+                    shape.children[ind].position.y = shape.children[ind].position.x / multiplier;
                     shape.children[ind].position.x = temp;
                 }
+
             }
         }
 
@@ -69,6 +107,21 @@ var Block = (function (blockSize) {
                 var temp = multiplier * shape.children[ind].position.y;
                 shape.children[ind].position.y = multiplier * shape.children[ind].position.z;
                 shape.children[ind].position.z = temp;
+            }
+
+            var collisionTypes = checkCollision();
+            var isRotationPossible = true;
+            if (collisionTypes.WALLXNegative == true || collisionTypes.WALLXPositive == true || collisionTypes.WALLZNegative == true || collisionTypes.WALLZPositive == true || collisionTypes.GROUND == true) {
+                isRotationPossible = false;
+            }
+
+            if(isRotationPossible == false) {
+                for (var ind = 0; ind < shape.children.length; ind += 1) {
+                    var temp = shape.children[ind].position.y / multiplier;
+                    shape.children[ind].position.y = shape.children[ind].position.z / multiplier;
+                    shape.children[ind].position.z = temp;
+                }
+
             }
         }
 
@@ -112,18 +165,8 @@ var Block = (function (blockSize) {
 
         //    if(oldShapePosition.x != Block.shape.position.x || oldShapePosition.z != Block.shape.position.z) {
 
+        //FIXME: Do it without loop, thats just lame
         for (var i = 0; i < Tetris.blockSize; i++) {
-
-            var collisionType = checkCollision();
-            if (collisionType.WALLXNegative == true && key == 37 && axis == 'x') {
-                break;
-            } else if (collisionType.WALLXPositive == true && key == 39 && axis == 'x') {
-                break;
-            } else if (collisionType.WALLZNegative == true && key == 38 && axis == 'z') {
-                break;
-            } else if (collisionType.WALLZPositive == true && key == 40 && axis == 'z') {
-                break;
-            }
 
             if (axis == 'x' && key == 37) {
 
@@ -143,6 +186,21 @@ var Block = (function (blockSize) {
             if (axis == 'z' && key == 40) {
                 Block.shape.position.z += 1;
                 //  console.log('down arrow');
+            }
+
+            var collisionType = checkCollision();
+            if (collisionType.WALLXNegative == true && key == 37 && axis == 'x') {
+                Block.shape.position.x += 1;
+                break;
+            } else if (collisionType.WALLXPositive == true && key == 39 && axis == 'x') {
+                Block.shape.position.x -= 1;
+                break;
+            } else if (collisionType.WALLZNegative == true && key == 38 && axis == 'z') {
+                Block.shape.position.z += 1;
+                break;
+            } else if (collisionType.WALLZPositive == true && key == 40 && axis == 'z') {
+                Block.shape.position.z -= 1;
+                break;
             }
 
         }
