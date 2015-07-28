@@ -166,44 +166,44 @@ var Block = (function (blockSize) {
         //    if(oldShapePosition.x != Block.shape.position.x || oldShapePosition.z != Block.shape.position.z) {
 
         //FIXME: Do it without loop, thats just lame
-        for (var i = 0; i < Tetris.blockSize; i++) {
+        //for (var i = 0; i < Tetris.blockSize; i++) {
 
             if (axis == 'x' && key == 37) {
-
-                Block.shape.position.x -= 1;
+                Block.shape.position.x -= Tetris.blockSize;
             }
 
             if (axis == 'x' && key == 39) {
-                Block.shape.position.x += 1;
+                Block.shape.position.x += Tetris.blockSize;
                 //   console.log('right arrow');
             }
 
             if (axis == 'z' && key == 38) {
-                Block.shape.position.z -= 1;
+                Block.shape.position.z -= Tetris.blockSize;
                 //   console.log('up arrow');
             }
 
             if (axis == 'z' && key == 40) {
-                Block.shape.position.z += 1;
+                Block.shape.position.z += Tetris.blockSize;
                 //  console.log('down arrow');
             }
 
             var collisionType = checkCollision();
-            if (collisionType.WALLXNegative == true && key == 37 && axis == 'x') {
-                Block.shape.position.x += 1;
-                break;
-            } else if (collisionType.WALLXPositive == true && key == 39 && axis == 'x') {
-                Block.shape.position.x -= 1;
-                break;
-            } else if (collisionType.WALLZNegative == true && key == 38 && axis == 'z') {
-                Block.shape.position.z += 1;
-                break;
-            } else if (collisionType.WALLZPositive == true && key == 40 && axis == 'z') {
-                Block.shape.position.z -= 1;
-                break;
+
+            if ((collisionType.StaticBlock == true || collisionType.WALLXNegative == true) && key == 37 && axis == 'x') {
+                Block.shape.position.x += Tetris.blockSize;
+               // break;
+            } else if ((collisionType.StaticBlock == true || collisionType.WALLXPositive == true) && key == 39 && axis == 'x') {
+                Block.shape.position.x -= Tetris.blockSize;
+               // break;
+            } else if ((collisionType.StaticBlock == true || collisionType.WALLZNegative == true) && key == 38 && axis == 'z') {
+                Block.shape.position.z += Tetris.blockSize;
+               // break;
+            } else if ((collisionType.StaticBlock == true || collisionType.WALLZPositive == true) && key == 40 && axis == 'z') {
+                Block.shape.position.z -= Tetris.blockSize;
+               // break;
             }
 
-        }
+        //}
 
         Tetris.renderer.render(Tetris.scene, Tetris.camera);
         // }
