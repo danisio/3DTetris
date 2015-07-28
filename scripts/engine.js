@@ -138,32 +138,34 @@ var Engine = function () {
             vector.setFromMatrixPosition(child.matrixWorld);
 
 
-            if ((vector.y - (Tetris.blockSize / 2)) <= -(Tetris.gameFieldConfig.height / 2 )) { //Bottom collision
-                // console.log("Bottom collision: x: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
+            if ((vector.y - (Tetris.blockSize / 2)) < -(Tetris.gameFieldConfig.height / 2 )) { //Bottom collision
+                 console.log("Bottom collision: x: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
                 collisionType.GROUND = true;
                 //break;
             }
 
-            if (vector.x - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2)) {
-                //console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
+            if (vector.x - (Tetris.blockSize / 2) < -(Tetris.gameFieldConfig.width / 2)) {
+                console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
                 //     collisionType = Tetris.collisionObject.WALLX;
                 collisionType.WALLXNegative = true;
                 //alert("Wall collision");
             }
 
-            if (vector.x + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.width) / 2) {
+            if (vector.x + (Tetris.blockSize / 2) > (Tetris.gameFieldConfig.width) / 2) {
+                console.log("X wall positive collision");
                 collisionType.WALLXPositive = true;
             }
 
-            if (vector.z - (Tetris.blockSize / 2) <= -(Tetris.gameFieldConfig.width / 2)) {
-                //console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
+            if (vector.z - (Tetris.blockSize / 2) < -(Tetris.gameFieldConfig.width / 2)) {
+                console.log("Z Wall negative collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
                 //    collisionType = Tetris.collisionObject.WALLZ;
                 collisionType.WALLZNegative = true;
 
                 //alert("Wall collision");
             }
 
-            if (vector.z + (Tetris.blockSize / 2) >= (Tetris.gameFieldConfig.depth) / 2) {
+            if (vector.z + (Tetris.blockSize / 2) > (Tetris.gameFieldConfig.depth) / 2) {
+                console.log("Z wall positive collision");
                 collisionType.WALLZPositive = true;
             }
         }
