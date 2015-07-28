@@ -4,13 +4,13 @@ var Engine = function () {
         lastFrameTime, gameStepTime, frameTimeDifference, time,
 
     // Test Functions
-        testCleanUpRow,
+        testCleanUpRow, testCleanUpRowWithMoreElements,
     // Help Functions
-        joinSubElements, getAvailableMesh, getCoordinates,
+        joinSubElements, getAvailableMesh, getCoordinates, getIndexByCoordinates,
     // Main Functions
         generateBlock, getNewShapeSkeleton, drawBlock,
         setBlockPosition, changeStateToStatic,
-        checkFullFlat, removeFlat,
+        checkFullFlat, removeFlat, moveFlatDown,
         setUp, render;
 
     var PHYSI_MESH_CONSTS = {
@@ -27,7 +27,15 @@ var Engine = function () {
 
     getCoordinates = function (m) {
         return (m * Tetris.blockSize - (Tetris.gameFieldConfig.width / 2)) + (Tetris.blockSize / 2);
+        // (m * Tetris.blockSize - (Tetris.gameFieldConfig.width / 2)) + (Tetris.blockSize / 2) = index
+        // (m * Tetris.blockSize - (Tetris.gameFieldConfig.width / 2)) = index  - (Tetris.blockSize/2);
+        //  m * Tetris.blockSize = (Tetris.gameFieldConfig.width / 2) + index - (Tetris.blockSize/2);
+        // m = (Tetris.gameFieldConfig.width / 2) + index  - (Tetris.blockSize/2) / Tetris.blockSize;
     };
+
+    getIndexByCoordinates = function (c) {
+        return ((Tetris.gameFieldConfig.width / 2) + c - (Tetris.blockSize / 2)) / Tetris.blockSize;
+    }
 
     generateBlock = function () {
         Block.shape = []; // nullify
@@ -59,9 +67,9 @@ var Engine = function () {
             additionalGeometry.position.x = Tetris.blockSize * Block.mesh[i].x;
             additionalGeometry.position.y = Tetris.blockSize * Block.mesh[i].y;
 
-            var cubeOutline = new THREE.EdgesHelper( additionalGeometry, 0x1f1f1f );
+            var cubeOutline = new THREE.EdgesHelper(additionalGeometry, 0x1f1f1f);
             cubeOutline.material.linewidth = 2;
-            Tetris.scene.add( cubeOutline );
+            Tetris.scene.add(cubeOutline);
 
             joinSubElements(baseGeometry, additionalGeometry);
         }
@@ -105,7 +113,7 @@ var Engine = function () {
 
         else {
 
-           /* return new THREE.SceneUtils.createMultiMaterialObject(new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize), [
+            /* return new THREE.SceneUtils.createMultiMaterialObject(new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize), [
              new THREE.MeshBasicMaterial({color: 0x000000, shading: THREE.FlatShading, wireframe: true, transparent: true}),
              new THREE.MeshBasicMaterial({color: randColor})
              ]);*/
@@ -179,9 +187,11 @@ var Engine = function () {
 
     function moveToStaticBlocks(staticBlocks, element) {
         var x = element.position.x,
-            y = element.position.y,
+            y = element.position.y, // -270
             z = element.position.z;
-
+        // console.log('X ' + x + ' Y ' + y + ' Z ' + z);
+        var coord = ((Tetris.gameFieldConfig.width / 2) + y - (Tetris.blockSize / 2)) / Tetris.blockSize;
+        console.log(coord);
         if (!staticBlocks[x]) {
             staticBlocks[x] = [];
         }
@@ -197,7 +207,8 @@ var Engine = function () {
         }
         else {
             removeFlat(staticBlocks, x, y, z);
-            // TODO: moveFlatDown();
+            // TODO: 
+            moveFlatDown(staticBlocks, x, y, z);
         }
     }
 
@@ -266,6 +277,18 @@ var Engine = function () {
 
             }
         }
+    };
+
+    moveFlatDown = function (staticBlocks, x, y, z) {
+        var index = getIndexByCoordinates(y);
+
+        // loop from the flat to remove to the upper one
+        for (var index = 0; index < Tetris.gameFieldConfig.segmentWidth - 1; index += 1) { // -1 ?
+            var currentY = getCoordinates(index);
+            var upperY = getCoordinates(index + 1);
+            staticBlocks[x][currentY] = staticBlocks[x][upperY];
+        }
+        staticBlocks[x][270] = [];
     };
 
     setUp = function () {
@@ -368,6 +391,46 @@ var Engine = function () {
         }
     };
 
+    testCleanUpRowWithMoreElements = function () {
+        console.log('~~~~~~~~~~~~~~~~~~~');
+        console.log('TEST CLEANING ROW: function testCleanUpRow() called in getEngine. Removable: true :D');
+        console.log('~~~~~~~~~~~~~~~~~~~~');
+
+        // var y = -270; // the most bottom y
+        for (var k = 0; k < 3; k += 1) {
+            var y = getCoordinates(k);
+
+            for (var j = 0; j < Tetris.gameFieldConfig.segmentWidth; j += 1) {
+                var x = getCoordinates(j);
+
+                for (var i = 0; i < Tetris.gameFieldConfig.segmentWidth; i += 1) {
+                    var z = getCoordinates(i);
+
+                    if (staticBlocks[x] === undefined) staticBlocks[x] = [];
+                    if (staticBlocks[x][y] === undefined) staticBlocks[x][y] = [];
+
+                    var mesh = new THREE.Mesh(
+                        new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize),
+                        new THREE.MeshBasicMaterial({color: Utilities.Colors[Math.floor(Math.random() * 6)]})
+                    );
+
+                    mesh.overdraw = true;
+                    // console.log("X: " + x, " Y " + y + " Z " + z);
+
+                    mesh.position.x = x;
+                    mesh.position.y = y;
+                    mesh.position.z = z;
+                    Tetris.scene.add(mesh);
+                    staticBlocks[x][y][z] = mesh;
+                }
+                if (k == 2 && j == 5) {
+                    return;
+                }
+            }
+        }
+    };
+
+
     return {
 
         getEngine: function (block, tetris, utilities) {
@@ -377,6 +440,7 @@ var Engine = function () {
             setUp();
             staticBlocks = [];
             //testCleanUpRow();
+           // testCleanUpRowWithMoreElements();
             return this;
         },
         run: render

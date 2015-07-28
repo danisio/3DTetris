@@ -4,7 +4,7 @@
         Engine.run();
     };
 
-    var unnecessary = true;
+    var unnecessary = false;
 
     if (unnecessary) {
         require(['libs/raphael', 'jquery'], function (Raphael, $) {
