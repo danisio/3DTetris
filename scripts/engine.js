@@ -1,7 +1,9 @@
 var Engine = function () {
     var typeIndex, baseGeometry, additionalGeometry,
         controls, x, y, z, staticBlocks,
-        lastFrameTime, gameStepTime, frameTimeDifference, time,
+        lastFrameTime = Date.now(),
+        gameStepTime = 1000,
+        frameTimeDifference = 0, time,
 
     // Test Functions
         testCleanUpRow, testCleanUpRowWithMoreElements,
@@ -11,7 +13,7 @@ var Engine = function () {
         generateBlock, getNewShapeSkeleton, drawBlock,
         setBlockPosition, changeStateToStatic,
         checkFullFlat, removeFlat, moveFlatDown,
-        setUp, render;
+        init, run;
 
     var PHYSI_MESH_CONSTS = {
         MASS: 10,
@@ -27,19 +29,14 @@ var Engine = function () {
 
     getCoordinates = function (m) {
         return (m * Tetris.blockSize - (Tetris.gameFieldConfig.width / 2)) + (Tetris.blockSize / 2);
-        // (m * Tetris.blockSize - (Tetris.gameFieldConfig.width / 2)) + (Tetris.blockSize / 2) = index
-        // (m * Tetris.blockSize - (Tetris.gameFieldConfig.width / 2)) = index  - (Tetris.blockSize/2);
-        //  m * Tetris.blockSize = (Tetris.gameFieldConfig.width / 2) + index - (Tetris.blockSize/2);
-        // m = (Tetris.gameFieldConfig.width / 2) + index  - (Tetris.blockSize/2) / Tetris.blockSize;
     };
 
-    //FIXME: y is float sometimes
     getIndexByCoordinates = function (c) {
         return ((Tetris.gameFieldConfig.width / 2) + c - (Tetris.blockSize / 2)) / Tetris.blockSize;
     };
 
     generateBlock = function () {
-        Block.shape = []; // nullify
+        Block.shape = [];
         Block.mesh = [];
         getNewShapeSkeleton();
         drawBlock();
@@ -92,60 +89,35 @@ var Engine = function () {
 
     getAvailableMesh = function () {
 
-
-            /* return new THREE.SceneUtils.createMultiMaterialObject(new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize), [
-             new THREE.MeshBasicMaterial({color: 0x000000, shading: THREE.FlatShading, wireframe: true, transparent: true}),
-             new THREE.MeshBasicMaterial({color: randColor})
-             ]);*/
-
             var texture = new THREE.ImageUtils.loadTexture("images/outline.gif");
-
             texture.anisotropy = Tetris.renderer.getMaxAnisotropy();
-            // texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-            // texture.repeat.set( 512, 512 );
             var material = new THREE.MeshBasicMaterial({color: randColor, map: texture});
 
-
-            return new THREE.Mesh(
-                new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize),
-                material
-                // new THREE.MeshBasicMaterial({color: randColor, transperant: true, opacity: 0.3})
-            );
-
+            return new THREE.Mesh(new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize), material);
     };
 
     checkCollision = function () {
 
-        //FIXME: Must be moved out of here
+        var index, vector,
+            child, x, y, z,
+            collisionType = {};
+
+        //Updates world positions of piece blocks
         Tetris.scene.updateMatrixWorld();
         Block.shape.updateMatrixWorld();
 
-        /*        console.log("x: " + Block.shape.position.x + ", y: " + Block.shape.position.y + ", z:" + Block.shape.position.z);
-         for (var index = 0; index < Block.shape.children.length; index += 1) {
-         var vector = new THREE.Vector3();
-         vector.setFromMatrixPosition( Block.shape.children[index].matrixWorld );
-         console.log("x: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
-         */
-        var collisionType = {};
+        for (index = 0; index < Block.shape.children.length; index += 1) {
 
-        for (var index = 0; index < Block.shape.children.length; index += 1) {
-
-            var child = Block.shape.children[index];
-            var vector = new THREE.Vector3();
+            child = Block.shape.children[index];
+            vector = new THREE.Vector3();
             vector.setFromMatrixPosition(child.matrixWorld);
 
-
             if ((vector.y - (Tetris.blockSize / 2 )) < -(Tetris.gameFieldConfig.height / 2 )) { //Bottom collision
-                // console.log("Bottom collision: x: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
                 collisionType.GROUND = true;
-                //break;
             }
 
             if (vector.x - (Tetris.blockSize / 2 ) < -(Tetris.gameFieldConfig.width / 2)) {
-                //console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
-                //     collisionType = Tetris.collisionObject.WALLX;
                 collisionType.WALLXNegative = true;
-                //alert("Wall collision");
             }
 
             if (vector.x + (Tetris.blockSize / 2) > (Tetris.gameFieldConfig.width) / 2) {
@@ -153,11 +125,7 @@ var Engine = function () {
             }
 
             if (vector.z - (Tetris.blockSize / 2) < -(Tetris.gameFieldConfig.width / 2)) {
-                //console.log("X Wall collision: " + vector.x + ", y: " + vector.y + ", z:" + vector.z);
-                //    collisionType = Tetris.collisionObject.WALLZ;
-                collisionType.WALLZNegative = true;
-
-                //alert("Wall collision");
+                collisionType.WALLZNegative = true;S
             }
 
             if (vector.z + (Tetris.blockSize / 2) > (Tetris.gameFieldConfig.depth) / 2) {
@@ -165,71 +133,55 @@ var Engine = function () {
             }
 
             // Checking collision with static blocks
-            var x, y, z;
             x = getIndexByCoordinates(vector.x);
             y = getIndexByCoordinates(vector.y);
             z = getIndexByCoordinates(vector.z);
 
-            ///   console.log(staticBlocks);
-            //   console.log(x);
-            //        console.log("x:" + x + " y:" + y + " z:" + z);
             if (!!staticBlocks && !!staticBlocks[x] && !!staticBlocks[x][y] && !!staticBlocks[x][y][z]) {
-                console.log("collision with block");
                 collisionType.StaticBlock = true;
             }
         }
-
-        /*else if(Math.abs(Block.shape.position.x) <= Tetris.blockSize / 2 || (Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
-         alert("X wall collision.");
-         } else if(Math.abs(Block.shape.position.z) <= Tetris.blockSize / 2 ||(Block.shape.position.x >= Tetris.gameFieldConfig.width - 1) / Tetris.gameFieldConfig.blockSize) {
-         alert("Z wall collision");
-         } */
 
         return collisionType;
     };
 
     function moveToStaticBlocks(staticBlocks, element) {
-        var x = element.position.x,
-            y = element.position.y, // -270
-            z = element.position.z;
-        // console.log('X ' + x + ' Y ' + y + ' Z ' + z);
-        var coord = ((Tetris.gameFieldConfig.width / 2) + y - (Tetris.blockSize / 2)) / Tetris.blockSize;
-        //console.log(coord);
+        var x, y, z, isFlatFull;
+
         x = getIndexByCoordinates(x);
         y = getIndexByCoordinates(y);
         z = getIndexByCoordinates(z);
+
         if (!staticBlocks[x]) {
             staticBlocks[x] = [];
         }
+
         if (!staticBlocks[x][y]) {
             staticBlocks[x][y] = [];
         }
-        console.log("NewStaticBlock x:" + x + " y:" + y + " z:" + z);
+
         staticBlocks[x][y][z] = element;
-        var isFlatFull = checkFullFlat(staticBlocks, element, x, y, z);
+        isFlatFull = checkFullFlat(staticBlocks, element, x, y, z);
 
         if (!isFlatFull) {
             Tetris.scene.add(staticBlocks[x][y][z]);
-        }
-        else {
+        } else {
             removeFlat(staticBlocks, x, y, z);
             moveFlatDown(staticBlocks, y);
-            // TODO: remove the blocks from staticBlocks!!! Otherwise Angel will have problems with the collision
             if (staticBlocks[x] && staticBlocks[x][y] && staticBlocks[x][y][z]) {
                 staticBlocks[x][y][z] = undefined;
             }
-
         }
     }
 
     changeStateToStatic = function (block) {
+        var index;
 
-        for (var subBlock = 0; subBlock < block.children.length; subBlock += 1) {
-            block.children[subBlock].position.y += block.position.y;
-            block.children[subBlock].position.x += block.position.x;
-            block.children[subBlock].position.z += block.position.z;
-            var newStatic = block.children[subBlock].clone();
-            moveToStaticBlocks(staticBlocks, newStatic);
+        for (index = 0; index < block.children.length; index += 1) {
+            block.children[index].position.x += block.position.x;
+            block.children[index].position.y += block.position.y;
+            block.children[index].position.z += block.position.z;
+            moveToStaticBlocks(staticBlocks, block.children[index].clone());
         }
 
     };
@@ -323,78 +275,6 @@ var Engine = function () {
         //console.log(staticBlocks[x][9]);
     };
 
-    setUp = function () {
-        Tetris.initScene();
-        controls = new THREE.OrbitControls(Tetris.camera, Tetris.renderer.domElement);
-        Block.initializeBlock(Tetris.blockSize);
-        Utilities.cleanScreen();
-        generateBlock();
-        // document.addEventListener('onkeypress', onKeyPress, false);
-    };
-
-    window.onkeyup = function (e) {
-
-        var key = e.keyCode ? e.keyCode : e.which;
-
-        if (key == 88) {
-            Block.rotate(AXIS.X);
-        }
-
-        if (key == 89) {
-            Block.rotate(AXIS.Y);
-        }
-
-        if (key == 90) {
-            Block.rotate(AXIS.Z);
-
-        }
-        if (key == 32 || key == 0) {
-            Block.move(0, -Tetris.blockSize, 0);
-        }
-        else {
-            Block.moveByUser(AXIS.X, key);
-            Block.moveByUser(AXIS.Z, key);
-        }
-    };
-
-    var lastFrameTime = Date.now();
-    var gameStepTime = 1000;
-    var frameTimeDifference = 0;
-
-    render = function () {
-
-        time = Date.now();
-        frameTimeDifference += time - lastFrameTime;
-        lastFrameTime = time;
-
-        if (frameTimeDifference > gameStepTime) {
-            frameTimeDifference = 0;
-
-            Block.move(0, -Tetris.blockSize, 0);
-
-            var collisionType = checkCollision();
-
-            if (collisionType.GROUND == true || collisionType.StaticBlock == true) {
-
-                //if(collisionType.StaticBlock == true) {
-
-
-                Block.move(0, Tetris.blockSize, 0);
-
-
-                changeStateToStatic(Block.shape);
-                Tetris.scene.remove(Block.shape);
-                generateBlock();
-
-
-            }
-            Tetris.renderer.render(Tetris.scene, Tetris.camera);
-        }
-        Tetris.renderer.render(Tetris.scene, Tetris.camera);
-        Tetris.stats.update();
-        controls.update();
-        requestAnimationFrame(render);
-    };
 
     testCleanUpRow = function () {
         console.log('~~~~~~~~~~~~~~~~~~~');
@@ -468,19 +348,55 @@ var Engine = function () {
         }
     };
 
+    init = function () {
+        Tetris.initScene();
+        controls = new THREE.OrbitControls(Tetris.camera, Tetris.renderer.domElement);
+        Block.init(Tetris.blockSize);
+        Utilities.cleanScreen();
+        generateBlock();
+    };
+
+    run = function () {
+
+        var collisionType;
+
+        time = Date.now();
+        frameTimeDifference += time - lastFrameTime;
+        lastFrameTime = time;
+
+        if (frameTimeDifference > gameStepTime) {
+
+            frameTimeDifference = 0;
+
+            Block.move(0, -Tetris.blockSize, 0);
+
+            collisionType = checkCollision();
+
+            if (collisionType.GROUND == true || collisionType.StaticBlock == true) {
+                Block.move(0, Tetris.blockSize, 0);
+                changeStateToStatic(Block.shape);
+                Tetris.scene.remove(Block.shape);
+                generateBlock();
+            }
+        }
+
+        Tetris.renderer.render(Tetris.scene, Tetris.camera);
+        Tetris.stats.update();
+        controls.update();
+        requestAnimationFrame(run);
+    };
+
 
     return {
-
-        getEngine: function (block, tetris, utilities) {
+        getEngine: function (tetris, block, utilities) {
             this.Tetris = tetris;
             this.Block = block;
             this.Utilities = utilities;
-            setUp();
+            init();
             staticBlocks = [];
-            // testCleanUpRowWithMoreElements();
             return this;
         },
-        run: render
+        run: run
     }
 }();
 
