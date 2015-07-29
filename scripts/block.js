@@ -17,8 +17,10 @@ var Block = (function (blockSize) {
         return this;
     };
 
-    function compareCollisionStates(firstCollision, secondCollision) {
-        if (firstCollision.WALLXNegative == secondCollision.WALLXNegative && firstCollision.WALLXPositive == secondCollision.WALLXPositive && firstCollision.WALLZNegative == secondCollision.WALLZPositive && firstCollision.GROUND == secondCollision.GROUND) {
+    function isCollisioned(collisionTypes) {
+        if (collisionTypes.WALLXNegative == true || collisionTypes.WALLXPositive == true ||
+            collisionTypes.WALLZNegative == true || collisionTypes.WALLZPositive == true ||
+            collisionTypes.GROUND == true || collisionTypes.StaticBlock == true) {
             return true;
         }
         return false;
@@ -49,7 +51,7 @@ var Block = (function (blockSize) {
             //var collisionAfterRotation = checkCollision();
             var collisionTypes = checkCollision();
             var isRotationPossible = true;
-            if (collisionTypes.WALLXNegative == true || collisionTypes.WALLXPositive == true || collisionTypes.WALLZNegative == true || collisionTypes.WALLZPositive == true || collisionTypes.GROUND == true) {
+            if (isCollisioned(collisionTypes) == true) {
                 isRotationPossible = false;
             }
 
@@ -81,7 +83,7 @@ var Block = (function (blockSize) {
 
             var collisionTypes = checkCollision();
             var isRotationPossible = true;
-            if (collisionTypes.WALLXNegative == true || collisionTypes.WALLXPositive == true || collisionTypes.WALLZNegative == true || collisionTypes.WALLZPositive == true || collisionTypes.GROUND == true) {
+            if (isCollisioned(collisionTypes) == true) {
                 isRotationPossible = false;
             }
 
@@ -111,7 +113,7 @@ var Block = (function (blockSize) {
 
             var collisionTypes = checkCollision();
             var isRotationPossible = true;
-            if (collisionTypes.WALLXNegative == true || collisionTypes.WALLXPositive == true || collisionTypes.WALLZNegative == true || collisionTypes.WALLZPositive == true || collisionTypes.GROUND == true) {
+            if (isCollisioned(collisionTypes) == true) {
                 isRotationPossible = false;
             }
 
