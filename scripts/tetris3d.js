@@ -3,8 +3,8 @@ var Tetris = function () {
 
     var WIDTH = window.innerWidth,
         HEIGHT = window.innerHeight,
-        NEAR = 0.1,
-        FAR = 2000,
+        NEAR = 10,
+        FAR = 50000,
 
         GRAVITY_VECTOR = -100,
         GROUND_HEIGHT = 1,
@@ -34,7 +34,7 @@ var Tetris = function () {
     var CAMERA_POSITION = {
         X: 0,
         Y: 150,
-        Z: 1500
+        Z: 1900
     };
 
     renderer = new THREE.WebGLRenderer({antialias: true});
@@ -77,7 +77,7 @@ var Tetris = function () {
 
         // camera.updateProjectionMatrix(); needed only for Orthographic camera
         camera.position.set(CAMERA_POSITION.X, CAMERA_POSITION.Y, CAMERA_POSITION.Z);
-        camera.lookAt(scene.position);
+        //camera.lookAt(scene.position);
         scene.add(camera);
         // End of basic setup
 
