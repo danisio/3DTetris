@@ -1,5 +1,5 @@
 var Tetris = (function () {
-    var renderer, render_stats, physics_stats, scene, camera;
+    var renderer, render_stats, physics_stats, scene, camera,sounds;
 
     var WIDTH = window.innerWidth,
         HEIGHT = window.innerHeight,
@@ -37,6 +37,16 @@ var Tetris = (function () {
         Z: 1500
     };
 
+    sounds={};
+    //Add sounds
+    sounds["theme"] = document.getElementById("audio_theme");
+    sounds["collision"] = document.getElementById("audio_collision");
+    sounds["move"] = document.getElementById("audio_move");
+    sounds['rotate']=document.getElementById('audio_rotate');
+    sounds['gameStart']=document.getElementById('audio_game_start');
+    sounds['theme'].play();
+
+
     renderer = new THREE.WebGLRenderer({antialias: true});
     scene = new THREE.Scene();
     render_stats = new Stats();
@@ -57,6 +67,7 @@ var Tetris = (function () {
         camera.position.set(CAMERA_POSITION.X, CAMERA_POSITION.Y, CAMERA_POSITION.Z);
         camera.lookAt(scene.position);
         scene.add(camera);
+
         // End of basic setup
 
         // Ground
@@ -111,6 +122,7 @@ var Tetris = (function () {
         renderer: renderer,
         camera: camera,
         stats: render_stats,
+        sounds:sounds,
         //  controls: getPerspectiveCameraControls(),
         blockSize: BLOCK_SIZE,
 

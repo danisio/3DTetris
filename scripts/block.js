@@ -55,7 +55,7 @@ var Block = (function (blockSize) {
                 isRotationPossible = false;
             }
 
-            if(isRotationPossible == false) {
+            if (isRotationPossible == false) {
                 for (var ind = 0; ind < shape.children.length; ind += 1) {
                     var temp = shape.children[ind].position.z / multiplier;
                     shape.children[ind].position.z = shape.children[ind].position.x / multiplier;
@@ -63,6 +63,7 @@ var Block = (function (blockSize) {
                 }
 
             }
+            Tetris.sounds.rotate.play();
         }
 
         if (axis == 'y') {
@@ -79,7 +80,7 @@ var Block = (function (blockSize) {
                 var temp = multiplier * shape.children[ind].position.y;
                 shape.children[ind].position.y = multiplier * shape.children[ind].position.x;
                 shape.children[ind].position.x = temp;
-             }
+            }
 
             var collisionTypes = checkCollision();
             var isRotationPossible = true;
@@ -87,7 +88,7 @@ var Block = (function (blockSize) {
                 isRotationPossible = false;
             }
 
-            if(isRotationPossible == false) {
+            if (isRotationPossible == false) {
                 for (var ind = 0; ind < shape.children.length; ind += 1) {
                     var temp = shape.children[ind].position.y / multiplier;
                     shape.children[ind].position.y = shape.children[ind].position.x / multiplier;
@@ -95,6 +96,8 @@ var Block = (function (blockSize) {
                 }
 
             }
+
+            Tetris.sounds.rotate.play();
         }
 
 
@@ -117,7 +120,7 @@ var Block = (function (blockSize) {
                 isRotationPossible = false;
             }
 
-            if(isRotationPossible == false) {
+            if (isRotationPossible == false) {
                 for (var ind = 0; ind < shape.children.length; ind += 1) {
                     var temp = shape.children[ind].position.y / multiplier;
                     shape.children[ind].position.y = shape.children[ind].position.z / multiplier;
@@ -125,6 +128,8 @@ var Block = (function (blockSize) {
                 }
 
             }
+
+            Tetris.sounds.rotate.play();
         }
 
         return this;
@@ -138,6 +143,7 @@ var Block = (function (blockSize) {
         //Block.shape.position.y += y;
         Block.shape.position.z += z; // * blockSize;
         //   Block.position.z += z;
+        Tetris.sounds['move'].play();
     }
 
     moveByUser = function (axis, key) {
@@ -170,40 +176,45 @@ var Block = (function (blockSize) {
         //FIXME: Do it without loop, thats just lame
         //for (var i = 0; i < Tetris.blockSize; i++) {
 
-            if (axis == 'x' && key == 37) {
-                Block.shape.position.x -= Tetris.blockSize;
-            }
+        if (axis == 'x' && key == 37) {
+            Block.shape.position.x -= Tetris.blockSize;
+            Tetris.sounds['move'].play();
+        }
 
-            if (axis == 'x' && key == 39) {
-                Block.shape.position.x += Tetris.blockSize;
-                //   console.log('right arrow');
-            }
+        if (axis == 'x' && key == 39) {
+            Block.shape.position.x += Tetris.blockSize;
+            Tetris.sounds['move'].play();
+            //   console.log('right arrow');
+        }
 
-            if (axis == 'z' && key == 38) {
-                Block.shape.position.z -= Tetris.blockSize;
-                //   console.log('up arrow');
-            }
+        if (axis == 'z' && key == 38) {
+            Block.shape.position.z -= Tetris.blockSize;
+            Tetris.sounds['move'].play();
+            //   console.log('up arrow');
+        }
 
-            if (axis == 'z' && key == 40) {
-                Block.shape.position.z += Tetris.blockSize;
-                //  console.log('down arrow');
-            }
+        if (axis == 'z' && key == 40) {
+            Block.shape.position.z += Tetris.blockSize;
+            Tetris.sounds['move'].play();
+            //  console.log('down arrow');
+        }
 
-            var collisionType = checkCollision();
 
-            if ((collisionType.StaticBlock == true || collisionType.WALLXNegative == true) && key == 37 && axis == 'x') {
-                Block.shape.position.x += Tetris.blockSize;
-               // break;
-            } else if ((collisionType.StaticBlock == true || collisionType.WALLXPositive == true) && key == 39 && axis == 'x') {
-                Block.shape.position.x -= Tetris.blockSize;
-               // break;
-            } else if ((collisionType.StaticBlock == true || collisionType.WALLZNegative == true) && key == 38 && axis == 'z') {
-                Block.shape.position.z += Tetris.blockSize;
-               // break;
-            } else if ((collisionType.StaticBlock == true || collisionType.WALLZPositive == true) && key == 40 && axis == 'z') {
-                Block.shape.position.z -= Tetris.blockSize;
-               // break;
-            }
+        var collisionType = checkCollision();
+
+        if ((collisionType.StaticBlock == true || collisionType.WALLXNegative == true) && key == 37 && axis == 'x') {
+            Block.shape.position.x += Tetris.blockSize;
+            // break;
+        } else if ((collisionType.StaticBlock == true || collisionType.WALLXPositive == true) && key == 39 && axis == 'x') {
+            Block.shape.position.x -= Tetris.blockSize;
+            // break;
+        } else if ((collisionType.StaticBlock == true || collisionType.WALLZNegative == true) && key == 38 && axis == 'z') {
+            Block.shape.position.z += Tetris.blockSize;
+            // break;
+        } else if ((collisionType.StaticBlock == true || collisionType.WALLZPositive == true) && key == 40 && axis == 'z') {
+            Block.shape.position.z -= Tetris.blockSize;
+            // break;
+        }
 
         //}
 

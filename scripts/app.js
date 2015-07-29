@@ -71,9 +71,12 @@
             }).click(function () {
                 $('#contentLogo').hide();
                 startGame();
+                Tetris.sounds['theme'].pause();
+                Tetris.sounds['gameStart'].play();
             });
         } else {
             startGame();
+
         }
     });
 }());
