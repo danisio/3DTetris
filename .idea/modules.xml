@@ -5,8 +5,11 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/3DTetris.iml" filepath="$PROJECT_DIR$/.idea/3DTetris.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/3DTetris.iml" filepath="$PROJECT_DIR$/.idea/3DTetris.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/3DTetris.iml" filepath="$PROJECT_DIR$/.idea/3DTetris.iml" />
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/3DTetris.iml" filepath="$PROJECT_DIR$/.idea/3DTetris.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/3DTetris.iml" filepath="$PROJECT_DIR$/.idea/3DTetris.iml" />
+=======
+>>>>>>> 60d0cf5ed46a4712575f48c8d6acd08485d8e6b2
     </modules>
   </component>
 </project>

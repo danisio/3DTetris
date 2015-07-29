@@ -1,5 +1,5 @@
-var Tetris = function () {
-    var renderer, render_stats, physics_stats, scene, camera;
+var Tetris = (function () {
+    var renderer, render_stats, physics_stats, scene, camera,sounds;
 
     var WIDTH = window.innerWidth,
         HEIGHT = window.innerHeight,
@@ -37,14 +37,18 @@ var Tetris = function () {
         Z: 1900
     };
 
+    sounds={};
+    //Add sounds
+    sounds["theme"] = document.getElementById("audio_theme");
+    sounds["collision"] = document.getElementById("audio_collision");
+    sounds["move"] = document.getElementById("audio_move");
+    sounds['rotate']=document.getElementById('audio_rotate');
+    sounds['gameStart']=document.getElementById('audio_game_start');
+    sounds['theme'].play();
+
+
     renderer = new THREE.WebGLRenderer({antialias: true});
-
-    if (Physijs.Scene) {
-        scene = new Physijs.Scene
-    } else {
-        scene = new THREE.Scene();
-    }
-
+    scene = new THREE.Scene();
     render_stats = new Stats();
     camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
 
@@ -60,25 +64,10 @@ var Tetris = function () {
         render_stats.domElement.style.zIndex = 100;
         document.getElementById('viewport').appendChild(render_stats.domElement);
 
-        if (Physijs) {
-            physics_stats = new Stats();
-            physics_stats.domElement.style.position = 'absolute';
-            physics_stats.domElement.style.top = '50px';
-            physics_stats.domElement.style.zIndex = 100;
-            document.getElementById('viewport').appendChild(physics_stats.domElement);
-
-            scene.setGravity(new THREE.Vector3(0, GRAVITY_VECTOR, 0));
-            scene.addEventListener('update', function () {
-                    scene.simulate(undefined, 1);
-                    physics_stats.update();
-                }
-            );
-        }
-
-        // camera.updateProjectionMatrix(); needed only for Orthographic camera
         camera.position.set(CAMERA_POSITION.X, CAMERA_POSITION.Y, CAMERA_POSITION.Z);
         //camera.lookAt(scene.position);
         scene.add(camera);
+
         // End of basic setup
 
         // Ground
@@ -133,6 +122,7 @@ var Tetris = function () {
         renderer: renderer,
         camera: camera,
         stats: render_stats,
+        sounds:sounds,
         //  controls: getPerspectiveCameraControls(),
         blockSize: BLOCK_SIZE,
 
@@ -140,4 +130,4 @@ var Tetris = function () {
         gameFieldConfig: GAMEFIELD_CONFIG,
         collisionObject: COLLISION_OBJECT
     }
-}();
+}());

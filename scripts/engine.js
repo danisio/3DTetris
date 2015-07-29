@@ -77,20 +77,12 @@ var Engine = function () {
         return this;
     };
 
-    setBlockPosition = function () {// TODO: make [boundingBoxConfig.segmentHeigh] public
-        Block.shape.position.x = 30;//Math.floor(Math.random() * 10 - Tetris.blockSize / 2);
-        Block.shape.position.z = 30;//Math.floor(Math.random() * 10 - Tetris.blockSize / 2);
-
-        Block.shape.position.y = 270; // TODO: tuning
-        /*Block.shape.position = new THREE.Vector3(
-         Block.position.x,
-         Block.position.y,
-         Block.position.z); */
-
-
+    setBlockPosition = function () {
+        Block.shape.position.x = 30;
+        Block.shape.position.z = 30;
+        Block.shape.position.y = (Tetris.gameFieldConfig.height / 2) - (Tetris.blockSize / 2); // TODO: tuning
         Block.shape.rotation = {x: 0, y: 0, z: 0};
         Block.shape.overdraw = true;
-
         return this;
     };
 
@@ -99,17 +91,7 @@ var Engine = function () {
     };
 
     getAvailableMesh = function () {
-        if (Physijs) {
-            return new Physijs.BoxMesh(
-                new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize),
-                new THREE.MeshBasicMaterial({color: randColor},
-                    PHYSI_MESH_CONSTS.FRICTION,
-                    PHYSI_MESH_CONSTS.RESTITUTION),
-                PHYSI_MESH_CONSTS.MASS
-            );
-        }
 
-        else {
 
             /* return new THREE.SceneUtils.createMultiMaterialObject(new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize), [
              new THREE.MeshBasicMaterial({color: 0x000000, shading: THREE.FlatShading, wireframe: true, transparent: true}),
@@ -129,7 +111,7 @@ var Engine = function () {
                 material
                 // new THREE.MeshBasicMaterial({color: randColor, transperant: true, opacity: 0.3})
             );
-        }
+
     };
 
     checkCollision = function () {
@@ -336,9 +318,9 @@ var Engine = function () {
         console.log('~~~~~~~~~~~~~~`');
 
         console.log('UP:');
-        console.log(staticBlocks[x][9]);
-        staticBlocks[x][9] = [];
-        console.log(staticBlocks[x][9]);
+        //console.log(staticBlocks[x][9]);
+       // staticBlocks[x][9] = [];
+        //console.log(staticBlocks[x][9]);
     };
 
     setUp = function () {
@@ -395,21 +377,15 @@ var Engine = function () {
             if (collisionType.GROUND == true || collisionType.StaticBlock == true) {
 
                 //if(collisionType.StaticBlock == true) {
-                var element;
-                element = Block.shape.clone();
+
+
                 Block.move(0, Tetris.blockSize, 0);
 
-                /*console.log('OLD: x: ' + element.position.x + ' y :' + element.position.y);
-                 console.log('MOVE: x: ' + Block.shape.position.x + ' y: ' + Block.shape.position.y);
-                 console.log(element == Block.shape);
-                 console.log(element === Block.shape);*/
 
                 changeStateToStatic(Block.shape);
-                //console.log(staticBlocks);
                 Tetris.scene.remove(Block.shape);
-                //Tetris.renderer.render(Tetris.scene, Tetris.camera);
-                //console.dir(staticBlocks);
                 generateBlock();
+
 
             }
             Tetris.renderer.render(Tetris.scene, Tetris.camera);
@@ -501,7 +477,6 @@ var Engine = function () {
             this.Utilities = utilities;
             setUp();
             staticBlocks = [];
-            //  testCleanUpRow();
             // testCleanUpRowWithMoreElements();
             return this;
         },
