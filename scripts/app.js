@@ -32,7 +32,6 @@
         var unnecessary = true; // set false to stop intro
 
         if (unnecessary) {
-            $('body').addClass('stop-scrolling');
             var width = window.innerWidth,
                 height = window.innerHeight;
 
@@ -90,7 +89,7 @@
 
             textPresents.animate(animatePresents.delay(1000));
 
-            $('#s-text').attr({
+            $('.text').attr({
                 cursor: 'pointer'
             }).click(function () {
                 $('#contentLogo').hide();

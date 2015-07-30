@@ -7,13 +7,12 @@
 #end-screen {
     margin: auto;
     background-color: black;
-    /*background-color: rgba(0, 0, 0, 0.6);*/
     z-index: 9999;
     position: absolute;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    /*display: none;*/
+    display: none;
 }
 
 .text {
@@ -21,42 +20,75 @@
     stroke-linejoin: round;
     stroke-dasharray: 70 330;
     stroke-dashoffset: 0;
-    -webkit-animation: stroke 6s infinite linear;
-    animation: stroke 6s infinite linear;
+    -webkit-animation: stroke 6s linear infinite;
+    -o-animation: stroke 6s linear infinite;
+    -moz-animation: stroke 6s linear infinite;
+    animation: stroke 6s linear infinite;
 }
 
 .text:nth-child(5n + 1) {
     stroke: #17ff11;
     -webkit-animation-delay: -1.2s;
+    -o-animation-delay: -1.2s;
+    -moz-animation-delay: -1.2s;
     animation-delay: -1.2s;
 }
 
 .text:nth-child(5n + 2) {
     stroke: #f4ff10;
     -webkit-animation-delay: -2.4s;
+    -o-animation-delay: -2.4s;
+    -moz-animation-delay: -2.4s;
     animation-delay: -2.4s;
 }
 
 .text:nth-child(5n + 3) {
     stroke: #115eff;
     -webkit-animation-delay: -3.6s;
+    -o-animation-delay: -3.6s;
+    -moz-animation-delay: -3.6s;
     animation-delay: -3.6s;
 }
 
 .text:nth-child(5n + 4) {
     stroke: #ff9913;
     -webkit-animation-delay: -4.8s;
+    -o-animation-delay: -4.8s;
+    -moz-animation-delay: -4.8s;
     animation-delay: -4.8s;
 }
 
 .text:nth-child(5n + 5) {
     stroke: #f21325;
     -webkit-animation-delay: -6s;
+    -o-animation-delay: -6s;
+    -moz-animation-delay: -6s;
     animation-delay: -6s;
 }
 
+@keyframes stroke {
+    from {
+        stroke-dashoffset: 0;
+    }
+    to {
+        stroke-dashoffset: -400;
+    }
+}
+
 @-webkit-keyframes stroke {
-    100% {
+    to {
+        stroke-dashoffset: -400;
+    }
+}
+
+@-moz-keyframes stroke {
+    to {
+        stroke-dashoffset: -400;
+    }
+}
+
+@-o-keyframes stroke {
+    to {
         stroke-dashoffset: -400;
     }
 }
