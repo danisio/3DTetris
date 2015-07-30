@@ -18,9 +18,12 @@
 
             paper.forEach(function (el) {
                 el.attr({
-                    stroke: "#c70015",
+                    stroke: "#000",
                     fill: "#c70015"
-                }).translate(600, 200);
+                }).translate(400, 200)
+                    .animate({
+                    stroke: "#c70015"
+                }, 100);
             });
         }
 

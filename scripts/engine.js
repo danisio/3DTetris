@@ -2,7 +2,7 @@ var Engine = function () {
     var typeIndex, baseGeometry, additionalGeometry,
         controls, x, y, z, staticBlocks,
         lastFrameTime = Date.now(),
-        gameStepTime = 1000,
+        gameStepTime = 600,
         frameTimeDifference = 0, time,
 
     // Test Functions
