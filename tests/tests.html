@@ -1,0 +1,41 @@
+<!-- Mocha tests in the browser use unicode symbols for bullet points
+so unless you want weird character bullet points, we add this. It doesn't
+break anything with or without it. -->
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="../node_modules/mocha/mocha.css">
+<!-- This is where mocha inserts the test results that are styled with the css file above -->
+<div id="mocha"></div>
+<script src="../node_modules/mocha/mocha.js"></script>
+<script src="../node_modules/chai/chai.js"></script>
+<script>
+    mocha.setup('bdd')
+    mocha.reporter('html');
+</script>
+<div id="viewport"></div>
+<!-- This is where any fixtures we need for the test will be inserted into. Naturally, we won't want to cover the mocha test results so we position this bad boy off screen. -->
+<div id="test" style="position: fixed; top: 0; left: -99999px;">
+</div>
+<!-- Dependencies  -->
+<script src="../node_modules/chai/chai.js"></script>
+
+<script>mocha.setup('bdd');</script>
+
+<!-- Our sources -->
+<script src="../scripts/libs/require.js"></script>
+<script type=="text/javascript" src="../scripts/libs/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../scripts/libs/three.min.js"></script>
+<script type="text/javascript" src="../scripts/libs/stats.js"></script>
+<script type="text/javascript" src="../scripts/libs/OrbitControls.js"></script>
+<script type="text/javascript" src="../scripts/tetris3d.js"></script>
+<script type="text/javascript" src="../scripts/block.js"></script>
+<script type="text/javascript" src="../scripts/utilities.js"></script>
+<script type="text/javascript" src="../scripts/engine.js"></script>
+<!-- Test sourse. Must be after the testing files-->
+<script src="tests.js"></script>
+<script>
+
+    if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+        mocha.run();
+    }
+</script>
