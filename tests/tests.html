@@ -12,10 +12,12 @@ break anything with or without it. -->
     mocha.setup('bdd')
     mocha.reporter('html');
 </script>
-<div id="viewport"></div>
+
 <!-- This is where any fixtures we need for the test will be inserted into. Naturally, we won't want to cover the mocha test results so we position this bad boy off screen. -->
 <div id="test" style="position: fixed; top: 0; left: -99999px;">
 </div>
+
+<div id="viewport"></div>
 <!-- Dependencies  -->
 <script src="../node_modules/chai/chai.js"></script>
 
@@ -30,6 +32,7 @@ break anything with or without it. -->
 <script type="text/javascript" src="../scripts/tetris3d.js"></script>
 <script type="text/javascript" src="../scripts/block.js"></script>
 <script type="text/javascript" src="../scripts/utilities.js"></script>
+<script type="text/javascript" src="../scripts/controller.js"></script>
 <script type="text/javascript" src="../scripts/engine.js"></script>
 <!-- Test sourse. Must be after the testing files-->
 <script src="tests.js"></script>

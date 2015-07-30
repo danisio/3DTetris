@@ -89,11 +89,11 @@ var Engine = function () {
 
     getAvailableMesh = function () {
 
-            var texture = new THREE.ImageUtils.loadTexture("images/outline.gif");
-            texture.anisotropy = Tetris.renderer.getMaxAnisotropy();
-            var material = new THREE.MeshBasicMaterial({color: randColor, map: texture});
+        var texture = new THREE.ImageUtils.loadTexture("images/outline.gif");
+        texture.anisotropy = Tetris.renderer.getMaxAnisotropy();
+        var material = new THREE.MeshBasicMaterial({color: randColor, map: texture});
 
-            return new THREE.Mesh(new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize), material);
+        return new THREE.Mesh(new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize), material);
     };
 
     checkCollision = function () {
@@ -188,7 +188,7 @@ var Engine = function () {
 
     checkFullFlat = function (staticBlocks, element, x, y, z) {
         staticBlocks[x][y][z] = element;
-        console.log('CHECK FLAT');
+        //console.log('CHECK FLAT');
         var maxCubesCount = Tetris.gameFieldConfig.segmentWidth;
 
         for (var j = 0; j < maxCubesCount; j += 1) {
@@ -215,7 +215,7 @@ var Engine = function () {
     };
 
     removeFlat = function (staticBlocks, x, y, z) {
-        console.log('REMOVE');
+        //console.log('REMOVE');
         var y = y;
 
         for (var i = 0; i < Tetris.gameFieldConfig.segmentWidth; i += 1) {
@@ -230,29 +230,29 @@ var Engine = function () {
     };
 
     moveFlatDown = function (staticBlocks, y) {
-        console.log("Y in flat down: " + y);
+        // console.log("Y in flat down: " + y);
         // loop from the flat to remove to the upper one
-        console.log('STATICS BEFORE:');
-        console.log(staticBlocks);
-        console.log('~~~~~~~~~~~~~~`');
+        /* console.log('STATICS BEFORE:');
+         console.log(staticBlocks);
+         console.log('~~~~~~~~~~~~~~`');*/
 
         for (var index = y; index < Tetris.gameFieldConfig.segmentWidth - 2; index += 1) {
             for (var x = 0; x < Tetris.gameFieldConfig.segmentWidth; x += 1) {
 
-                console.log('X :' + x);
-                console.log('INDEX: ' + index);
-                console.log(staticBlocks[x][index]);
-                console.log(staticBlocks[x][index + 1]);
-                console.log('=========');
+                /* console.log('X :' + x);
+                 console.log('INDEX: ' + index);
+                 console.log(staticBlocks[x][index]);
+                 console.log(staticBlocks[x][index + 1]);
+                 console.log('=========');*/
 
                 if (staticBlocks[x][index + 1]) {
                     staticBlocks[x][index] = staticBlocks[x][index + 1];
 
                     for (var z = 0; z < Tetris.gameFieldConfig.segmentWidth; z += 1) {
                         if (staticBlocks[x][index][z]) {
-                            console.log('ELEMENT with y??: ');
-                            console.log(staticBlocks[x][index][z]);
-                            console.log('============##===========');
+                            /* console.log('ELEMENT with y??: ');
+                             console.log(staticBlocks[x][index][z]);
+                             console.log('============##===========');*/
                             staticBlocks[x][index][z].position.y -= Tetris.blockSize;
                         }
 
@@ -265,13 +265,13 @@ var Engine = function () {
 
 
         }
-        console.log('STATICS AFTER:');
-        console.log(staticBlocks);
-        console.log('~~~~~~~~~~~~~~`');
+        /*  console.log('STATICS AFTER:');
+         console.log(staticBlocks);
+         console.log('~~~~~~~~~~~~~~`');
 
-        console.log('UP:');
+         console.log('UP:');*/
         //console.log(staticBlocks[x][9]);
-       // staticBlocks[x][9] = [];
+        // staticBlocks[x][9] = [];
         //console.log(staticBlocks[x][9]);
     };
 
@@ -303,10 +303,14 @@ var Engine = function () {
                 mesh.position.x = x;
                 mesh.position.y = y;
                 mesh.position.z = z;
-                Tetris.scene.add(mesh);
-                staticBlocks[x][y][z] = mesh;
+                if (x != 270 && y != 270) {
+                    Tetris.scene.add(mesh);
+                }
+                staticBlocks[i][0][j] = mesh;
             }
         }
+//staticBlocks[0][0][0] = undefined;
+        return staticBlocks;
     };
 
     testCleanUpRowWithMoreElements = function () {
@@ -402,7 +406,13 @@ var Engine = function () {
             staticBlocks = [];
             return this;
         },
-        run: run
+        run: run,
+        test: function(){
+            return{
+                blocks:staticBlocks.slice()
+            }
+        }
+
     }
 }();
 

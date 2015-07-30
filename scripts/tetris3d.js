@@ -1,4 +1,4 @@
-var Tetris = (function () {
+var Tetris = function () {
     var renderer, render_stats, physics_stats, scene, camera,sounds;
 
     var WIDTH = window.innerWidth,
@@ -37,14 +37,14 @@ var Tetris = (function () {
         Z: 1900
     };
 
-    sounds={};
+    /*sounds={};
     //Add sounds
     sounds["theme"] = document.getElementById("audio_theme");
     sounds["collision"] = document.getElementById("audio_collision");
     sounds["move"] = document.getElementById("audio_move");
     sounds['rotate']=document.getElementById('audio_rotate');
     sounds['gameStart']=document.getElementById('audio_game_start');
-    sounds['theme'].play();
+    sounds['theme'].play();*/
 
 
     renderer = new THREE.WebGLRenderer({antialias: true});
@@ -130,4 +130,4 @@ var Tetris = (function () {
         gameFieldConfig: GAMEFIELD_CONFIG,
         collisionObject: COLLISION_OBJECT
     }
-}());
+}();

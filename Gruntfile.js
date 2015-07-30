@@ -1,6 +1,7 @@
-/**
+/*
+/!**
  * Example Gruntfile for Mocha setup
- */
+ *!/
 
 'use strict';
 
@@ -13,7 +14,7 @@ module.exports = function (grunt) {
         jshint: {
             all: [
                 'Gruntfile.js',
-                'tasks/**/*.js',],
+                'tasks/!**!/!*.js',],
             options: {
                 jshintrc: '.jshintrc'
             }
@@ -24,13 +25,13 @@ module.exports = function (grunt) {
                 files: [
                     // 'tests/tests.html',
                     'tests/tests.js',
-                    'scripts/*',
-                    'example/js/**/*.js',
-                    'example/test/spec/**/*.js',
-                    'example-requirejs/js/**/*.js',
-                    'example-requirejs/test/spec/**/*.js',
-                    'phantomjs/*',
-                    'tasks/*',
+                    'scripts/!*',
+                    'example/js/!**!/!*.js',
+                    'example/test/spec/!**!/!*.js',
+                    'example-requirejs/js/!**!/!*.js',
+                    'example-requirejs/test/spec/!**!/!*.js',
+                    'phantomjs/!*',
+                    'tasks/!*',
                     'Gruntfile.js'
                 ],
                 tasks: 'test'
@@ -125,3 +126,25 @@ module.exports = function (grunt) {
 };
 
 
+*/
+
+module.exports = function(grunt){
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+
+        // Mocha
+        mocha: {
+            all: {
+                src: ['tests/tests.html'],
+            },
+            options: {
+                run: false
+            }
+        }
+    });
+
+    // Load grunt mocha task
+    grunt.loadNpmTasks('grunt-mocha');
+
+    grunt.registerTask('default', ['mocha']);
+};

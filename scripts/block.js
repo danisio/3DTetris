@@ -1,5 +1,5 @@
 //TODO: Singleton
-var Block = (function (blockSize) {
+var Block = (function () {
     var init, move, rotate, multiplier,
         pressedX = 0,
         pressedY = 0,
@@ -11,7 +11,8 @@ var Block = (function (blockSize) {
         Z: 'z'
     };
 
-    init = function () {
+    init = function (blockSize) {
+        this.blockSize = blockSize;
         this.position = {
             x: 0,
             y: 0,
@@ -167,4 +168,4 @@ var Block = (function (blockSize) {
         move: move
     }
 
-}(Tetris.blockSize));
+}());
