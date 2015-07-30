@@ -1,7 +1,10 @@
 //TODO: Singleton
+
 var Block = (function () {
-    var init, move, rotate, multiplier,
+    var init, move, rotate, multiplier,moveByUser,
         pressedX = 0,
+
+
         pressedY = 0,
         pressedZ = 0;
 
@@ -38,10 +41,11 @@ var Block = (function () {
             return -1;
         }
     }
+
     rotate = function (axis) {
         var shape = this.shape,
-        multiplier, index, oldX, oldY, oldZ,
-        collisionTypes, isRotationPossible = false;
+            multiplier, index, oldX, oldY, oldZ,
+            collisionTypes, isRotationPossible = false;
 
         if (axis == AXIS.X) {
 
@@ -56,7 +60,7 @@ var Block = (function () {
 
             collisionTypes = checkCollision();
             if (isCollisioned(collisionTypes) == false) {
-                isRotationPossible = truee;
+                isRotationPossible = true;
             }
 
             if (isRotationPossible == false) {
@@ -73,7 +77,7 @@ var Block = (function () {
             multiplier = getRotationMultiplier(pressedY);
 
             for (index = 0; index < shape.children.length; index += 1) {
-                oldY = shape.children[ind].position.y * multiplier;
+                oldY = shape.children[index].position.y * multiplier;
                 shape.children[index].position.y = shape.children[index].position.x * multiplier;
                 shape.children[index].position.x = oldY;
             }
@@ -85,9 +89,9 @@ var Block = (function () {
 
             if (isRotationPossible == false) {
                 for (index = 0; index < shape.children.length; index += 1) {
-                     oldY = shape.children[ind].position.y / multiplier;
-                    shape.children[ind].position.y = shape.children[ind].position.x / multiplier;
-                    shape.children[ind].position.x = oldY;
+                    oldY = shape.children[index].position.y / multiplier;
+                    shape.children[index].position.y = shape.children[index].position.x / multiplier;
+                    shape.children[index].position.x = oldY;
                 }
 
             }
@@ -109,9 +113,9 @@ var Block = (function () {
 
             if (isRotationPossible == false) {
                 for (index = 0; index < shape.children.length; index += 1) {
-                    oldY = shape.children[ind].position.y / multiplier;
+                    oldY = shape.children[index].position.y / multiplier;
                     shape.children[index].position.y = shape.children[index].position.z / multiplier;
-                    shape.children[index].position.z = temp;
+                    shape.children[index].position.z = oldY;
                 }
 
             }
@@ -124,7 +128,7 @@ var Block = (function () {
         Block.shape.position.x += x;
         Block.shape.position.y += y;
         Block.shape.position.z += z;
-    }
+    };
 
     moveByUser = function (key) {
 

@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/scripts/libs/ammo.js" />
-    <file url="file://$PROJECT_DIR$/scripts/libs/bower.json" />
-    <file url="file://$PROJECT_DIR$/scripts/libs/jquery-2.1.4.min.js" />
-    <file url="file://$PROJECT_DIR$/scripts/libs/OrbitControls.js" />
-    <file url="file://$PROJECT_DIR$/scripts/libs/physi.js" />
-    <file url="file://$PROJECT_DIR$/scripts/libs/physijs_worker.js" />
-    <file url="file://$PROJECT_DIR$/scripts/libs/raphael.js" />
-    <file url="file://$PROJECT_DIR$/scripts/libs/require.js" />
-    <file url="file://$PROJECT_DIR$/scripts/libs/simplex-noise.js" />
-    <file url="file://$PROJECT_DIR$/scripts/libs/stats.js" />
-    <file url="file://$PROJECT_DIR$/scripts/libs/three.min.js" />
-    <file url="file://$PROJECT_DIR$/scripts/libs/tween.js" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectRootManager" version="2" />
 </project>
