@@ -10,7 +10,7 @@ var Engine = function () {
     // Help Functions
         joinSubElements, getAvailableMesh, getCoordinates, getIndexByCoordinates,
     // Main Functions
-        generateBlock, getNewShapeSkeleton, drawBlock,
+        endGameUIFunction, generateBlock, getNewShapeSkeleton, drawBlock,
         setBlockPosition, changeStateToStatic,
         checkFullFlat, removeFlat, moveFlatDown,
         init, run;
@@ -112,7 +112,7 @@ var Engine = function () {
             vector = new THREE.Vector3();
             vector.setFromMatrixPosition(child.matrixWorld);
 
-            if ((vector.y - (Tetris.blockSize / 2 )) < -(Tetris.gameFieldConfig.height / 2 )) { //Bottom collision
+            if ((vector.y - (Tetris.blockSize / 2 )) < -(Tetris.gameFieldConfig.height / 2 )) {
                 collisionType.GROUND = true;
             }
 
@@ -125,7 +125,7 @@ var Engine = function () {
             }
 
             if (vector.z - (Tetris.blockSize / 2) < -(Tetris.gameFieldConfig.width / 2)) {
-                collisionType.WALLZNegative = true;S
+                collisionType.WALLZNegative = true;
             }
 
             if (vector.z + (Tetris.blockSize / 2) > (Tetris.gameFieldConfig.depth) / 2) {
@@ -148,9 +148,9 @@ var Engine = function () {
     function moveToStaticBlocks(staticBlocks, element) {
         var x, y, z, isFlatFull;
 
-        x = getIndexByCoordinates(x);
-        y = getIndexByCoordinates(y);
-        z = getIndexByCoordinates(z);
+        x = getIndexByCoordinates(element.position.x);
+        y = getIndexByCoordinates(element.position.y);
+        z = getIndexByCoordinates(element.position.z);
 
         if (!staticBlocks[x]) {
             staticBlocks[x] = [];
@@ -352,6 +352,7 @@ var Engine = function () {
         Tetris.initScene();
         controls = new THREE.OrbitControls(Tetris.camera, Tetris.renderer.domElement);
         Block.init(Tetris.blockSize);
+        Controller.getController(Block, Tetris, Utilities).run();
         Utilities.cleanScreen();
         generateBlock();
     };
@@ -377,6 +378,10 @@ var Engine = function () {
                 changeStateToStatic(Block.shape);
                 Tetris.scene.remove(Block.shape);
                 generateBlock();
+                collisionType = checkCollision();
+                if (collisionType.StaticBlock == true) {
+                    endGameUIFunction();
+                }
             }
         }
 
@@ -388,10 +393,11 @@ var Engine = function () {
 
 
     return {
-        getEngine: function (tetris, block, utilities) {
+        getEngine: function (tetris, block, utilities, endGameFunction) {
             this.Tetris = tetris;
             this.Block = block;
             this.Utilities = utilities;
+            endGameUIFunction = endGameFunction;
             init();
             staticBlocks = [];
             return this;

@@ -1,23 +1,34 @@
+
 var Controller = function () {
 
-    var init;
+    var run;
 
-    function readUserInput() {
-        var key = e.keyCode ? e.keyCode : e.which;
+    var AXIS = {
+        X: 'x',
+        Y: 'y',
+        Z: 'z'
+    };
+
+    function readUserInput(e) {
+        var rotated = false,
+        key = e.keyCode ? e.keyCode : e.which;
 
         if (key == 88) {
-            Block.rotate(AXIS.X);
+            rotated = this.Block.rotate(AXIS.X);
         } else if (key == 89) {
-            Block.rotate(AXIS.Y);
+            rotated = this.Block.rotate(AXIS.Y);
         } else if (key == 90) {
-            Block.rotate(AXIS.Z);
+            rotated = this.Block.rotate(AXIS.Z);
         } else {
-            Block.moveByUser(AXIS.X, key);
-            Block.moveByUser(AXIS.Z, key);
+            this.Block.moveByUser(key);
+        }
+
+        if(rotated == true) {
+            Tetris.sounds.rotate.play();
         }
     }
 
-    init = function(block) {
+    run = function(block) {
         addEventListener('keyup', readUserInput);
     }
 
@@ -26,7 +37,6 @@ var Controller = function () {
             this.Tetris = tetris;
             this.Block = block;
             this.Utilities = utilities;
-            init();
             return this;
         },
         run: run

@@ -5,6 +5,12 @@ var Block = (function (blockSize) {
         pressedY = 0,
         pressedZ = 0;
 
+    var AXIS = {
+        X: 'x',
+        Y: 'y',
+        Z: 'z'
+    };
+
     init = function () {
         this.position = {
             x: 0,
@@ -31,103 +37,97 @@ var Block = (function (blockSize) {
             return -1;
         }
     }
-
     rotate = function (axis) {
-        var shape = this.shape, multiplier, index,
-            collisionTypes, isRotationPossible;
+        var shape = this.shape,
+        multiplier, index, oldX, oldY, oldZ,
+        collisionTypes, isRotationPossible = false;
 
-        if (axis == 'x') {
+        if (axis == AXIS.X) {
 
+            pressedX += 1;
             multiplier = getRotationMultiplier(pressedX);
 
             for (index = 0; index < shape.children.length; index += 1) {
-                shape.children[index].position.z = multiplier * shape.children[index].position.x;
-                shape.children[index].position.x = multiplier * shape.children[index].position.z;
+                oldZ = shape.children[index].position.z;
+                shape.children[index].position.z = shape.children[index].position.x * multiplier;
+                shape.children[index].position.x = oldZ * multiplier;
             }
 
             collisionTypes = checkCollision();
-            isRotationPossible = true;
-            if (isCollisioned(collisionTypes) == true) {
-                isRotationPossible = false;
+            if (isCollisioned(collisionTypes) == false) {
+                isRotationPossible = truee;
             }
 
             if (isRotationPossible == false) {
                 for (index = 0; index < shape.children.length; index += 1) {
+                    oldZ = shape.children[index].position.z / multiplier;
                     shape.children[index].position.z = shape.children[index].position.x / multiplier;
-                    shape.children[index].position.x = shape.children[index].position.z / multiplier;
+                    shape.children[index].position.x = oldZ;
                 }
-            } else {
-                pressedX += 1;
+
             }
+        } else if (axis == AXIS.Y) {
 
-            Tetris.sounds.rotate.play(); //TODO: Move this out of here into the controller.js
-
-        } else if (axis == 'y') {
-
+            pressedY += 1;
             multiplier = getRotationMultiplier(pressedY);
 
             for (index = 0; index < shape.children.length; index += 1) {
-                shape.children[index].position.y = multiplier * shape.children[index].position.x;
-                shape.children[index].position.x = multiplier * shape.children[index].position.y;
+                oldY = shape.children[ind].position.y * multiplier;
+                shape.children[index].position.y = shape.children[index].position.x * multiplier;
+                shape.children[index].position.x = oldY;
             }
 
             collisionTypes = checkCollision();
-            isRotationPossible = true;
-            if (isCollisioned(collisionTypes) == true) {
-                isRotationPossible = false;
-            }
-
-            if (isRotationPossible == false) {
-                for (var index = 0; index < shape.children.length; index += 1) {
-                    shape.children[index].position.y = shape.children[index].position.x / multiplier;
-                    shape.children[index].position.x = shape.children[index].position.y / multiplier;
-                }
-            } else {
-                pressedY += 1;
-            }
-
-            Tetris.sounds.rotate.play();
-
-        } else if (axis == 'z') {
-
-            multiplier = getRotationMultiplier(pressedZ);
-
-            for (index = 0; index < shape.children.length; index += 1) {
-                shape.children[index].position.y = multiplier * shape.children[index].position.z;
-                shape.children[index].position.z = multiplier * shape.children[index].position.y;
-            }
-
-            collisionTypes = checkCollision();
-            isRotationPossible = true;
-            if (isCollisioned(collisionTypes) == true) {
-                isRotationPossible = false;
+            if (isCollisioned(collisionTypes) == false) {
+                isRotationPossible = true;
             }
 
             if (isRotationPossible == false) {
                 for (index = 0; index < shape.children.length; index += 1) {
-                    shape.children[index].position.y = shape.children[index].position.z / multiplier;
-                    shape.children[index].position.z = shape.children[index].position.y / multiplier;
+                     oldY = shape.children[ind].position.y / multiplier;
+                    shape.children[ind].position.y = shape.children[ind].position.x / multiplier;
+                    shape.children[ind].position.x = oldY;
                 }
-            } else {
-                pressedZ += 1;
+
+            }
+        } else if (axis == AXIS.Z) {
+
+            pressedZ += 1;
+            multiplier = getRotationMultiplier(pressedZ);
+
+            for (index = 0; index < shape.children.length; index += 1) {
+                oldY = shape.children[index].position.y * multiplier;
+                shape.children[index].position.y = shape.children[index].position.z * multiplier;
+                shape.children[index].position.z = oldY;
             }
 
-            Tetris.sounds.rotate.play();
+            collisionTypes = checkCollision();
+            if (isCollisioned(collisionTypes) == false) {
+                isRotationPossible = true;
+            }
+
+            if (isRotationPossible == false) {
+                for (index = 0; index < shape.children.length; index += 1) {
+                    oldY = shape.children[ind].position.y / multiplier;
+                    shape.children[index].position.y = shape.children[index].position.z / multiplier;
+                    shape.children[index].position.z = temp;
+                }
+
+            }
         }
 
-        return this;
+        return isRotationPossible;
     };
 
     move = function (x, y, z) {
-        this.shape.position.x += x;
-        this.shape.position.y += y;
-        this.shape.position.z += z;
-        Tetris.sounds['move'].play(); //TODO: Move sounds playing into controller.js, and make move functions to return true or false so you play or not play sound
+        Block.shape.position.x += x;
+        Block.shape.position.y += y;
+        Block.shape.position.z += z;
     }
 
     moveByUser = function (key) {
 
-        var collisionType;
+        var collisionType, moved = false;
 
         if (key == 37) {
             move(-Tetris.blockSize, 0, 0);
@@ -138,7 +138,7 @@ var Block = (function (blockSize) {
         } else if (key == 40) {
             move(0, 0, Tetris.blockSize);
         } else {
-            return;
+            return moved;
         }
 
         collisionType = checkCollision();
@@ -151,11 +151,13 @@ var Block = (function (blockSize) {
             move(0, 0, Tetris.blockSize);
         } else if ((collisionType.StaticBlock == true || collisionType.WALLZPositive == true) && key == 40) {
             move(0, 0, -Tetris.blockSize);
+        } else {
+            moved = true;
         }
 
         Tetris.renderer.render(Tetris.scene, Tetris.camera);
 
-        return this;
+        return moved;
     };
 
     return {
