@@ -94,7 +94,6 @@
                 cursor: 'pointer'
             }).click(function () {
                 $('#contentLogo').hide();
-                $('#end-screen').hide();
                 startGame();
                 Tetris.sounds['theme'].pause();
                 Tetris.sounds['gameStart'].play();
