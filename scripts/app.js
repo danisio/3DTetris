@@ -35,11 +35,8 @@
         $('#viewport').css('width', width).css('height', height);
 
         var r = Raphael("viewport");
-        r.rect(0, 0, width, height).attr({
-            fill: 'black'
-        });
 
-             var textMojito = r.text(0, height / 3, 'Team "Mojito"').attr({
+        var textMojito = r.text(0, height / 3, 'Team "Mojito"').attr({
             font: '10px "Consolas',
             fill: "white",
             opacity: 0.1
@@ -85,10 +82,15 @@
         logo.node.setAttribute("class", "logo");
 
         var logoWidth = logo.getBBox().width;
-        logo.translate(width/2-logoWidth/2,-200);
+        var logoHeight = logo.getBBox().height;
+        var rectClick = r.rect(width / 2 - logoWidth / 2, 120, logoWidth, logoHeight).attr({
+            fill: 'black'
+        }).toBack();
+
+        logo.translate(width / 2 - logoWidth / 2, -200);
         $('.logo').delay(4100).show(0);
 
-        $('.logo').attr({
+        rectClick.attr({
             cursor: 'pointer'
         }).click(function () {
             $('svg').hide();
