@@ -15,7 +15,7 @@ var Controller = function () {
 
         if (key == 88) {
             rotated = this.Block.rotate(AXIS.X);
-        } else if (key == 89) {
+        } else if (key == 89|| key ==67) {
             rotated = this.Block.rotate(AXIS.Y);
         } else if (key == 90) {
             rotated = this.Block.rotate(AXIS.Z);
