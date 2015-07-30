@@ -390,7 +390,7 @@ var Engine = function () {
         }
 
         Tetris.renderer.render(Tetris.scene, Tetris.camera);
-        Tetris.stats.update();
+        //Tetris.stats.update();
         controls.update();
         requestAnimationFrame(run);
     };

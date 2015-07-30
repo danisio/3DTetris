@@ -37,19 +37,35 @@ var Tetris = function () {
         Z: 1900
     };
 
-    /*sounds={};
+    sounds={};
     //Add sounds
     sounds["theme"] = document.getElementById("audio_theme");
     sounds["collision"] = document.getElementById("audio_collision");
     sounds["move"] = document.getElementById("audio_move");
     sounds['rotate']=document.getElementById('audio_rotate');
     sounds['gameStart']=document.getElementById('audio_game_start');
-    sounds['theme'].play();*/
+    sounds['theme'].play();
 
+    function webglAvailable() {
+        try {
+            var canvas = document.createElement( 'canvas' );
+            return !!( window.WebGLRenderingContext && (
+                canvas.getContext( 'webgl' ) ||
+                canvas.getContext( 'experimental-webgl' ) )
+            );
+        } catch ( e ) {
+            return false;
+        }
+    }
 
-    renderer = new THREE.WebGLRenderer({antialias: true});
+    if ( webglAvailable() ) {
+        renderer = new THREE.WebGLRenderer();
+    } else {
+        renderer = new THREE.CanvasRenderer();
+    }
+   // renderer = new THREE.WebGLRenderer({antialias: true});
     scene = new THREE.Scene();
-    render_stats = new Stats();
+   // render_stats = new Stats();
     camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
 
     function initScene() {
@@ -59,10 +75,10 @@ var Tetris = function () {
         renderer.shadowMapSoft = true;
         document.getElementById('viewport').appendChild(renderer.domElement);
 
-        render_stats.domElement.style.position = 'absolute';
+       /* render_stats.domElement.style.position = 'absolute';
         render_stats.domElement.style.top = '0px';
-        render_stats.domElement.style.zIndex = 100;
-        document.getElementById('viewport').appendChild(render_stats.domElement);
+        render_stats.domElement.style.zIndex = 100;*/
+       // document.getElementById('viewport').appendChild(render_stats.domElement);
 
         camera.position.set(CAMERA_POSITION.X, CAMERA_POSITION.Y, CAMERA_POSITION.Z);
         //camera.lookAt(scene.position);
@@ -121,7 +137,7 @@ var Tetris = function () {
         scene: scene,
         renderer: renderer,
         camera: camera,
-        stats: render_stats,
+       // stats: render_stats,
         sounds:sounds,
         //  controls: getPerspectiveCameraControls(),
         blockSize: BLOCK_SIZE,
