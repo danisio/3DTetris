@@ -1,8 +1,8 @@
-var Engine = function () {
+Engine = function () {
     var typeIndex, baseGeometry, additionalGeometry,
         controls, x, y, z, staticBlocks,
         lastFrameTime = Date.now(),
-        gameStepTime = 1000,
+        gameStepTime = 600,
         frameTimeDifference = 0, time,
 
     // Test Functions
@@ -90,7 +90,7 @@ var Engine = function () {
     getAvailableMesh = function () {
 
         var texture = new THREE.ImageUtils.loadTexture("images/outline.gif");
-        texture.anisotropy = Tetris.renderer.getMaxAnisotropy();
+        //texture.anisotropy = Tetris.renderer.getMaxAnisotropy();
         var material = new THREE.MeshBasicMaterial({color: randColor, map: texture});
 
         return new THREE.Mesh(new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize), material);

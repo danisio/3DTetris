@@ -1,6 +1,4 @@
 #contentLogo {
-    font: 800 16em/1 'Open Sans', Impact;
-    background-color: black;
     display: none;
 }
 
@@ -15,80 +13,43 @@
     display: none;
 }
 
-.text {
-    stroke-width: 3;
-    stroke-linejoin: round;
-    stroke-dasharray: 70 330;
-    stroke-dashoffset: 0;
-    -webkit-animation: stroke 6s linear infinite;
-    -o-animation: stroke 6s linear infinite;
-    -moz-animation: stroke 6s linear infinite;
-    animation: stroke 6s linear infinite;
+.logo {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 5;
+    stroke-miterlimit: 3;
+    stroke-dasharray: 0;
+    stroke-dashoffset: 2500;
+    -webkit-animation: dash 3s linear infinite;
+    -moz-animation: dash 3s linear infinite;
+    -o-animation: dash 3s linear infinite;
+    animation: dash 3s linear infinite;
+    display:none;
 }
 
-.text:nth-child(5n + 1) {
-    stroke: #17ff11;
-    -webkit-animation-delay: -1.2s;
-    -o-animation-delay: -1.2s;
-    -moz-animation-delay: -1.2s;
-    animation-delay: -1.2s;
-}
-
-.text:nth-child(5n + 2) {
-    stroke: #f4ff10;
-    -webkit-animation-delay: -2.4s;
-    -o-animation-delay: -2.4s;
-    -moz-animation-delay: -2.4s;
-    animation-delay: -2.4s;
-}
-
-.text:nth-child(5n + 3) {
-    stroke: #115eff;
-    -webkit-animation-delay: -3.6s;
-    -o-animation-delay: -3.6s;
-    -moz-animation-delay: -3.6s;
-    animation-delay: -3.6s;
-}
-
-.text:nth-child(5n + 4) {
-    stroke: #ff9913;
-    -webkit-animation-delay: -4.8s;
-    -o-animation-delay: -4.8s;
-    -moz-animation-delay: -4.8s;
-    animation-delay: -4.8s;
-}
-
-.text:nth-child(5n + 5) {
-    stroke: #f21325;
-    -webkit-animation-delay: -6s;
-    -o-animation-delay: -6s;
-    -moz-animation-delay: -6s;
-    animation-delay: -6s;
-}
-
-@keyframes stroke {
-    from {
+@keyframes dash {
+    0% {
         stroke-dashoffset: 0;
     }
-    to {
-        stroke-dashoffset: -400;
+    10% {
+        stroke-dasharray: 5;
+        stroke: #f0f50e;
     }
-}
-
-@-webkit-keyframes stroke {
-    to {
-        stroke-dashoffset: -400;
+    30% {
+        stroke: #f21325;
     }
-}
-
-@-moz-keyframes stroke {
-    to {
-        stroke-dashoffset: -400;
+    50% {
+        stroke: #5ff213;
     }
-}
-
-@-o-keyframes stroke {
-    to {
-        stroke-dashoffset: -400;
+    70% {
+        stroke-dasharray: 10;
+        stroke: #f5b614;
+    }
+    90% {
+        stroke: #115eff;
+    }
+    100% {
+        stroke: #000;
+        stroke-dashoffset: 2500;
     }
 }

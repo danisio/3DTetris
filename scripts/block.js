@@ -134,13 +134,13 @@ var Block = (function () {
 
         var collisionType, moved = false;
 
-        if (key == 37) {
+        if ((key == 37 || key == 65)) {
             move(-Tetris.blockSize, 0, 0);
-        } else if (key == 39) {
+        } else if (key == 39 || key == 68) {
             move(Tetris.blockSize, 0, 0);
-        } else if (key == 38) {
+        } else if (key == 38 || key == 87) {
             move(0, 0, -Tetris.blockSize);
-        } else if (key == 40) {
+        } else if (key == 40 || key == 83) {
             move(0, 0, Tetris.blockSize);
         } else {
             return moved;
@@ -148,13 +148,13 @@ var Block = (function () {
 
         collisionType = checkCollision();
 
-        if ((collisionType.StaticBlock == true || collisionType.WALLXNegative == true) && key == 37) {
+        if ((collisionType.StaticBlock == true || collisionType.WALLXNegative == true) && (key == 37 || key == 65)) {
             move(Tetris.blockSize, 0, 0);
-        } else if ((collisionType.StaticBlock == true || collisionType.WALLXPositive == true) && key == 39) {
+        } else if ((collisionType.StaticBlock == true || collisionType.WALLXPositive == true) && (key == 39 || key == 68)) {
             move(-Tetris.blockSize, 0, 0);
-        } else if ((collisionType.StaticBlock == true || collisionType.WALLZNegative == true) && key == 38) {
+        } else if ((collisionType.StaticBlock == true || collisionType.WALLZNegative == true) && (key == 38 || key == 87)) {
             move(0, 0, Tetris.blockSize);
-        } else if ((collisionType.StaticBlock == true || collisionType.WALLZPositive == true) && key == 40) {
+        } else if ((collisionType.StaticBlock == true || collisionType.WALLZPositive == true) && (key == 40 || key == 83)) {
             move(0, 0, -Tetris.blockSize);
         } else {
             moved = true;
