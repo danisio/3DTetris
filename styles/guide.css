@@ -1,0 +1,80 @@
+#guide{
+    position: relative;
+    top: -650px;
+    rigth: 0px;
+    /*display: inline-block;*/
+
+    display: none;
+}
+#showGuide{
+    position: absolute;
+    top: 210px;
+    right: -60px;
+    width: 200px;
+}
+#container{
+   /* visibility: hidden;*/
+    margin-top: 100px;
+    margin-left: 740px;
+    position: relative;;
+}
+
+#guideButtons{
+    margin-top: -270px;
+    margin-left: 1100px;
+    position: relative;;
+    /*display: none;*/
+}
+
+#nav{
+    margin-top:-130px;
+    margin-left: 1100px;
+    position: relative;;
+}
+#startGameFromGuide{
+    width: 160px;
+    margin-left: 750px;
+    position: relative;
+    margin-top: 100px;
+}
+
+.fade{
+    transform: translate3d(0, 100%, 0);
+}
+.vertical{
+    writing-mode:tb-rl;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform: rotate(90deg);
+    white-space:nowrap;
+}
+.buttons {
+width: 50px;
+    height: 50px;
+    padding: 20px;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+    display: inline-block;
+    border: 0;
+    outline: 0;
+    padding: 12px 16px;
+    line-height: 1.4;
+    background: -webkit-gradient(linear, left top, left bottom, from(#4d4d4d), to(#2f2f2f));
+    background: -webkit-linear-gradient(#4d4d4d, #2f2f2f);
+    background: linear-gradient(#4d4d4d, #2f2f2f);
+    border-radius: 5px;
+    border: 1px solid black;
+    color: white !important;
+    font-size: 1.2em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-decoration: none !important;
+    cursor: pointer;
+    text-align: center;
+    float: none;
+    display: inline-block;
+    margin: 0 0 4px 0;
+    opacity: 1;
+}
+

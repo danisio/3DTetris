@@ -3,10 +3,42 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>3D Tetris</title>
+    <!--<script type="text/javascript" src="scripts/libs/require.js"></script>-->
+    <script>
+        (function () {
+            require.config({
+                paths: {
+                    "app": "app"
+                }
+            });
+
+
+        }());
+    </script>
     <script type="text/javascript" src="scripts/libs/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="scripts/libs/three.min.js"></script>
+    <script type="text/javascript" src="scripts/libs/Projector.js"></script>
+    <script type="text/javascript" src="scripts/libs/CanvasRenderer.js"></script>
+    <script type="text/javascript" src="scripts/libs/stats.js"></script>
+    <script type="text/javascript" src="scripts/libs/OrbitControls.js"></script>
+    <script type="text/javascript" src="scripts/libs/kinetic.min.js"></script>
     <script src="scripts/libs/require.js" data-main="scripts/app"></script>
+    <!--
+    <script type="text/javascript" src="scripts/libs/three.min.js"></script>
+<script type="text/javascript" src="scripts/libs/Projector.js"></script>
+<script type="text/javascript" src="scripts/libs/CanvasRenderer.js"></script>
+<script type="text/javascript" src="scripts/libs/stats.js"></script>
+<script type="text/javascript" src="scripts/libs/OrbitControls.js"></script>
+<script type="text/javascript" src="scripts/libs/kinetic.min.js"></script>
+    <script type="text/javascript" src="scripts/tetris3d.js"></script>
+    <script type="text/javascript" src="scripts/utilities.js"></script>
+<script type="text/javascript" src="scripts/block.js"></script>
+<script type="text/javascript" src="scripts/controller.js"></script>
+<script type="text/javascript" src="scripts/engine.js"></script>
+<script type="text/javascript" src="scripts/menu.js"></script>-->
     <link rel="stylesheet" type="text/css" href="styles/style-introduction.css">
     <link rel="stylesheet" type="text/css" href="styles/style-mainwindow.css">
+    <link rel="stylesheet" type="text/css" href="styles/guide.css">
 </head>
 <body>
 
@@ -32,16 +64,35 @@
         </svg>
     </div>
 </div>
+<button id="showGuide" class="buttons vertical">GUIDE</button>
+<div id="guide">
+    <div id="container"></div>
+    <div id="guideButtons">
+        <button>X</button>
+        <button>Y</button>
+        <button>Z</button>
+    </div>
+    <div id="nav">
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+    </div>
+</div>
+
 <div id="end-screen"></div>
 <script type="text/javascript" src="scripts/libs/three.min.js"></script>
 <script type="text/javascript" src="scripts/libs/Projector.js"></script>
 <script type="text/javascript" src="scripts/libs/CanvasRenderer.js"></script>
 <script type="text/javascript" src="scripts/libs/stats.js"></script>
 <script type="text/javascript" src="scripts/libs/OrbitControls.js"></script>
+<script type="text/javascript" src="scripts/libs/kinetic.min.js"></script>
+
 <script type="text/javascript" src="scripts/tetris3d.js"></script>
 <script type="text/javascript" src="scripts/block.js"></script>
 <script type="text/javascript" src="scripts/utilities.js"></script>
 <script type="text/javascript" src="scripts/controller.js"></script>
 <script type="text/javascript" src="scripts/engine.js"></script>
+<!--<script type="text/javascript" src="scripts/menu.js"></script>-->
 </body>
 </html>
