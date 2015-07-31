@@ -1,14 +1,12 @@
 body{
     margin:0;
     padding:0;
+    height: 100%;
+    overflow: hidden;
 }
 
 #viewport {
     display: block;
     margin: 0 auto;
-}
-
-.stop-scrolling {
-    height: 100%;
-    overflow: hidden;
+    background-color: black;
 }
