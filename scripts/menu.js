@@ -6,11 +6,11 @@ function guideScreen(){
 
             var buttons, stage, layer, rect;
             var positionTop = 180;
-            $('#guide').css('display');
-            $('#container').show();
-            $('#showGuide').show();
+           // $('#container').css.display = "none";
+           // $('#container').hide();
+           // $('#showGuide').toggle();
 
-            $('#guide').fadeToggle("slow", "linear");
+           // $('#guide').fadeToggle("slow", "linear");
             var blob, circle, curvedLine, layer, polygon, rect, stage, straightLine, background, bgRect;
 
 

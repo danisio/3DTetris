@@ -63,9 +63,9 @@ var Tetris = function () {
     } else {
         renderer = new THREE.CanvasRenderer();
     }
-   // renderer = new THREE.WebGLRenderer({antialias: true});
+
     scene = new THREE.Scene();
-   // render_stats = new Stats();
+
     camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
 
     function initScene() {

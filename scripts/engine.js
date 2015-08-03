@@ -90,7 +90,6 @@ Engine = function () {
     getAvailableMesh = function () {
 
         var texture = new THREE.ImageUtils.loadTexture("images/outline.gif");
-        //texture.anisotropy = Tetris.renderer.getMaxAnisotropy();
         var material = new THREE.MeshBasicMaterial({color: randColor, map: texture});
 
         return new THREE.Mesh(new THREE.BoxGeometry(Tetris.blockSize, Tetris.blockSize, Tetris.blockSize), material);
@@ -188,7 +187,7 @@ Engine = function () {
 
     checkFullFlat = function (staticBlocks, element, x, y, z) {
         staticBlocks[x][y][z] = element;
-        //console.log('CHECK FLAT');
+
         var maxCubesCount = Tetris.gameFieldConfig.segmentWidth;
 
         for (var j = 0; j < maxCubesCount; j += 1) {
@@ -230,51 +229,31 @@ Engine = function () {
     };
 
     moveFlatDown = function (staticBlocks, y) {
-        // console.log("Y in flat down: " + y);
-        // loop from the flat to remove to the upper one
-        /* console.log('STATICS BEFORE:');
-         console.log(staticBlocks);
-         console.log('~~~~~~~~~~~~~~`');*/
 
         for (var index = y; index < Tetris.gameFieldConfig.segmentWidth - 2; index += 1) {
             for (var x = 0; x < Tetris.gameFieldConfig.segmentWidth; x += 1) {
-
-                /* console.log('X :' + x);
-                 console.log('INDEX: ' + index);
-                 console.log(staticBlocks[x][index]);
-                 console.log(staticBlocks[x][index + 1]);
-                 console.log('=========');*/
 
                 if (staticBlocks[x][index + 1]) {
                     staticBlocks[x][index] = staticBlocks[x][index + 1];
 
                     for (var z = 0; z < Tetris.gameFieldConfig.segmentWidth; z += 1) {
                         if (staticBlocks[x][index][z]) {
-                            /* console.log('ELEMENT with y??: ');
+                            /* console.log('ELEMENT with y: ');
                              console.log(staticBlocks[x][index][z]);
                              console.log('============##===========');*/
                             staticBlocks[x][index][z].position.y -= Tetris.blockSize;
                         }
-
                     }
                 }
                 if (staticBlocks[x][index] && staticBlocks[x][index].length != 0) {  // if now is []
                     staticBlocks[x][index] = undefined;
                 }
             }
-
-
         }
         /*  console.log('STATICS AFTER:');
          console.log(staticBlocks);
-         console.log('~~~~~~~~~~~~~~`');
-
-         console.log('UP:');*/
-        //console.log(staticBlocks[x][9]);
-        // staticBlocks[x][9] = [];
-        //console.log(staticBlocks[x][9]);
+         console.log('~~~~~~~~~~~~~~`');*/
     };
-
 
     testCleanUpRow = function () {
         console.log('~~~~~~~~~~~~~~~~~~~');
@@ -384,6 +363,7 @@ Engine = function () {
                 generateBlock();
                 collisionType = checkCollision();
                 if (collisionType.StaticBlock == true) {
+                    $("#guide").hide();
                     endGameUIFunction();
                 }
             }
@@ -407,9 +387,9 @@ Engine = function () {
             return this;
         },
         run: run,
-        test: function(){
-            return{
-                blocks:staticBlocks.slice()
+        test: function () {
+            return {
+                blocks: staticBlocks.slice()
             }
         }
 

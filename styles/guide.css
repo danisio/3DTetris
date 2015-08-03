@@ -2,9 +2,8 @@
     position: relative;
     top: -650px;
     rigth: 0px;
-    /*display: inline-block;*/
+    display: inline-block;
 
-    display: none;
 }
 #showGuide{
     position: absolute;
@@ -52,10 +51,10 @@
 }
 .buttons {
 width: 50px;
+display: inline-block;
     height: 50px;
     padding: 20px;
     font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
-    display: inline-block;
     border: 0;
     outline: 0;
     padding: 12px 16px;
@@ -73,8 +72,10 @@ width: 50px;
     cursor: pointer;
     text-align: center;
     float: none;
-    display: inline-block;
     margin: 0 0 4px 0;
     opacity: 1;
 }
 
+button{
+    display: none;
+}

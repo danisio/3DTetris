@@ -43,15 +43,14 @@
         var startGame = function () {
             Engine.getEngine(Block, Tetris, Utilities, displayEndGameScreen);
             Engine.run();
-            $('#showGuide').attr({
-                cursor: 'pointer'
-            }).click(function () {
-                console.log(guideScreen);
-                guideScreen();
+            guideScreen();
 
-            });
         };
-
+        $('#showGuide').attr({
+            cursor: 'pointer'
+        }).on('click', function () {
+            $("#guide").toggle("display");
+        });
         var width = window.innerWidth,
             height = window.innerHeight;
 
